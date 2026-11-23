@@ -1,6 +1,6 @@
-# Spectrum Field Manual
+# RF Lab
 
-A self-contained SDR + GNU Radio field manual for cyber security operators. It is a static, single-page site: no build step, no dependencies, and no server-side code.
+The Spectrum Field Manual: a self-contained SDR + GNU Radio field manual for cyber security operators. It is a static, single-page site: no build step, no dependencies, and no server-side code.
 
 ## What is inside
 
@@ -37,15 +37,15 @@ The `wrangler.toml` file also declares the Pages output directory for Wrangler-b
 ### Direct upload with Wrangler
 
 ```bash
-npx wrangler pages deploy public --project-name spectrum-field-manual
+npx wrangler pages deploy public --project-name rf-lab
 ```
 
-The project name is already set in `wrangler.toml`.
+The project name `rf-lab` is already set in `wrangler.toml`.
 
 ## Structure
 
 ```text
-spectrum-field-manual/
+rf-lab/
 ├── public/
 │   ├── index.html      # the complete site
 │   ├── _headers        # security headers for Cloudflare Pages
