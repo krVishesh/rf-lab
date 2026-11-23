@@ -42,6 +42,25 @@ npx wrangler pages deploy public --project-name rf-lab
 
 The project name `rf-lab` is already set in `wrangler.toml`.
 
+### If the build log says `npx wrangler deploy`
+
+This is a **Pages** site, not a Worker. `npx wrangler deploy` is the Workers deploy command and will fail with:
+
+```text
+Missing entry-point to Worker script or to assets directory
+```
+
+Fix it in one of two ways:
+
+1. **If the project is Pages:** open **Settings → Builds & deployments** and set:
+   - **Framework preset:** None
+   - **Build command:** blank
+   - **Build output directory:** `public`
+   - **Deploy command**, if shown: `npx wrangler pages deploy public --project-name rf-lab`
+2. **If you created a Worker instead:** delete it and create a new project via **Workers & Pages → Create application → Pages → Connect to Git**.
+
+Do not add `main` or `[assets]` to `wrangler.toml` just to satisfy `wrangler deploy`; that deploys a Worker rather than this Pages project.
+
 ## Structure
 
 ```text
