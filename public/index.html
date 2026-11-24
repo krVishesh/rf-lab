@@ -735,6 +735,22 @@
     background: #071012;
   }
   .block-panel[hidden] { display: none; }
+  .block-drawer {
+    position: fixed;
+    top: 66px;
+    right: 0;
+    bottom: 0;
+    z-index: 44;
+    display: flex;
+    flex-direction: column;
+    width: min(320px, 88vw);
+    margin: 0;
+    border: 0;
+    border-left: 1px solid var(--line2);
+    background: #071012;
+    box-shadow: -20px 0 55px rgba(0,0,0,.45);
+  }
+  .block-drawer[hidden] { display: none; }
   .block-panel-head {
     display: flex;
     justify-content: space-between;
@@ -747,6 +763,57 @@
     color: var(--dim);
   }
   .block-panel-head span:last-child { color: var(--cyan); }
+  .block-drawer .block-panel-head > span:last-child {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--cyan);
+  }
+  .block-drawer-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 1px solid var(--line2);
+    background: transparent;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .block-drawer-close:hover { color: var(--lime); border-color: var(--lime); }
+  .block-tab {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    z-index: 43;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 13px 8px;
+    border: 1px solid var(--line2);
+    border-right: 0;
+    background: var(--panel2);
+    color: var(--lime);
+    writing-mode: vertical-rl;
+    font-family: var(--mono);
+    font-size: .55rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .block-tab:hover { background: #102024; }
+  .block-tab[hidden] { display: none; }
+  .block-tab span:last-child { color: var(--cyan); writing-mode: horizontal-tb; }
+  .block-drawer .block-panel-list {
+    max-height: none;
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+  }
   .block-panel-list {
     display: flex;
     flex-direction: column;
@@ -1020,15 +1087,7 @@
     <div class="side-progress">
       <div class="row"><span>COURSE PROGRESS</span><strong id="sidePct">0%</strong></div>
       <div class="meter"><i id="sideBar"></i></div>
-      <div class="row" style="margin-top:8px;margin-bottom:0"><span id="sideDone">0 / 57 checkpoints</span><span>v1.0</span></div>
-    </div>
-    <div class="block-panel" id="blockPanel" hidden>
-      <div class="block-panel-head">
-        <span>BLOCKS IN THIS CHAPTER</span>
-        <span id="blockPanelCount">0</span>
-      </div>
-      <div class="block-panel-list" id="blockPanelList"></div>
-      <a class="block-panel-all" href="#blocks">Open full block guide →</a>
+      <div class="row" style="margin-top:8px;margin-bottom:0"><span id="sideDone">0 / 57 checkpoints</span><span>v1.1</span></div>
     </div>
     <nav id="nav"></nav>
     <div class="side-actions">
@@ -1043,7 +1102,7 @@
   <main id="main" tabindex="-1">
     <section class="view active" id="overview" data-view data-nav="Mission brief">
       <div class="hero">
-        <div class="kicker"><span class="pulse"></span> SDR FIELD MANUAL / v1.0</div>
+        <div class="kicker"><span class="pulse"></span> SDR FIELD MANUAL / v1.1</div>
         <h1>The spectrum is a <em>computer interface.</em></h1>
         <p class="hero-sub">A build-first course for cyber security operators. Learn the RF chain, wire it in <strong>GNU Radio Companion</strong>, prove it without help, then move up the stack. No magic blocks. No illegal transmitters. No hand-waving.</p>
         <div class="hero-actions">
@@ -2833,6 +2892,12 @@ f = frequency in hertz</code></pre>
             <p>Never connect a transmitter to an antenna without a licence or written authorization. Use a dummy load and shielded enclosure for bench tests. Do not jam, spoof, or transmit on a band you do not own or have permission to use. When in doubt, do not transmit.</p>
           </div>
 
+          <div class="callout tip">
+            <strong>For a proper transmit build, go to the book</strong>
+            <p>This chapter deliberately stops at a software loopback. The full FM transmitter project, hardware gain staging, test procedure, and legal discussion are in <em>Practical SDR</em>, chapter 13. Use that chapter if you have a lawful transmit setup and the right test equipment.</p>
+            <p><a class="btn secondary" href="https://nostarch.com/practical-sdr" target="_blank" rel="noopener noreferrer">Practical SDR → chapter 13</a></p>
+          </div>
+
           <div class="tool-card chapter-tool" data-chapter-tool>
             <div class="tool-head">
               <div>
@@ -2912,7 +2977,7 @@ f = frequency in hertz</code></pre>
         <span class="block-count" id="blockCount"></span>
       </div>
       <div class="block-grid" id="blockGrid"></div>
-      <p class="block-guide-note">This environment’s GNU Radio 3.10.9.2 install contains 564 block definitions. The 65 detailed entries below cover the blocks used in the course plus common neighbours. <a href="grc-block-catalog.csv" download>Download the full installed block catalogue (CSV)</a>; every installed block also documents its own parameters in GRC’s block properties.</p>
+      <p class="block-guide-note">This environment’s GNU Radio 3.10.9.2 install contains 564 block definitions. The CSV is generated from the official block definition files installed by GNU Radio (<code>/usr/share/gnuradio/grc/blocks/*.block.yml</code>), not copied from a website or from the book. The 65 detailed entries below cover the blocks used in the course plus common neighbours. <a href="grc-block-catalog.csv" download>Download the full installed block catalogue (CSV)</a>; every installed block also documents its own parameters in GRC’s block properties.</p>
       <div class="callout tip">
         <strong>How to use the chapter sidebar</strong>
         <p>On a module page, the left sidebar lists the blocks that chapter actually uses. Click one for the short briefing. Use this index when you meet a block in an example or want to compare alternatives.</p>
@@ -3364,6 +3429,21 @@ f = frequency in hertz</code></pre>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<button class="block-tab" id="blockTab" type="button" aria-controls="blockPanel" aria-expanded="false" hidden>
+  <span>BLOCKS</span><span id="blockTabCount">0</span>
+</button>
+<aside class="block-panel block-drawer" id="blockPanel" aria-label="Blocks in this chapter" hidden>
+  <div class="block-panel-head">
+    <span>BLOCKS IN THIS CHAPTER</span>
+    <span>
+      <span id="blockPanelCount">0</span>
+      <button class="block-drawer-close" id="blockDrawerClose" type="button" aria-label="Close block panel">×</button>
+    </span>
+  </div>
+  <div class="block-panel-list" id="blockPanelList"></div>
+  <a class="block-panel-all" href="#blocks">Open full block guide →</a>
+</aside>
+
 <div class="block-modal" id="blockModal" hidden>
   <div class="block-modal-panel" role="dialog" aria-modal="true" aria-labelledby="blockModalTitle">
     <button class="block-modal-close" id="blockClose" aria-label="Close block details">×</button>
@@ -3490,6 +3570,9 @@ f = frequency in hertz</code></pre>
   const blockPanel = document.getElementById('blockPanel');
   const blockPanelList = document.getElementById('blockPanelList');
   const blockPanelCount = document.getElementById('blockPanelCount');
+  const blockTab = document.getElementById('blockTab');
+  const blockTabCount = document.getElementById('blockTabCount');
+  const blockDrawerClose = document.getElementById('blockDrawerClose');
   const blockGrid = document.getElementById('blockGrid');
   const blockSearch = document.getElementById('blockSearch');
   const blockFilter = document.getElementById('blockFilter');
@@ -3511,17 +3594,23 @@ f = frequency in hertz</code></pre>
   }
 
   function updateBlockPanel(view) {
+    blockPanel.hidden = true;
+    blockTab.hidden = true;
+    blockTab.setAttribute('aria-expanded', 'false');
     const moduleId = view?.dataset?.module;
-    if (!moduleId) {
-      blockPanel.hidden = true;
-      return;
-    }
+    if (!moduleId) return;
     const names = BLOCKS.filter(b => b.chapters.includes(moduleId)).map(b => b.name);
-    blockPanel.hidden = false;
+    blockTab.hidden = false;
+    blockTabCount.textContent = names.length;
     blockPanelCount.textContent = names.length + ' linked';
     blockPanelList.innerHTML = names.length
       ? names.map(name => '<button class="block-pill" type="button" data-block="' + name + '">' + name + '</button>').join('')
       : '<p class="tool-note" style="padding:4px 6px">No new blocks in this chapter.</p>';
+  }
+
+  function closeBlockDrawer() {
+    blockPanel.hidden = true;
+    blockTab.setAttribute('aria-expanded', 'false');
   }
 
   function blockCardHtml(b) {
@@ -4657,6 +4746,12 @@ f = frequency in hertz</code></pre>
     showToast('Progress reset.');
   });
 
+  blockTab.addEventListener('click', () => {
+    const open = blockPanel.hidden;
+    blockPanel.hidden = !open;
+    blockTab.setAttribute('aria-expanded', String(open));
+  });
+  blockDrawerClose.addEventListener('click', closeBlockDrawer);
   blockPanelList.addEventListener('click', event => {
     const button = event.target.closest('[data-block]');
     if (button) openBlock(button.dataset.block);
@@ -4695,6 +4790,7 @@ f = frequency in hertz</code></pre>
     if (event.key === 'Escape') {
       document.body.classList.remove('nav-open');
       menuBtn.setAttribute('aria-expanded', 'false');
+      closeBlockDrawer();
       if (!blockModal.hidden) closeBlockModal();
     }
   });

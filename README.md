@@ -1,5 +1,7 @@
 # RF Lab
 
+**Version:** 1.1
+
 The Spectrum Field Manual: a self-contained SDR + GNU Radio field manual for cyber security operators, expanded with physical-layer and hardware material from *Practical SDR* (Clark & Clark, 2025). It is a static, single-page site: no build step, no dependencies, and no server-side code.
 
 ## What is inside
@@ -9,10 +11,10 @@ The Spectrum Field Manual: a self-contained SDR + GNU Radio field manual for cyb
 - Simulated GNU Radio labs that work without a radio, plus receive-only hardware paths
 - RF security, capture, evidence handling, and defensive monitoring material
 - Per-chapter GRC block sidebar with what / why / parameters / gotchas
-- Searchable 65-block guide plus a downloadable 564-block GRC catalogue
+- Searchable 65-block guide plus a downloadable 564-block GRC catalogue generated from the installed GNU Radio block definitions
 - Field reference, formula sheet, debug playbook, coverage map, and accuracy limits
 
-The physical-layer track is informed by [*Practical SDR*](https://nostarch.com/practical-sdr) by David Clark and Paul Clark (No Starch Press, 2025). No text or figures from the book are reproduced here.
+The physical-layer track is informed by [*Practical SDR*](https://nostarch.com/practical-sdr) by David Clark and Paul Clark (No Starch Press, 2025). No text or figures from the book are reproduced here. The downloadable GRC catalogue is generated locally from the block definition files installed with GNU Radio 3.10.9.2.
 
 Progress is stored in the visitor’s browser under the localStorage key `spectrum-field-manual:v1`. It is not sent to a server.
 
