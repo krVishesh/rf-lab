@@ -1015,6 +1015,14 @@
   }
   .block-detail-grid dd { color: var(--muted); }
   .block-detail-grid dd strong { color: var(--txt); }
+  .block-param-list {
+    margin: 0;
+    padding-left: 17px;
+    color: var(--muted);
+  }
+  .block-param-list li { margin: 3px 0; }
+  .block-param-list li::marker { color: var(--lime); }
+  .block-param-empty { color: var(--muted); }
   .block-detail-chapters { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 14px; }
   .block-detail-chapters a {
     padding: 4px 7px;
@@ -3732,6 +3740,16 @@ f = frequency in hertz</code></pre>
     blockCount.textContent = filtered.length + ' / ' + GUIDE_BLOCKS.length + ' blocks';
   }
 
+  function paramsListHtml(params) {
+    const text = String(params || '').trim();
+    if (!text) return '<span class="block-param-empty">See the block properties in GRC.</span>';
+    const parts = (text.includes(';') ? text.split(';') : text.split(','))
+      .map(p => p.trim().replace(/[.;,]+$/, ''))
+      .filter(Boolean)
+      .map(p => p.charAt(0).toUpperCase() + p.slice(1));
+    return '<ul class="block-param-list">' + parts.map(p => '<li>' + escapeHtml(p) + '</li>').join('') + '</ul>';
+  }
+
   function openBlock(key) {
     const b = blockByKey[key] || blockByName[key];
     if (!b) return;
@@ -3745,7 +3763,7 @@ f = frequency in hertz</code></pre>
       '<dl class="block-detail-grid">' +
         '<dt>What</dt><dd>' + escapeHtml(b.what) + '</dd>' +
         '<dt>Why</dt><dd>' + escapeHtml(b.why) + '</dd>' +
-        '<dt>Key params</dt><dd>' + escapeHtml(b.params) + '</dd>' +
+        '<dt>Key params</dt><dd>' + paramsListHtml(b.params) + '</dd>' +
         '<dt>Watch</dt><dd>' + escapeHtml(b.watch) + '</dd>' +
         docs +
       '</dl>' +
