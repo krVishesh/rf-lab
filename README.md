@@ -75,7 +75,8 @@ rf-lab/
 │   ├── index.html      # the complete site
 │   ├── _headers        # security headers for Cloudflare Pages
 │   ├── robots.txt
-│   └── grc-block-catalog.csv
+│   ├── grc-block-catalog.csv
+│   └── grc-block-data.js
 ├── README.md
 ├── wrangler.toml
 └── .gitignore
@@ -83,7 +84,8 @@ rf-lab/
 
 ## Notes
 
-- All CSS, JavaScript, and charts are embedded in `index.html`.
+- All site CSS, application JavaScript, and charts are in `index.html`; the generated block documentation data lives in `grc-block-data.js`.
 - No external JavaScript libraries, fonts, or build tooling are required.
+- Module photos are hotlinked from Wikimedia Commons and attributed in their captions. The site still works offline, but those images will not load without internet.
 - External links in the field library open in a new tab.
 - The RF material is receive-first and educational. It is not a substitute for local radio regulations, licensing, calibration, or RF safety advice.

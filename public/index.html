@@ -728,6 +728,38 @@
   .chapter-tool .chart { height: 235px; }
   .chapter-tool .chart.constellation { height: 290px; }
   .chapter-tool .tool-note { font-size: .74rem; }
+  .module-figure {
+    margin: 24px 0;
+    padding: 10px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+  }
+  .module-figure img {
+    display: block;
+    width: 100%;
+    max-height: 420px;
+    object-fit: contain;
+    background: #020505;
+  }
+  .module-figure figcaption {
+    padding: 9px 2px 1px;
+    color: var(--muted);
+    font-size: .76rem;
+    line-height: 1.5;
+  }
+  .figure-credit {
+    display: block;
+    margin-top: 4px;
+    color: var(--dim);
+    font-family: var(--mono);
+    font-size: .52rem;
+    letter-spacing: .03em;
+  }
+  .figure-credit a { color: var(--dim); }
+  .figure-credit a:hover { color: var(--cyan); }
+  .figure-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+  .figure-grid .module-figure { margin: 18px 0; }
+  @media (max-width: 650px) { .figure-grid { grid-template-columns: 1fr; } }
 
   .block-panel {
     margin: 12px 0 4px;
@@ -1273,6 +1305,13 @@
             <li><strong>Host DSP</strong> filters, demodulates, synchronizes, and decodes. GNU Radio lives here.</li>
           </ul>
           <p>Transmit is the same chain in reverse: bits → symbols → DAC → mixer → filter → power amplifier → antenna. Most low-cost SDRs are receive-only or half-duplex. That is a safety feature, not a limitation to work around.</p>
+
+          <figure class="module-figure">
+            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/USB-SDR-stick.jpg/960px-USB-SDR-stick.jpg" alt="A USB SDR receiver dongle with an antenna connector" loading="lazy" decoding="async">
+            <figcaption>A USB SDR is a tuner, ADC, and bus interface in a small package. The antenna, gain, sample rate, and DSP decisions still determine what you can receive.
+              <span class="figure-credit">Photo: Fellegis / <a href="https://commons.wikimedia.org/wiki/File:USB-SDR-stick.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a> / <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></span>
+            </figcaption>
+          </figure>
 
           <h4>Sample rate is width, not tuning range</h4>
           <p>A complex stream at 2.4 Msps can represent about 2.4 MHz of spectrum, centred on the tuner frequency. It does not mean the radio can tune from 24 MHz to 1.7 GHz at once. The hardware tuner sets the centre; the sample rate sets the window.</p>
@@ -1876,6 +1915,21 @@
           <div class="callout">
             <strong>Security reality</strong>
             <p>Analog modulation has no confidentiality or integrity. Anyone with a receiver can demodulate it. The only protections are legal, physical, or at a higher layer. “It sounds like noise” is not encryption.</p>
+          </div>
+
+          <div class="figure-grid">
+            <figure class="module-figure">
+              <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Amplitude_modulation.png/960px-Amplitude_modulation.png" alt="Amplitude modulation waveform showing a carrier whose envelope follows the message" loading="lazy" decoding="async">
+              <figcaption>AM: the message changes the carrier’s amplitude. The envelope is easy to recover, but amplitude noise and fading come along with it.
+                <span class="figure-credit">Image: Orion 8 / <a href="https://commons.wikimedia.org/wiki/File:Amplitude_modulation.png" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a> / Public domain</span>
+              </figcaption>
+            </figure>
+            <figure class="module-figure">
+              <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/Frequency_modulation_%28FM%29.svg/960px-Frequency_modulation_%28FM%29.svg.png" alt="Frequency modulation waveform showing constant amplitude and varying frequency" loading="lazy" decoding="async">
+              <figcaption>FM: the envelope stays constant while the frequency moves. That is why FM is more resistant to amplitude noise above its threshold.
+                <span class="figure-credit">Image: L31n42 / <a href="https://commons.wikimedia.org/wiki/File:Frequency_modulation_(FM).svg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a> / <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer">CC0</a></span>
+              </figcaption>
+            </figure>
           </div>
 
           <div class="tool-card chapter-tool" data-chapter-tool>
@@ -2592,6 +2646,14 @@ class blk(gr.sync_block):
 c = 299,792,458 m/s (use 3×10⁸ for estimates)
 f = frequency in hertz</code></pre>
           <p>At 100 MHz, one wavelength is about 3 metres. At 433.92 MHz it is about 69 cm. At 2.4 GHz it is about 12.5 cm. That is why low-frequency antennas are large and microwave antennas are small.</p>
+
+          <figure class="module-figure">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Electromagnetic_wave_EN.svg" alt="An electromagnetic wave showing perpendicular electric and magnetic fields" loading="lazy" decoding="async">
+            <figcaption>An electromagnetic wave: electric and magnetic fields oscillate perpendicular to each other and to the direction of travel. Frequency and wavelength are two views of the same wave.
+              <span class="figure-credit">Image: Piotr Fita / <a href="https://commons.wikimedia.org/wiki/File:Electromagnetic_wave_EN.svg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a> / <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer">CC0</a></span>
+            </figcaption>
+          </figure>
+
           <div class="table-wrap">
             <table>
               <thead><tr><th>Band</th><th>Range</th><th>Typical examples</th></tr></thead>
@@ -2622,6 +2684,13 @@ f = frequency in hertz</code></pre>
             <li>Most SDRs and antennas are designed for <strong>50 Ω</strong>. A mismatch causes reflection, loss, and sometimes damage at high transmit power.</li>
             <li>Feedline loss is real. A long cheap cable can cost more than the antenna gain adds.</li>
           </ul>
+
+          <figure class="module-figure">
+            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Yagi_antenna_BIRA.jpg/960px-Yagi_antenna_BIRA.jpg" alt="A multi-element Yagi antenna mounted outdoors" loading="lazy" decoding="async">
+            <figcaption>A Yagi is directional and higher-gain than a simple monopole, but it must be pointed and its pattern is narrower. Gain trades coverage for direction.
+              <span class="figure-credit">Photo: OliCol11 / <a href="https://commons.wikimedia.org/wiki/File:Yagi_antenna_BIRA.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a> / <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></span>
+            </figcaption>
+          </figure>
 
           <div class="tool-card chapter-tool" data-chapter-tool>
             <div class="tool-head">
@@ -2725,6 +2794,13 @@ f = frequency in hertz</code></pre>
             </table>
           </div>
 
+          <figure class="module-figure">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/HackRF_One_%2814945241348%29.jpg" alt="A HackRF One software-defined radio board with SMA connectors and USB port" loading="lazy" decoding="async">
+            <figcaption>A HackRF One is a half-duplex 8-bit SDR. The board contains the RF front end, mixers, filters, clocking, and ADC/DAC; the host still has to keep up with the samples.
+              <span class="figure-credit">Photo: SparkFun Electronics / <a href="https://commons.wikimedia.org/wiki/File:HackRF_One_(14945241348).jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a> / <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener noreferrer">CC BY 2.0</a></span>
+            </figcaption>
+          </figure>
+
           <div class="tool-card chapter-tool" data-chapter-tool>
             <div class="tool-head">
               <div>
@@ -2812,6 +2888,22 @@ f = frequency in hertz</code></pre>
             <div class="card"><span class="tag">Noise</span><h3>Computer and charger EMI</h3><p>USB power, switch-mode chargers, displays, and CPUs radiate noise. Battery power, ferrites, shielded cables, short USB runs, and antenna placement often help more than a better SDR.</p></div>
             <div class="card"><span class="tag">Bench</span><h3>Toolkit discipline</h3><p>Known-good antenna, adapters, 10/20/30 dB attenuators, dummy load, ferrites, labelled cables, and a notebook. Change one variable at a time.</p></div>
           </div>
+
+          <div class="figure-grid">
+            <figure class="module-figure">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/SMA_connector.jpg" alt="SMA coaxial connectors" loading="lazy" decoding="async">
+              <figcaption>SMA is common on SDRs, but RP-SMA is physically similar and not compatible. Check the centre pin and thread before forcing a connection.
+                <span class="figure-credit">Photo: Meggar / <a href="https://commons.wikimedia.org/wiki/File:SMA_connector.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a> / <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></span>
+              </figcaption>
+            </figure>
+            <figure class="module-figure">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Ferrite_bead_filter.png" alt="A ferrite bead clamped onto a cable" loading="lazy" decoding="async">
+              <figcaption>A ferrite choke suppresses common-mode RF current on a cable. It is a cheap way to reduce noise coupled from USB power and the computer.
+                <span class="figure-credit">Image: AlexJFox / <a href="https://commons.wikimedia.org/wiki/File:Ferrite_bead_filter.png" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a> / Public domain</span>
+              </figcaption>
+            </figure>
+          </div>
+
           <h4>Noise mitigation checklist</h4>
           <ul>
             <li>Run the laptop on battery and compare the noise floor with the charger connected.</li>
@@ -2966,8 +3058,8 @@ f = frequency in hertz</code></pre>
       <div class="module-head" style="padding-top:54px">
         <div class="module-kicker">INTERACTIVE GRC BLOCK GUIDE <span>/</span> GNU RADIO 3.10.x</div>
         <h2>Every block you need, in context</h2>
-        <p class="lede">Search the core blocks used in this course, see what each one does, why you reach for it, and which chapter uses it. Open a block from the chapter sidebar or from the index below.</p>
-        <div class="meta-row"><span class="meta">65 core blocks</span><span class="meta">what / why / params / gotchas</span><span class="meta">chapter-linked</span></div>
+        <p class="lede">Search the installed GNU Radio block catalogue, see what each one does, why you reach for it, and which chapters use the annotated ones. Open a block from the right-hand chapter drawer or from the index below.</p>
+        <div class="meta-row"><span class="meta">564 installed blocks</span><span class="meta">65 course annotations</span><span class="meta">official docs + params</span></div>
       </div>
       <div class="block-guide-controls">
         <input class="block-search" id="blockSearch" type="search" placeholder="Search blocks, categories, or chapter…" aria-label="Search GRC blocks">
@@ -2977,7 +3069,7 @@ f = frequency in hertz</code></pre>
         <span class="block-count" id="blockCount"></span>
       </div>
       <div class="block-grid" id="blockGrid"></div>
-      <p class="block-guide-note">This environment’s GNU Radio 3.10.9.2 install contains 564 block definitions. The CSV is generated from the official block definition files installed by GNU Radio (<code>/usr/share/gnuradio/grc/blocks/*.block.yml</code>), not copied from a website or from the book. The 65 detailed entries below cover the blocks used in the course plus common neighbours. <a href="grc-block-catalog.csv" download>Download the full installed block catalogue (CSV)</a>; every installed block also documents its own parameters in GRC’s block properties.</p>
+      <p class="block-guide-note">This environment’s GNU Radio 3.10.9.2 install contains 564 block definitions. The catalogue is generated from the official block definition files installed by GNU Radio (<code>/usr/share/gnuradio/grc/blocks/*.block.yml</code>), not copied from a website or from the book. <strong>157 definitions include prose documentation; 526 expose parameter names; every entry has an official GNU Radio search link.</strong> The 65 annotated entries cover the blocks used in the course. <a href="grc-block-catalog.csv" download>Download the full installed block catalogue (CSV)</a>.</p>
       <div class="callout tip">
         <strong>How to use the chapter sidebar</strong>
         <p>On a module page, the left sidebar lists the blocks that chapter actually uses. Click one for the short briefing. Use this index when you meet a block in an example or want to compare alternatives.</p>
@@ -3374,33 +3466,6 @@ f = frequency in hertz</code></pre>
       </div>
 
       <div class="ref-section">
-        <h2>Practical SDR companion</h2>
-        <p>This course was expanded using <em>Practical SDR: Getting Started with Software-Defined Radio</em> by David Clark and Paul Clark (No Starch Press, 2025) as a source for the physical-layer, hardware, peripheral, and transmit material. The explanations, labs, and charts here are original summaries; use the book for its full projects and worked examples.</p>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Practical SDR chapter</th><th>Coverage here</th><th>Where it supports this course</th></tr></thead>
-            <tbody>
-              <tr><td>1–2: What is a radio? / Computers and signals</td><td>Covered</td><td>Modules 1–3: signals, modulation, sampling, IQ</td></tr>
-              <tr><td>3–4: GNU Radio / AM receiver</td><td>Mostly covered</td><td>Modules 4–5 and 8: GRC, sources, variables, AM</td></tr>
-              <tr><td>5: Signal processing fundamentals</td><td>Covered</td><td>Modules 6–8: gain, dB, filters, resampling</td></tr>
-              <tr><td>6: How an AM receiver works</td><td>Covered</td><td>Modules 5, 8, 16: tuning, filtering, demodulation</td></tr>
-              <tr><td>7: Building an FM radio</td><td>Covered</td><td>Module 8: FM, de-emphasis, audio rate</td></tr>
-              <tr><td>8: The physics of radio signals</td><td>Covered</td><td>Module 16: bands, wavelength, bandwidth, noise, SNR</td></tr>
-              <tr><td>9: GNU Radio flowgraphs with SDR hardware</td><td>Covered</td><td>Modules 5, 11, 17: hardware sources and real captures</td></tr>
-              <tr><td>10: Modulation</td><td>Mostly covered</td><td>Modules 8, 9, 19: AM, FM, PM, digital, filtering</td></tr>
-              <tr><td>11: SDR hardware under the hood</td><td>Covered</td><td>Module 17: IQ sampling, ADC, gain, DC offset, specs</td></tr>
-              <tr><td>12: Peripheral hardware</td><td>Covered</td><td>Module 18: antennas, connectors, noise, toolkit</td></tr>
-              <tr><td>13: Transmitting</td><td>Conceptual</td><td>Module 19: FM loopback, interpolation, harmonics, law</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="callout tip">
-          <strong>Source note</strong>
-          <p>No text or figures from the book are reproduced here. The PDF is a reference for concepts and project structure; the website remains a self-contained original course. Statuses are a coverage audit against the book, not a claim that every paragraph is reproduced. “Mostly covered” or “Conceptual” means the core idea is present but a book-specific project, installation step, or hardware walkthrough is not. Use the book for those details.</p>
-        </div>
-      </div>
-
-      <div class="ref-section">
         <h2>Field library</h2>
         <p>Primary sources and useful tools. Open these when you need to go deeper than the module.</p>
         <div class="link-list">
@@ -3451,6 +3516,7 @@ f = frequency in hertz</code></pre>
   </div>
 </div>
 
+<script src="grc-block-data.js"></script>
 <script>
   const STORE = 'spectrum-field-manual:v1';
   const state = (() => {
@@ -3566,7 +3632,38 @@ f = frequency in hertz</code></pre>
   });
 
   /* ---------- GRC block guide ---------- */
+  const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]);
   const blockByName = Object.fromEntries(BLOCKS.map(b => [b.name, b]));
+  const catalog = Array.isArray(window.GRC_CATALOG) ? window.GRC_CATALOG : [];
+  const categoryLabel = raw => ({
+    analog: 'Analog', audio: 'Audio', blocks: 'Core', channels: 'Channel',
+    digital: 'Digital', dtv: 'DTV', fec: 'FEC', filter: 'Filter', fft: 'DSP',
+    iio: 'Hardware', network: 'Network', pdu: 'Packet', qtgui: 'GUI',
+    soapy: 'Hardware', tags: 'Tag', trellis: 'FEC', uhd: 'Hardware',
+    vocoder: 'Vocoder', zeromq: 'Network'
+  }[raw] || raw.charAt(0).toUpperCase() + raw.slice(1));
+  const curatedNameSet = new Set(BLOCKS.map(b => b.name));
+  const catalogEntries = catalog.map(c => {
+    const curated = blockByName[c.label];
+    const docs = c.docs || '';
+    return {
+      key: c.id,
+      name: c.label,
+      cat: curated?.cat || categoryLabel(c.category),
+      what: curated?.what || (docs ? docs.slice(0, 220) + (docs.length > 220 ? '…' : '') : 'No description string in the installed block definition.'),
+      why: curated?.why || 'Not annotated in this course; inspect the block properties and the official docs.',
+      params: curated?.params || c.params || 'See the block properties in GRC.',
+      watch: curated?.watch || 'Check input type, rate, and parameter defaults before wiring it.',
+      chapters: curated?.chapters || [],
+      docs,
+      source: c.file,
+      curated: !!curated
+    };
+  });
+  const catalogLabels = new Set(catalog.map(c => c.label));
+  const extras = BLOCKS.filter(b => !catalogLabels.has(b.name)).map(b => ({ ...b, key: 'course:' + b.name, docs: '', source: 'Course annotation', curated: true }));
+  const GUIDE_BLOCKS = catalogEntries;
+  const blockByKey = Object.fromEntries([...GUIDE_BLOCKS, ...extras].map(b => [b.key, b]));
   const blockPanel = document.getElementById('blockPanel');
   const blockPanelList = document.getElementById('blockPanelList');
   const blockPanelCount = document.getElementById('blockPanelCount');
@@ -3580,7 +3677,7 @@ f = frequency in hertz</code></pre>
   const blockModal = document.getElementById('blockModal');
   const blockModalBody = document.getElementById('blockModalBody');
   const blockClose = document.getElementById('blockClose');
-  const blockCategories = [...new Set(BLOCKS.map(b => b.cat))].sort();
+  const blockCategories = [...new Set(GUIDE_BLOCKS.map(b => b.cat))].sort();
 
   blockCategories.forEach(cat => {
     const option = document.createElement('option');
@@ -3615,10 +3712,10 @@ f = frequency in hertz</code></pre>
 
   function blockCardHtml(b) {
     const chapters = [...new Set(b.chapters)].map(id => '<span class="block-chip">' + chapterLabel(id) + '</span>').join('');
-    return '<article class="block-card" role="button" tabindex="0" data-block="' + b.name + '">' +
-      '<span class="block-cat">' + b.cat + '</span>' +
-      '<h3>' + b.name + '</h3>' +
-      '<p>' + b.what + '</p>' +
+    return '<article class="block-card" role="button" tabindex="0" data-block="' + escapeHtml(b.key) + '">' +
+      '<span class="block-cat">' + escapeHtml(b.cat) + (b.curated ? ' / annotated' : '') + '</span>' +
+      '<h3>' + escapeHtml(b.name) + '</h3>' +
+      '<p>' + escapeHtml(b.what) + '</p>' +
       '<div class="block-chips">' + chapters + '</div>' +
       '</article>';
   }
@@ -3627,28 +3724,37 @@ f = frequency in hertz</code></pre>
     if (!blockGrid) return;
     const query = (blockSearch.value || '').trim().toLowerCase();
     const cat = blockFilter.value || 'all';
-    const filtered = BLOCKS.filter(b => {
+    const filtered = GUIDE_BLOCKS.filter(b => {
       if (cat !== 'all' && b.cat !== cat) return false;
       if (!query) return true;
-      return [b.name, b.cat, b.what, b.why, b.params, ...b.chapters.map(chapterLabel)].join(' ').toLowerCase().includes(query);
+      return [b.name, b.cat, b.what, b.why, b.params, b.docs, ...b.chapters.map(chapterLabel)].join(' ').toLowerCase().includes(query);
     });
     blockGrid.innerHTML = filtered.length ? filtered.map(blockCardHtml).join('') : '<p class="block-guide-note">No blocks match that filter.</p>';
-    blockCount.textContent = filtered.length + ' / ' + BLOCKS.length + ' blocks';
+    blockCount.textContent = filtered.length + ' / ' + GUIDE_BLOCKS.length + ' blocks';
   }
 
-  function openBlock(name) {
-    const b = blockByName[name];
+  function openBlock(key) {
+    const b = blockByKey[key] || blockByName[key];
     if (!b) return;
+    const docs = b.docs
+      ? '<dt>GNU Radio docs</dt><dd>' + escapeHtml(b.docs) + '</dd>'
+      : '<dt>GNU Radio docs</dt><dd>No documentation string in the installed block definition. Open the block properties in GRC or use the official search link below.</dd>';
+    const chapters = [...new Set(b.chapters)].map(id => '<a href="#' + id + '">' + chapterLabel(id) + ' →</a>').join('');
     blockModalBody.innerHTML =
-      '<div class="tool-kicker">' + b.cat + ' / GNU RADIO</div>' +
-      '<h2 id="blockModalTitle">' + b.name + '</h2>' +
+      '<div class="tool-kicker">' + escapeHtml(b.cat) + ' / GNU RADIO' + (b.curated ? ' / COURSE NOTE' : '') + '</div>' +
+      '<h2 id="blockModalTitle">' + escapeHtml(b.name) + '</h2>' +
       '<dl class="block-detail-grid">' +
-        '<dt>What</dt><dd>' + b.what + '</dd>' +
-        '<dt>Why</dt><dd>' + b.why + '</dd>' +
-        '<dt>Key params</dt><dd>' + b.params + '</dd>' +
-        '<dt>Watch</dt><dd>' + b.watch + '</dd>' +
+        '<dt>What</dt><dd>' + escapeHtml(b.what) + '</dd>' +
+        '<dt>Why</dt><dd>' + escapeHtml(b.why) + '</dd>' +
+        '<dt>Key params</dt><dd>' + escapeHtml(b.params) + '</dd>' +
+        '<dt>Watch</dt><dd>' + escapeHtml(b.watch) + '</dd>' +
+        docs +
+        '<dt>Installed file</dt><dd><code>' + escapeHtml(b.source) + '</code></dd>' +
       '</dl>' +
-      '<div class="block-detail-chapters">' + [...new Set(b.chapters)].map(id => '<a href="#' + id + '">' + chapterLabel(id) + ' →</a>').join('') + '</div>';
+      '<div class="block-detail-chapters">' +
+        chapters +
+        '<a href="https://wiki.gnuradio.org/index.php?search=' + encodeURIComponent(b.name) + '" target="_blank" rel="noopener noreferrer">Official GNU Radio search ↗</a>' +
+      '</div>';
     blockModal.hidden = false;
     document.body.classList.add('modal-open');
     blockClose.focus();
