@@ -729,6 +729,213 @@
   .chapter-tool .chart.constellation { height: 290px; }
   .chapter-tool .tool-note { font-size: .74rem; }
 
+  .block-panel {
+    margin: 12px 0 4px;
+    border: 1px solid var(--line);
+    background: #071012;
+  }
+  .block-panel[hidden] { display: none; }
+  .block-panel-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 9px 10px;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: .53rem;
+    letter-spacing: .1em;
+    color: var(--dim);
+  }
+  .block-panel-head span:last-child { color: var(--cyan); }
+  .block-panel-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-height: 188px;
+    overflow-y: auto;
+    padding: 5px;
+  }
+  .block-pill {
+    width: 100%;
+    padding: 5px 6px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--muted);
+    text-align: left;
+    font-family: var(--mono);
+    font-size: .62rem;
+    line-height: 1.35;
+    cursor: pointer;
+  }
+  .block-pill:hover { color: var(--lime); border-color: var(--line2); background: rgba(255,255,255,.025); }
+  .block-panel-all {
+    display: block;
+    padding: 8px 10px;
+    border-top: 1px solid var(--line);
+    color: var(--cyan);
+    font-family: var(--mono);
+    font-size: .55rem;
+    letter-spacing: .04em;
+    text-decoration: none;
+  }
+  .block-panel-all:hover { color: #fff; }
+
+  .block-guide-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin: 22px 0 14px;
+  }
+  .block-search {
+    flex: 1 1 240px;
+    min-height: 40px;
+    padding: 8px 11px;
+    border: 1px solid var(--line2);
+    background: #040a0b;
+    color: var(--txt);
+    font-family: var(--mono);
+    font-size: .8rem;
+    outline: none;
+  }
+  .block-search:focus { border-color: var(--cyan); box-shadow: 0 0 0 2px rgba(94,231,255,.08); }
+  .block-filter {
+    min-height: 40px;
+    padding: 7px 10px;
+    border: 1px solid var(--line2);
+    background: #040a0b;
+    color: var(--txt);
+    font-family: var(--mono);
+    font-size: .72rem;
+  }
+  .block-count {
+    align-self: center;
+    margin-left: auto;
+    color: var(--dim);
+    font-family: var(--mono);
+    font-size: .58rem;
+    letter-spacing: .06em;
+  }
+  .block-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin: 12px 0 22px;
+  }
+  .block-card {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--txt);
+    text-align: left;
+    cursor: pointer;
+  }
+  .block-card:hover { border-color: var(--line2); background: var(--panel2); }
+  .block-card:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+  .block-cat {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--cyan);
+    font-family: var(--mono);
+    font-size: .52rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  .block-card h3 { margin: 0 0 5px; font-size: .86rem; line-height: 1.25; }
+  .block-card p { margin: 0; color: var(--muted); font-size: .78rem; line-height: 1.45; }
+  .block-card .block-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 9px;
+  }
+  .block-chip {
+    padding: 2px 5px;
+    border: 1px solid var(--line);
+    color: var(--dim);
+    font-family: var(--mono);
+    font-size: .5rem;
+    letter-spacing: .04em;
+  }
+  .block-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0,0,0,.72);
+    backdrop-filter: blur(3px);
+  }
+  .block-modal[hidden] { display: none; }
+  body.modal-open { overflow: hidden; }
+  .block-modal-panel {
+    width: min(760px, 100%);
+    max-height: min(86vh, 760px);
+    overflow-y: auto;
+    padding: 24px;
+    border: 1px solid var(--line2);
+    background: var(--panel);
+    box-shadow: var(--shadow);
+  }
+  .block-modal-close {
+    float: right;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--line2);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 1.1rem;
+  }
+  .block-modal-close:hover { color: var(--lime); border-color: var(--lime); }
+  .block-modal-panel .tool-kicker { color: var(--lime); }
+  .block-modal-panel h2 { margin: 8px 0 16px; font-size: 1.7rem; letter-spacing: -.03em; }
+  .block-detail-grid {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: 1px;
+    border: 1px solid var(--line);
+    background: var(--line);
+  }
+  .block-detail-grid dt,
+  .block-detail-grid dd {
+    margin: 0;
+    padding: 9px 11px;
+    background: var(--panel2);
+    font-size: .82rem;
+  }
+  .block-detail-grid dt {
+    color: var(--dim);
+    font-family: var(--mono);
+    font-size: .55rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+  .block-detail-grid dd { color: var(--muted); }
+  .block-detail-grid dd strong { color: var(--txt); }
+  .block-detail-chapters { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 14px; }
+  .block-detail-chapters a {
+    padding: 4px 7px;
+    border: 1px solid var(--line2);
+    color: var(--cyan);
+    font-family: var(--mono);
+    font-size: .58rem;
+    text-decoration: none;
+  }
+  .block-detail-chapters a:hover { color: #fff; border-color: var(--cyan); }
+  .block-guide-note { margin: 0 0 18px; color: var(--dim); font-size: .82rem; }
+
+  @media (max-width: 650px) {
+    .block-grid { grid-template-columns: 1fr; }
+    .block-count { width: 100%; margin-left: 0; }
+    .block-detail-grid { grid-template-columns: 1fr; }
+    .block-detail-grid dt { padding-bottom: 2px; }
+    .block-detail-grid dd { padding-top: 2px; }
+  }
+
   .toast {
     position: fixed;
     right: 18px;
@@ -814,6 +1021,14 @@
       <div class="row"><span>COURSE PROGRESS</span><strong id="sidePct">0%</strong></div>
       <div class="meter"><i id="sideBar"></i></div>
       <div class="row" style="margin-top:8px;margin-bottom:0"><span id="sideDone">0 / 57 checkpoints</span><span>v1.0</span></div>
+    </div>
+    <div class="block-panel" id="blockPanel" hidden>
+      <div class="block-panel-head">
+        <span>BLOCKS IN THIS CHAPTER</span>
+        <span id="blockPanelCount">0</span>
+      </div>
+      <div class="block-panel-list" id="blockPanelList"></div>
+      <a class="block-panel-all" href="#blocks">Open full block guide →</a>
     </div>
     <nav id="nav"></nav>
     <div class="side-actions">
@@ -2682,6 +2897,28 @@ f = frequency in hertz</code></pre>
       </div>
     </section>
 
+    <section class="view" id="blocks" data-view data-nav="Block guide" data-navnum="BLK">
+      <div class="module-head" style="padding-top:54px">
+        <div class="module-kicker">INTERACTIVE GRC BLOCK GUIDE <span>/</span> GNU RADIO 3.10.x</div>
+        <h2>Every block you need, in context</h2>
+        <p class="lede">Search the core blocks used in this course, see what each one does, why you reach for it, and which chapter uses it. Open a block from the chapter sidebar or from the index below.</p>
+        <div class="meta-row"><span class="meta">65 core blocks</span><span class="meta">what / why / params / gotchas</span><span class="meta">chapter-linked</span></div>
+      </div>
+      <div class="block-guide-controls">
+        <input class="block-search" id="blockSearch" type="search" placeholder="Search blocks, categories, or chapter…" aria-label="Search GRC blocks">
+        <select class="block-filter" id="blockFilter" aria-label="Filter blocks by category">
+          <option value="all">All categories</option>
+        </select>
+        <span class="block-count" id="blockCount"></span>
+      </div>
+      <div class="block-grid" id="blockGrid"></div>
+      <p class="block-guide-note">This environment’s GNU Radio 3.10.9.2 install contains 564 block definitions. The 65 detailed entries below cover the blocks used in the course plus common neighbours. <a href="grc-block-catalog.csv" download>Download the full installed block catalogue (CSV)</a>; every installed block also documents its own parameters in GRC’s block properties.</p>
+      <div class="callout tip">
+        <strong>How to use the chapter sidebar</strong>
+        <p>On a module page, the left sidebar lists the blocks that chapter actually uses. Click one for the short briefing. Use this index when you meet a block in an example or want to compare alternatives.</p>
+      </div>
+    </section>
+
     <section class="view" id="tools" data-view data-nav="Toolbench" data-navnum="LAB">
       <div class="module-head" style="padding-top:54px">
         <div class="module-kicker">INTERACTIVE TOOLBENCH <span>/</span> NO RADIO REQUIRED</div>
@@ -3076,25 +3313,25 @@ f = frequency in hertz</code></pre>
         <p>This course was expanded using <em>Practical SDR: Getting Started with Software-Defined Radio</em> by David Clark and Paul Clark (No Starch Press, 2025) as a source for the physical-layer, hardware, peripheral, and transmit material. The explanations, labs, and charts here are original summaries; use the book for its full projects and worked examples.</p>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Practical SDR chapter</th><th>Where it supports this course</th></tr></thead>
+            <thead><tr><th>Practical SDR chapter</th><th>Coverage here</th><th>Where it supports this course</th></tr></thead>
             <tbody>
-              <tr><td>1–2: What is a radio? / Computers and signals</td><td>Modules 1–3: signals, modulation, sampling, IQ</td></tr>
-              <tr><td>3–4: GNU Radio / AM receiver</td><td>Modules 4–5 and 8: GRC, sources, variables, AM</td></tr>
-              <tr><td>5: Signal processing fundamentals</td><td>Modules 6–8: gain, dB, filters, resampling</td></tr>
-              <tr><td>6: How an AM receiver works</td><td>Modules 5, 8, 16: tuning, filtering, demodulation</td></tr>
-              <tr><td>7: Building an FM radio</td><td>Module 8: FM, de-emphasis, audio rate</td></tr>
-              <tr><td>8: The physics of radio signals</td><td>Module 16: bands, wavelength, bandwidth, noise, SNR</td></tr>
-              <tr><td>9: GNU Radio flowgraphs with SDR hardware</td><td>Modules 5, 11, 17: hardware sources and real captures</td></tr>
-              <tr><td>10: Modulation</td><td>Modules 8, 9, 19: AM, FM, PM, digital, filtering</td></tr>
-              <tr><td>11: SDR hardware under the hood</td><td>Module 17: IQ sampling, ADC, gain, DC offset, specs</td></tr>
-              <tr><td>12: Peripheral hardware</td><td>Module 18: antennas, connectors, noise, toolkit</td></tr>
-              <tr><td>13: Transmitting</td><td>Module 19: FM loopback, interpolation, harmonics, law</td></tr>
+              <tr><td>1–2: What is a radio? / Computers and signals</td><td>Covered</td><td>Modules 1–3: signals, modulation, sampling, IQ</td></tr>
+              <tr><td>3–4: GNU Radio / AM receiver</td><td>Mostly covered</td><td>Modules 4–5 and 8: GRC, sources, variables, AM</td></tr>
+              <tr><td>5: Signal processing fundamentals</td><td>Covered</td><td>Modules 6–8: gain, dB, filters, resampling</td></tr>
+              <tr><td>6: How an AM receiver works</td><td>Covered</td><td>Modules 5, 8, 16: tuning, filtering, demodulation</td></tr>
+              <tr><td>7: Building an FM radio</td><td>Covered</td><td>Module 8: FM, de-emphasis, audio rate</td></tr>
+              <tr><td>8: The physics of radio signals</td><td>Covered</td><td>Module 16: bands, wavelength, bandwidth, noise, SNR</td></tr>
+              <tr><td>9: GNU Radio flowgraphs with SDR hardware</td><td>Covered</td><td>Modules 5, 11, 17: hardware sources and real captures</td></tr>
+              <tr><td>10: Modulation</td><td>Mostly covered</td><td>Modules 8, 9, 19: AM, FM, PM, digital, filtering</td></tr>
+              <tr><td>11: SDR hardware under the hood</td><td>Covered</td><td>Module 17: IQ sampling, ADC, gain, DC offset, specs</td></tr>
+              <tr><td>12: Peripheral hardware</td><td>Covered</td><td>Module 18: antennas, connectors, noise, toolkit</td></tr>
+              <tr><td>13: Transmitting</td><td>Conceptual</td><td>Module 19: FM loopback, interpolation, harmonics, law</td></tr>
             </tbody>
           </table>
         </div>
         <div class="callout tip">
           <strong>Source note</strong>
-          <p>No text or figures from the book are reproduced here. The PDF is a reference for concepts and project structure; the website remains a self-contained original course. If you are studying the book, map its chapters to the modules above and use its projects as extra lab time.</p>
+          <p>No text or figures from the book are reproduced here. The PDF is a reference for concepts and project structure; the website remains a self-contained original course. Statuses are a coverage audit against the book, not a claim that every paragraph is reproduced. “Mostly covered” or “Conceptual” means the core idea is present but a book-specific project, installation step, or hardware walkthrough is not. Use the book for those details.</p>
         </div>
       </div>
 
@@ -3127,12 +3364,88 @@ f = frequency in hertz</code></pre>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<div class="block-modal" id="blockModal" hidden>
+  <div class="block-modal-panel" role="dialog" aria-modal="true" aria-labelledby="blockModalTitle">
+    <button class="block-modal-close" id="blockClose" aria-label="Close block details">×</button>
+    <div id="blockModalBody"></div>
+  </div>
+</div>
+
 <script>
   const STORE = 'spectrum-field-manual:v1';
   const state = (() => {
     try { return JSON.parse(localStorage.getItem(STORE) || '{}') || {}; }
     catch (_) { return {}; }
   })();
+
+  /* Core GNU Radio blocks used in the course, plus common neighbours. */
+  const BLOCKS = [
+    { name: 'Options', cat: 'Flowgraph', what: 'Defines flowgraph metadata and the generation mode.', why: 'Sets the graph ID, title, author, and whether the generated Python uses a GUI.', params: 'ID, title, author, generate options.', watch: 'Use No GUI for headless production; keep an interactive copy.', chapters: ['m04', 'm12'] },
+    { name: 'Variable', cat: 'Flowgraph', what: 'Defines a named value or expression used by other blocks.', why: 'Keeps sample rates and frequencies consistent across the graph.', params: 'ID and value/expression.', watch: 'A variable is not a runtime slider; use QT GUI Range for that.', chapters: ['m04', 'm05', 'm06'] },
+    { name: 'QT GUI Range', cat: 'Control', what: 'Creates a runtime slider or numeric control.', why: 'Changes gain, volume, frequency, or another parameter while the graph runs.', params: 'ID, type, default, start, stop, step.', watch: 'Only works for parameters with callbacks; not every setting is live.', chapters: ['m07', 'm13', 'm16'] },
+    { name: 'Signal Source', cat: 'Source', what: 'Generates a sine, cosine, square, triangle, or constant waveform.', why: 'Provides a known-good signal for testing without hardware.', params: 'Sample rate, waveform, frequency, amplitude, offset.', watch: 'The frequency is a baseband offset; add a Throttle.', chapters: ['m01', 'm02', 'm04', 'm06', 'm08', 'm16', 'm19'] },
+    { name: 'Noise Source', cat: 'Source', what: 'Produces random samples from a selected distribution.', why: 'Adds a realistic noise floor and tests detector thresholds.', params: 'Noise type, amplitude, seed.', watch: 'Amplitude is not dBm; uniform and Gaussian noise behave differently.', chapters: ['m03', 'm04', 'm07', 'm14'] },
+    { name: 'Random Source', cat: 'Source', what: 'Generates random bytes, integers, or shorts.', why: 'Creates bit patterns and synthetic packet payloads.', params: 'Output type, minimum, maximum, repeat.', watch: 'It is unpaced; use Throttle or Repeat before rate-sensitive blocks.', chapters: ['m09', 'm10'] },
+    { name: 'Vector Source', cat: 'Source', what: 'Repeats a fixed vector of samples or bytes.', why: 'Makes a deterministic bit pattern for modulation and framing labs.', params: 'Output type, vector, repeat.', watch: 'The vector is not a sample-rate clock; add Throttle.', chapters: ['m09', 'm14'] },
+    { name: 'File Source', cat: 'Source', what: 'Reads a raw IQ, float, or byte file from disk.', why: 'Replays a capture deterministically without hardware.', params: 'File, output type, repeat, offset, length.', watch: 'Raw files carry no metadata; set the sample rate yourself and Throttle playback.', chapters: ['m11'] },
+    { name: 'RTL-SDR Source', cat: 'Hardware source', what: 'Receives IQ samples from an RTL-SDR dongle.', why: 'Cheap wideband receive for FM, ADS-B, weather, and spectrum surveys.', params: 'Centre frequency, sample rate, RF gain, ppm correction, antenna.', watch: 'Receive-only, 8-bit, and easily overloaded; hardware sources do not need a Throttle.', chapters: ['m01', 'm05', 'm07', 'm11', 'm14', 'm15', 'm17', 'm18'] },
+    { name: 'Soapy Source', cat: 'Hardware source', what: 'Receives IQ through the SoapySDR hardware abstraction.', why: 'One block family supports HackRF, Pluto, Lime, USRP, RTL-SDR, and more.', params: 'Driver, centre frequency, sample rate, gain, bandwidth.', watch: 'Set bandwidth to match the sample rate; supported rates and gain steps are device-specific.', chapters: ['m01', 'm17'] },
+    { name: 'QT GUI Frequency Sink', cat: 'Sink', what: 'Displays spectrum as an FFT plot.', why: 'Shows signal position, bandwidth, noise floor, and spurs.', params: 'FFT size, bandwidth, centre frequency, averaging, window.', watch: 'Set bandwidth to the actual stream rate; averaging can hide bursts.', chapters: ['m01', 'm02', 'm03', 'm04', 'm06', 'm07', 'm16', 'm17', 'm18', 'm19'] },
+    { name: 'QT GUI Waterfall Sink', cat: 'Sink', what: 'Displays spectrum over time as a scrolling waterfall.', why: 'Makes intermittent bursts, frequency hopping, and drift visible.', params: 'FFT size, bandwidth, centre, update rate, colour map.', watch: 'Not a logging tool; capture IQ if you need evidence.', chapters: ['m01', 'm03', 'm05'] },
+    { name: 'QT GUI Time Sink', cat: 'Sink', what: 'Plots samples in the time domain.', why: 'Shows envelopes, bit transitions, audio waveforms, and clipping.', params: 'Input type, sample rate, number of points, autoscale.', watch: 'Autoscale can hide amplitude changes; set fixed axes for measurements.', chapters: ['m04', 'm05', 'm09', 'm14', 'm18'] },
+    { name: 'QT GUI Constellation Sink', cat: 'Sink', what: 'Plots complex samples in the I/Q plane.', why: 'Diagnoses modulation, carrier offset, phase noise, and timing errors.', params: 'Number of points, autoscale, axes.', watch: 'A pretty constellation is not proof of a correct decoder; sync matters.', chapters: ['m02', 'm09'] },
+    { name: 'Audio Sink', cat: 'Sink', what: 'Sends float samples to the sound card.', why: 'Turns demodulated audio into something you can hear.', params: 'Sample rate, device, OK to block.', watch: 'The rate must match; wrong rates cause chipmunk or slow audio.', chapters: ['m05', 'm08', 'm19'] },
+    { name: 'File Sink', cat: 'Sink', what: 'Writes raw stream samples to a file.', why: 'Captures IQ or demodulated data for offline analysis and evidence.', params: 'File, input type, vector length, append/unbuffered.', watch: 'Complex float32 is 8 bytes per sample; record metadata and hash the file.', chapters: ['m01', 'm04', 'm11', 'm15', 'm18'] },
+    { name: 'Wav File Sink', cat: 'Sink', what: 'Writes audio to a WAV, FLAC, or Ogg file.', why: 'Produces a playable audio recording without a GUI.', params: 'File, sample rate, format, bit depth.', watch: 'Input is float; do not feed complex IQ into it.', chapters: ['m12', 'm15'] },
+    { name: 'Null Sink', cat: 'Sink', what: 'Discards samples while still consuming them.', why: 'Benchmarks a flowgraph or terminates an unused branch.', params: 'Item size.', watch: 'It does not pace a source; you still need a Throttle or hardware rate.', chapters: ['m12', 'm17'] },
+    { name: 'Message Debug', cat: 'Message', what: 'Prints messages and PDUs to the console.', why: 'Shows packet contents, metadata, and CRC pass/fail results.', params: 'Input message port.', watch: 'It prints; it does not validate the protocol for you.', chapters: ['m10'] },
+    { name: 'Tag Debug', cat: 'Message', what: 'Prints stream tags and their sample offsets.', why: 'Shows burst boundaries, sync markers, and tagged-stream lengths.', params: 'Input type, key filter, display.', watch: 'Tags are metadata, not payload; check the offset and key.', chapters: ['m13'] },
+    { name: 'Throttle', cat: 'Rate', what: 'Paces samples from a source that has no real-time clock.', why: 'Keeps simulated flowgraphs from consuming 100 percent CPU.', params: 'Sample rate, vector length, ignore tags.', watch: 'Do not add it after a hardware source; the radio already paces.', chapters: ['m01', 'm02', 'm03', 'm04', 'm06', 'm08', 'm09'] },
+    { name: 'Add', cat: 'Math', what: 'Adds two or more sample streams element by element.', why: 'Combines signal and noise, or sums tones and channels.', params: 'Input type and number of inputs.', watch: 'Inputs must have the same type and rate.', chapters: ['m02', 'm03', 'm04', 'm06', 'm08'] },
+    { name: 'Multiply', cat: 'Math', what: 'Multiplies sample streams element by element.', why: 'Implements mixing, modulation, and complex multiplication.', params: 'Input type and number of inputs.', watch: 'Complex multiplication is not the same as multiplying magnitudes.', chapters: ['m08', 'm09', 'm19'] },
+    { name: 'Add Const', cat: 'Math', what: 'Adds a constant to every sample.', why: 'Creates a DC term or converts a bipolar message to a unipolar envelope.', params: 'Constant and input type.', watch: 'A DC offset can create a centre spike; know why you are adding it.', chapters: ['m08'] },
+    { name: 'Multiply Const', cat: 'Math', what: 'Scales every sample by a constant.', why: 'Applies software gain, attenuation, or volume control.', params: 'Constant and input type.', watch: 'Too much gain clips; the SDR sink expects roughly -1 to +1.', chapters: ['m07', 'm13', 'm19'] },
+    { name: 'Keep 1 in N', cat: 'Rate', what: 'Keeps one sample out of every N and discards the rest.', why: 'Simple decimation for teaching and rate reduction.', params: 'N and vector length.', watch: 'It does not filter; put a low-pass filter before it to prevent aliasing.', chapters: ['m06'] },
+    { name: 'Repeat', cat: 'Rate', what: 'Repeats each input sample N times.', why: 'Creates samples per symbol in simple OOK and FSK labs.', params: 'Interpolation and vector length.', watch: 'Creates images; filter after it in a real transmitter.', chapters: ['m09'] },
+    { name: 'Rational Resampler', cat: 'Rate', what: 'Changes rate by interpolation/decimation with an optional FIR filter.', why: 'Converts between audio, channel, and hardware rates.', params: 'Type, interpolation, decimation, taps, fractional bandwidth.', watch: 'Compute the ratio; filter when interpolating to suppress images.', chapters: ['m05', 'm08', 'm19'] },
+    { name: 'Low Pass Filter', cat: 'Filter', what: 'Passes low frequencies and attenuates high frequencies.', why: 'Selects a channel, limits bandwidth, and prevents aliasing.', params: 'Type, cutoff, transition width, sample rate, taps, decimation.', watch: 'A narrow transition needs many taps and more CPU; account for group delay.', chapters: ['m05', 'm06', 'm07', 'm09', 'm14', 'm15'] },
+    { name: 'Band Pass Filter', cat: 'Filter', what: 'Passes a band and rejects energy above and below it.', why: 'Selects a signal in a crowded spectrum before demodulation.', params: 'Low/high cutoff, transition width, sample rate, taps.', watch: 'For complex signals, an asymmetric filter may be better than a symmetric real filter.', chapters: ['m06'] },
+    { name: 'Frequency Xlating FIR Filter', cat: 'Filter', what: 'Shifts a selected frequency to zero and filters/decimates it.', why: 'Extracts one channel from a wideband capture efficiently.', params: 'Decimation, centre frequency, taps, sample rate.', watch: 'The centre offset is relative to the stream; get the sign right.', chapters: ['m05', 'm15'] },
+    { name: 'Root Raised Cosine Filter', cat: 'Filter', what: 'Pulse-shapes symbols and acts as a matched filter.', why: 'Limits digital bandwidth while controlling intersymbol interference.', params: 'Gain, symbol rate, excess bandwidth, taps per symbol.', watch: 'The transmitter and receiver must use compatible pulse shaping.', chapters: ['m09'] },
+    { name: 'Complex to Mag', cat: 'Math', what: 'Computes the magnitude of a complex sample.', why: 'Implements an envelope detector, burst detector, or AM demod front end.', params: 'Vector length.', watch: 'It discards phase; do not use it for PSK or coherent detection.', chapters: ['m02', 'm08', 'm09', 'm14'] },
+    { name: 'Float To Complex', cat: 'Type', what: 'Combines a real stream with an optional imaginary stream.', why: 'Feeds a real message into complex multiplication or modulation.', params: 'Vector length; optional imaginary input.', watch: 'With no imaginary input, Q is zero; this is not an IQ modulator by itself.', chapters: ['m02', 'm08', 'm09'] },
+    { name: 'Char To Float', cat: 'Type', what: 'Converts byte samples to float samples.', why: 'Connects byte-oriented bit sources to float DSP blocks.', params: 'Vector length, scale.', watch: 'Check the scale and whether the byte is signed or unsigned.', chapters: ['m08', 'm09'] },
+    { name: 'Binary Slicer', cat: 'Digital', what: 'Makes a one-bit decision from a float sample.', why: 'Recovers OOK, FSK discriminator output, or other binary decisions.', params: 'None beyond input type.', watch: 'Timing and threshold matter; a slicer is not a clock recovery block.', chapters: ['m09'] },
+    { name: 'Threshold', cat: 'Math', what: 'Outputs 1 when the input is above a threshold and 0 otherwise.', why: 'Builds simple burst or envelope detectors.', params: 'Threshold and input type.', watch: 'No hysteresis or minimum duration; noise will chatter.', chapters: ['m14', 'm15'] },
+    { name: 'Pack K Bits', cat: 'Digital', what: 'Packs K one-bit samples into each output byte.', why: 'Compacts unpacked bits for byte-oriented processing.', params: 'K and vector length.', watch: 'Bit order is a protocol fact; document it.', chapters: ['m09', 'm10'] },
+    { name: 'Unpack K Bits', cat: 'Digital', what: 'Expands each byte into K one-bit samples.', why: 'Turns packed data into a bit stream for modulation or inspection.', params: 'K and vector length.', watch: 'MSB-first vs LSB-first will make valid data look wrong.', chapters: ['m09', 'm10'] },
+    { name: 'Repack Bits', cat: 'Digital', what: 'Changes the bit packing/order of a stream.', why: 'Bridges protocols with different byte and bit conventions.', params: 'Input/output sizes, bit order, endianness.', watch: 'Test with a known byte pattern before trusting a decoder.', chapters: ['m10'] },
+    { name: 'AM Demod', cat: 'Analog', what: 'Envelope-demodulates a complex AM signal and filters/decimates audio.', why: 'Recovers AM audio without building a detector by hand.', params: 'Channel rate, audio decimation, pass/stop frequencies.', watch: 'The internal filter can be expensive; keep the audio transition practical.', chapters: ['m08'] },
+    { name: 'WBFM Receive', cat: 'Analog', what: 'Demodulates wideband FM with decimation, audio filtering, and de-emphasis.', why: 'The normal FM broadcast receiver block.', params: 'Quadrature rate, audio decimation.', watch: 'Output rate is quad rate divided by audio decimation.', chapters: ['m05', 'm08', 'm19'] },
+    { name: 'NBFM Receive', cat: 'Analog', what: 'Demodulates narrowband FM.', why: 'Receives narrow FM voice and telemetry signals.', params: 'Audio rate, quadrature rate, tau, max deviation.', watch: 'Set deviation and rates to the signal, not to the broadcast FM defaults.', chapters: ['m08'] },
+    { name: 'Quadrature Demod', cat: 'Analog', what: 'Converts phase change into an amplitude proportional to frequency offset.', why: 'Builds FM/FSK discriminators and measures frequency deviation.', params: 'Gain, usually sample rate divided by 2π times deviation.', watch: 'The gain must match the modulator deviation or the output clips or disappears.', chapters: ['m09'] },
+    { name: 'Frequency Mod', cat: 'Analog', what: 'Modulates a float message onto a complex carrier as frequency deviation.', why: 'Builds FM and FSK transmitters or test signals.', params: 'Sensitivity in radians per sample.', watch: 'Sensitivity is not deviation in Hz; compute 2πΔf/fs.', chapters: ['m05', 'm09', 'm19'] },
+    { name: 'WBFM Transmit', cat: 'Analog', what: 'Modulates audio into a complex wideband FM waveform.', why: 'Builds a broadcast-FM transmitter or software loopback.', params: 'Audio rate, quadrature rate, tau, max deviation, pre-emphasis.', watch: 'Audio rate must divide quadrature rate; filter after interpolation and never transmit without authorization.', chapters: ['m19'] },
+    { name: 'Constellation Object', cat: 'Digital', what: 'Defines a digital constellation and its symbol mapping.', why: 'Shared configuration for modulators and decoders.', params: 'Constellation type, points, mapping.', watch: 'The transmitter and receiver must agree on points, order, and normalization.', chapters: ['m09'] },
+    { name: 'Constellation Modulator', cat: 'Digital', what: 'Maps bits/bytes to symbols and pulse-shapes them.', why: 'Generates PSK/QAM waveforms for simulation or transmission.', params: 'Constellation, samples per symbol, excess bandwidth.', watch: 'Pulse shaping and rate change belong in the chain; do not forget the filter.', chapters: ['m09'] },
+    { name: 'Constellation Decoder', cat: 'Digital', what: 'Maps received symbols back to bits or bytes.', why: 'Recovers the digital payload after timing and carrier recovery.', params: 'Constellation and output type.', watch: 'It assumes the input is already synchronized and scaled.', chapters: ['m09'] },
+    { name: 'Symbol Sync', cat: 'Digital', what: 'Recovers symbol timing from an oversampled stream.', why: 'Finds the best sampling instant instead of trusting the transmitter clock.', params: 'Input/output type, TED, samples per symbol, loop bandwidth, damping.', watch: 'Check samples per symbol and loop bandwidth; a bad TED will not lock.', chapters: ['m09'] },
+    { name: 'Costas Loop', cat: 'Digital', what: 'Tracks carrier phase for BPSK/QPSK.', why: 'Removes carrier offset and phase rotation before decisions.', params: 'Loop bandwidth, order, use SNR.', watch: 'A Costas loop does not fix timing; use it with symbol sync.', chapters: ['m09'] },
+    { name: 'FLL Band-Edge', cat: 'Digital', what: 'Estimates and corrects carrier frequency offset.', why: 'Pulls a large frequency error into the Costas loop range.', params: 'Loop bandwidth, order, samples per symbol.', watch: 'FLL pulls frequency; it does not resolve phase or timing by itself.', chapters: ['m09'] },
+    { name: 'Correlate Access Code - Tag', cat: 'Digital', what: 'Finds a known access code and attaches a tag at the match.', why: 'Marks frame starts for packet processing.', params: 'Access code, threshold, tag name, type.', watch: 'A sync word is not authentication; anyone can transmit it.', chapters: ['m10'] },
+    { name: 'Message Strobe', cat: 'Message', what: 'Emits a message periodically.', why: 'Triggers PDU generators and message-driven tests.', params: 'Period and message value.', watch: 'Message rate is wall-clock, not sample rate.', chapters: ['m10', 'm12'] },
+    { name: 'Random PDU Generator', cat: 'Message', what: 'Generates random protocol data units.', why: 'Tests packet plumbing and CRC handling.', params: 'Min/max size, mask, length modulo.', watch: 'Payload bytes are random, so do not treat them as a valid protocol.', chapters: ['m10'] },
+    { name: 'CRC Append', cat: 'Packet', what: 'Appends a CRC to a PDU.', why: 'Adds error detection to a packet stream.', params: 'CRC width, polynomial, init, XOR, reflection, skip bytes.', watch: 'CRC detects errors; it does not authenticate the sender.', chapters: ['m10'] },
+    { name: 'CRC Check', cat: 'Packet', what: 'Checks a PDU CRC and emits pass/fail messages.', why: 'Separates valid frames from corrupted frames.', params: 'Same CRC settings as the transmitter, discard CRC.', watch: 'Mismatched settings look identical to a bad link.', chapters: ['m10'] },
+    { name: 'PDU to Tagged Stream', cat: 'Packet', what: 'Converts PDUs into a tagged sample stream.', why: 'Bridges packet processing into the sample-domain modulator.', params: 'Type, length tag.', watch: 'Tags carry the packet boundary; downstream blocks must preserve them.', chapters: ['m10'] },
+    { name: 'Tagged Stream to PDU', cat: 'Packet', what: 'Converts a tagged stream into PDUs.', why: 'Hands received packets to message-based decoders.', params: 'Type, length tag.', watch: 'A missing or wrong length tag produces broken packets.', chapters: ['m10'] },
+    { name: 'Stream to Tagged Stream', cat: 'Packet', what: 'Adds a length tag to fixed-size chunks of a stream.', why: 'Creates packet boundaries for framed processing.', params: 'Type, packet length, length tag key.', watch: 'The length must match the real frame; it is not a sync detector.', chapters: ['m10', 'm13'] },
+    { name: 'Tags Strobe', cat: 'Tag', what: 'Adds a tag every N samples.', why: 'Demonstrates tag propagation and timing.', params: 'Value, key, sample interval.', watch: 'A tag is metadata; it does not change the samples.', chapters: ['m13'] },
+    { name: 'Burst Tagger', cat: 'Tag', what: 'Tags the start and end of bursts from a trigger stream.', why: 'Marks activity for burst capture and packet processing.', params: 'True/false keys and values.', watch: 'Needs a detector in front; the tagger does not decide what a burst is.', chapters: ['m13', 'm14'] },
+    { name: 'Probe Avg Mag^2', cat: 'Probe', what: 'Tracks average signal power and exposes it to probes.', why: 'Builds power meters, squelch logic, and simple monitors.', params: 'Threshold, alpha, input type.', watch: 'Alpha controls averaging; a slow probe hides short bursts.', chapters: ['m07', 'm12', 'm15', 'm17'] },
+    { name: 'Function Probe', cat: 'Probe', what: 'Polls a method on another block at a fixed rate.', why: 'Turns a probe value into a variable for logging or control.', params: 'Block ID, function, arguments, poll rate.', watch: 'It is asynchronous; do not use it as a sample-accurate detector.', chapters: ['m12'] },
+    { name: 'Embedded Python Block', cat: 'Custom', what: 'Runs a Python work function inside the flowgraph.', why: 'Prototypes a detector, formatter, or custom DSP operation quickly.', params: 'Input/output signatures and Python code.', watch: 'Per-sample Python is slow; decimate first or move hot paths to C++.', chapters: ['m13'] }
+  ];
 
   const navGroups = [
     { label: 'Brief', ids: ['overview'] },
@@ -3141,6 +3454,7 @@ f = frequency in hertz</code></pre>
     { label: 'Phase III / Digital', ids: ['m09', 'm10', 'm11'] },
     { label: 'Phase IV / Operations', ids: ['m12', 'm13', 'm14', 'm15'] },
     { label: 'Phase V / Physical layer', ids: ['m16', 'm17', 'm18', 'm19'] },
+    { label: 'Block guide', ids: ['blocks'] },
     { label: 'Toolbench', ids: ['tools'] },
     { label: 'Reference', ids: ['reference'] }
   ];
@@ -3170,6 +3484,91 @@ f = frequency in hertz</code></pre>
       nav.appendChild(link);
     });
   });
+
+  /* ---------- GRC block guide ---------- */
+  const blockByName = Object.fromEntries(BLOCKS.map(b => [b.name, b]));
+  const blockPanel = document.getElementById('blockPanel');
+  const blockPanelList = document.getElementById('blockPanelList');
+  const blockPanelCount = document.getElementById('blockPanelCount');
+  const blockGrid = document.getElementById('blockGrid');
+  const blockSearch = document.getElementById('blockSearch');
+  const blockFilter = document.getElementById('blockFilter');
+  const blockCount = document.getElementById('blockCount');
+  const blockModal = document.getElementById('blockModal');
+  const blockModalBody = document.getElementById('blockModalBody');
+  const blockClose = document.getElementById('blockClose');
+  const blockCategories = [...new Set(BLOCKS.map(b => b.cat))].sort();
+
+  blockCategories.forEach(cat => {
+    const option = document.createElement('option');
+    option.value = cat;
+    option.textContent = cat;
+    blockFilter.appendChild(option);
+  });
+
+  function chapterLabel(id) {
+    return id.replace('m', 'M').toUpperCase();
+  }
+
+  function updateBlockPanel(view) {
+    const moduleId = view?.dataset?.module;
+    if (!moduleId) {
+      blockPanel.hidden = true;
+      return;
+    }
+    const names = BLOCKS.filter(b => b.chapters.includes(moduleId)).map(b => b.name);
+    blockPanel.hidden = false;
+    blockPanelCount.textContent = names.length + ' linked';
+    blockPanelList.innerHTML = names.length
+      ? names.map(name => '<button class="block-pill" type="button" data-block="' + name + '">' + name + '</button>').join('')
+      : '<p class="tool-note" style="padding:4px 6px">No new blocks in this chapter.</p>';
+  }
+
+  function blockCardHtml(b) {
+    const chapters = [...new Set(b.chapters)].map(id => '<span class="block-chip">' + chapterLabel(id) + '</span>').join('');
+    return '<article class="block-card" role="button" tabindex="0" data-block="' + b.name + '">' +
+      '<span class="block-cat">' + b.cat + '</span>' +
+      '<h3>' + b.name + '</h3>' +
+      '<p>' + b.what + '</p>' +
+      '<div class="block-chips">' + chapters + '</div>' +
+      '</article>';
+  }
+
+  function renderBlockGuide() {
+    if (!blockGrid) return;
+    const query = (blockSearch.value || '').trim().toLowerCase();
+    const cat = blockFilter.value || 'all';
+    const filtered = BLOCKS.filter(b => {
+      if (cat !== 'all' && b.cat !== cat) return false;
+      if (!query) return true;
+      return [b.name, b.cat, b.what, b.why, b.params, ...b.chapters.map(chapterLabel)].join(' ').toLowerCase().includes(query);
+    });
+    blockGrid.innerHTML = filtered.length ? filtered.map(blockCardHtml).join('') : '<p class="block-guide-note">No blocks match that filter.</p>';
+    blockCount.textContent = filtered.length + ' / ' + BLOCKS.length + ' blocks';
+  }
+
+  function openBlock(name) {
+    const b = blockByName[name];
+    if (!b) return;
+    blockModalBody.innerHTML =
+      '<div class="tool-kicker">' + b.cat + ' / GNU RADIO</div>' +
+      '<h2 id="blockModalTitle">' + b.name + '</h2>' +
+      '<dl class="block-detail-grid">' +
+        '<dt>What</dt><dd>' + b.what + '</dd>' +
+        '<dt>Why</dt><dd>' + b.why + '</dd>' +
+        '<dt>Key params</dt><dd>' + b.params + '</dd>' +
+        '<dt>Watch</dt><dd>' + b.watch + '</dd>' +
+      '</dl>' +
+      '<div class="block-detail-chapters">' + [...new Set(b.chapters)].map(id => '<a href="#' + id + '">' + chapterLabel(id) + ' →</a>').join('') + '</div>';
+    blockModal.hidden = false;
+    document.body.classList.add('modal-open');
+    blockClose.focus();
+  }
+
+  function closeBlockModal() {
+    blockModal.hidden = true;
+    document.body.classList.remove('modal-open');
+  }
 
   function showToast(message) {
     toast.textContent = message;
@@ -4207,6 +4606,7 @@ f = frequency in hertz</code></pre>
     const id = location.hash.replace('#', '') || 'overview';
     let view = document.getElementById(id);
     if (!view || !view.classList.contains('view')) view = document.getElementById('overview');
+    if (!blockModal.hidden) closeBlockModal();
     document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v === view));
     document.querySelectorAll('.nav-link[data-view]').forEach(a => {
       const active = a.dataset.view === view.id;
@@ -4218,6 +4618,8 @@ f = frequency in hertz</code></pre>
     document.title = title + 'SPECTRUM // SDR Field Manual';
     document.body.classList.remove('nav-open');
     menuBtn.setAttribute('aria-expanded', 'false');
+    updateBlockPanel(view);
+    if (view.id === 'blocks') renderBlockGuide();
     if (view.id === 'tools') scheduleTools();
     if (view.querySelector('.chapter-tool')) scheduleChapters();
     window.scrollTo({ top: 0, behavior: 'auto' });
@@ -4255,6 +4657,31 @@ f = frequency in hertz</code></pre>
     showToast('Progress reset.');
   });
 
+  blockPanelList.addEventListener('click', event => {
+    const button = event.target.closest('[data-block]');
+    if (button) openBlock(button.dataset.block);
+  });
+  blockGrid.addEventListener('click', event => {
+    const card = event.target.closest('[data-block]');
+    if (card) openBlock(card.dataset.block);
+  });
+  blockGrid.addEventListener('keydown', event => {
+    const card = event.target.closest('[data-block]');
+    if (card && (event.key === 'Enter' || event.key === ' ')) {
+      event.preventDefault();
+      openBlock(card.dataset.block);
+    }
+  });
+  blockSearch.addEventListener('input', renderBlockGuide);
+  blockFilter.addEventListener('change', renderBlockGuide);
+  blockClose.addEventListener('click', closeBlockModal);
+  blockModal.addEventListener('click', event => {
+    if (event.target === blockModal) closeBlockModal();
+  });
+  blockModalBody.addEventListener('click', event => {
+    if (event.target.closest('.block-detail-chapters a')) closeBlockModal();
+  });
+
   menuBtn.addEventListener('click', () => {
     const open = !document.body.classList.contains('nav-open');
     document.body.classList.toggle('nav-open', open);
@@ -4268,6 +4695,7 @@ f = frequency in hertz</code></pre>
     if (event.key === 'Escape') {
       document.body.classList.remove('nav-open');
       menuBtn.setAttribute('aria-expanded', 'false');
+      if (!blockModal.hidden) closeBlockModal();
     }
   });
   window.addEventListener('hashchange', route);

@@ -5,9 +5,11 @@ The Spectrum Field Manual: a self-contained SDR + GNU Radio field manual for cyb
 ## What is inside
 
 - 19 modules with Study / Build / Solo checkpoints
-- 13 interactive charts and six calculator-style tools
+- 13 interactive charts, six calculator-style tools, and a 65-block GRC guide
 - Simulated GNU Radio labs that work without a radio, plus receive-only hardware paths
 - RF security, capture, evidence handling, and defensive monitoring material
+- Per-chapter GRC block sidebar with what / why / parameters / gotchas
+- Searchable 65-block guide plus a downloadable 564-block GRC catalogue
 - Field reference, formula sheet, debug playbook, coverage map, and accuracy limits
 
 The physical-layer track is informed by [*Practical SDR*](https://nostarch.com/practical-sdr) by David Clark and Paul Clark (No Starch Press, 2025). No text or figures from the book are reproduced here.
@@ -70,7 +72,8 @@ rf-lab/
 ├── public/
 │   ├── index.html      # the complete site
 │   ├── _headers        # security headers for Cloudflare Pages
-│   └── robots.txt
+│   ├── robots.txt
+│   └── grc-block-catalog.csv
 ├── README.md
 ├── wrangler.toml
 └── .gitignore
