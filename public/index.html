@@ -3656,12 +3656,11 @@ f = frequency in hertz</code></pre>
       watch: curated?.watch || 'Check input type, rate, and parameter defaults before wiring it.',
       chapters: curated?.chapters || [],
       docs,
-      source: c.file,
       curated: !!curated
     };
   });
   const catalogLabels = new Set(catalog.map(c => c.label));
-  const extras = BLOCKS.filter(b => !catalogLabels.has(b.name)).map(b => ({ ...b, key: 'course:' + b.name, docs: '', source: 'Course annotation', curated: true }));
+  const extras = BLOCKS.filter(b => !catalogLabels.has(b.name)).map(b => ({ ...b, key: 'course:' + b.name, docs: '', curated: true }));
   const GUIDE_BLOCKS = catalogEntries;
   const blockByKey = Object.fromEntries([...GUIDE_BLOCKS, ...extras].map(b => [b.key, b]));
   const blockPanel = document.getElementById('blockPanel');
@@ -3749,7 +3748,6 @@ f = frequency in hertz</code></pre>
         '<dt>Key params</dt><dd>' + escapeHtml(b.params) + '</dd>' +
         '<dt>Watch</dt><dd>' + escapeHtml(b.watch) + '</dd>' +
         docs +
-        '<dt>Installed file</dt><dd><code>' + escapeHtml(b.source) + '</code></dd>' +
       '</dl>' +
       '<div class="block-detail-chapters">' +
         chapters +
