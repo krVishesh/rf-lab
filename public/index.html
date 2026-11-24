@@ -797,7 +797,7 @@
   <button class="menu-btn" id="menuBtn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">☰</button>
   <a class="brand" href="#overview"><span class="brand-mark">◈</span><span>SPECTRUM<span class="brand-sub"> // SDR FIELD MANUAL</span></span></a>
   <div class="top-meter" aria-hidden="true">
-    <span id="topLabel">0 / 45</span>
+    <span id="topLabel">0 / 57</span>
     <div class="meter"><i id="topBar"></i></div>
     <span id="topPct">0%</span>
   </div>
@@ -813,7 +813,7 @@
     <div class="side-progress">
       <div class="row"><span>COURSE PROGRESS</span><strong id="sidePct">0%</strong></div>
       <div class="meter"><i id="sideBar"></i></div>
-      <div class="row" style="margin-top:8px;margin-bottom:0"><span id="sideDone">0 / 45 checkpoints</span><span>v1.0</span></div>
+      <div class="row" style="margin-top:8px;margin-bottom:0"><span id="sideDone">0 / 57 checkpoints</span><span>v1.0</span></div>
     </div>
     <nav id="nav"></nav>
     <div class="side-actions">
@@ -837,17 +837,17 @@
           <a class="btn secondary" href="#reference">Field reference</a>
         </div>
         <div class="hero-meta">
-          <span>15 modules</span>
-          <span>45 checkpoints</span>
-          <span>10 live charts</span>
+          <span>19 modules</span>
+          <span>57 checkpoints</span>
+          <span>13 live charts</span>
           <span>sim + hardware paths</span>
           <span>rx only by default</span>
         </div>
       </div>
 
       <div class="metrics">
-        <div class="metric"><strong>15</strong><span>modules</span></div>
-        <div class="metric"><strong>45</strong><span>study / lab / solo checks</span></div>
+        <div class="metric"><strong>19</strong><span>modules</span></div>
+        <div class="metric"><strong>57</strong><span>study / lab / solo checks</span></div>
         <div class="metric"><strong>2</strong><span>paths: simulated + radio</span></div>
         <div class="metric"><strong>0</strong><span>transmitters required</span></div>
       </div>
@@ -952,6 +952,15 @@
               <li><a href="#m15">Capstone: signal watchdog</a></li>
             </ol>
           </div>
+          <div class="card roadmap-phase">
+            <h3>Phase V / Physical layer</h3>
+            <ol start="16">
+              <li><a href="#m16">RF physics, propagation, antennas</a></li>
+              <li><a href="#m17">SDR hardware under the hood</a></li>
+              <li><a href="#m18">Peripherals, noise, bench</a></li>
+              <li><a href="#m19">Transmit chain and boundaries</a></li>
+            </ol>
+          </div>
         </div>
         <div class="callout">
           <strong>The honest scope</strong>
@@ -993,6 +1002,7 @@
 
           <h4>Sample rate is width, not tuning range</h4>
           <p>A complex stream at 2.4 Msps can represent about 2.4 MHz of spectrum, centred on the tuner frequency. It does not mean the radio can tune from 24 MHz to 1.7 GHz at once. The hardware tuner sets the centre; the sample rate sets the window.</p>
+          <p><strong>Bandwidth is physics; channel width is law.</strong> Bandwidth is how much spectrum the signal actually occupies. Channel width is the allocation the regulator defines. A clean transmitter fits inside its channel; an overdriven or malfunctioning one spills into its neighbours.</p>
           <div class="table-wrap">
             <table>
               <thead><tr><th>Radio</th><th>Typical role</th><th>What it teaches</th></tr></thead>
@@ -1426,7 +1436,7 @@
           <p>A filter is a frequency-dependent gain. A low-pass filter keeps low frequencies and rejects high ones. The important parameters are cutoff, transition width, stopband attenuation, and the number of taps. A narrow transition costs more taps and more CPU.</p>
           <ul>
             <li><strong>Decimation</strong> keeps one sample out of every N. It lowers the rate and the bandwidth, but only after an anti-alias low-pass filter.</li>
-            <li><strong>Interpolation</strong> inserts samples. It must be followed by a low-pass filter to remove the images created by the rate increase.</li>
+            <li><strong>Interpolation</strong> inserts samples and creates spectral images. It must be followed by a low-pass filter; a rational resampler can include those taps. Skipping the filter puts the images on the air.</li>
             <li><strong>Rational resampling</strong> changes by <code>interp/decim</code>; use it for rates like 50 kHz → 48 kHz (24/25) or 200 kHz → 48 kHz (6/25).</li>
             <li><strong>Group delay</strong> is real. Filters shift the signal in time; this matters for burst timing and packet sync.</li>
             <li><strong>Complex filters</strong> can be asymmetric and select positive or negative frequencies; real filters are symmetric.</li>
@@ -1521,6 +1531,7 @@
             <li><strong>AGC</strong> hides level changes. For measurements, turn it off and record the gain.</li>
             <li><strong>RSSI</strong> is relative and antenna-dependent. It is not a distance sensor.</li>
           </ul>
+          <p><strong>Gain has a specific job: use the ADC’s full scale.</strong> If the signal is tiny relative to full scale, only a few ADC levels describe it, so effective resolution and SNR suffer. If gain is too high, the waveform clips and the ADC stops measuring it faithfully. The sweet spot is enough gain for good bit usage without compression, clipping, or new intermodulation products.</p>
           <div class="callout warn">
             <strong>Cyber lens / denial and deception</strong>
             <p>A strong nearby transmitter can desensitise a receiver or create false products. This is a physical-layer denial-of-service condition. A defender needs front-end filtering, gain control, and a baseline that distinguishes “new signal” from “my receiver is being overloaded.”</p>
@@ -1583,7 +1594,7 @@
           <h3><span class="step">01</span> Study / Three ways to carry a message</h3>
           <ul>
             <li><strong>AM:</strong> the message changes the carrier’s amplitude. It has a carrier and two sidebands, so a 5 kHz audio signal needs about 10 kHz of RF bandwidth. Simple, but sensitive to amplitude noise and fading.</li>
-            <li><strong>FM:</strong> the message changes the carrier’s frequency. The envelope stays constant, which makes it more resistant to amplitude noise above the threshold. Carson’s rule gives an approximate bandwidth: <code>B ≈ 2(Δf + f_m)</code>.</li>
+            <li><strong>FM:</strong> the message changes the carrier’s frequency. The envelope stays constant, which makes it more resistant to amplitude noise above the threshold. Carson’s rule gives an approximate bandwidth: <code>B ≈ 2(Δf + f_m)</code>. Broadcast FM also pre-emphasises high audio frequencies before transmission and de-emphasises them at the receiver; this improves SNR without making the audio sound bright.</li>
             <li><strong>SSB:</strong> one sideband, carrier suppressed. It is efficient in bandwidth and power, but requires frequency and phase accuracy. Ham operators use it heavily.</li>
             <li><strong>CW:</strong> a carrier switched on and off. It is not “digital” just because the key is a switch; it is still an analog carrier.</li>
           </ul>
@@ -1676,7 +1687,7 @@
           <ul>
             <li><strong>OOK/ASK:</strong> amplitude on/off or multilevel. Simple remotes and sensors use it. Envelope detection works, but noise and interference look like bits.</li>
             <li><strong>FSK:</strong> frequency shifts. Noncoherent discriminator or coherent detector. Common in telemetry, remotes, and IoT.</li>
-            <li><strong>BPSK/QPSK:</strong> phase shifts. Needs carrier recovery; a Costas loop is the usual tool. More spectral efficiency, more sync complexity.</li>
+            <li><strong>BPSK/QPSK:</strong> phase shifts. Needs carrier recovery; a Costas loop is the usual tool. More spectral efficiency, more sync complexity. PSK is phase modulation with a discrete alphabet; FM is the continuous-phase relative, where frequency is the derivative of phase.</li>
             <li><strong>QAM:</strong> amplitude and phase. Higher throughput, tighter SNR and linearity requirements.</li>
             <li><strong>Pulse shaping:</strong> a root-raised-cosine filter limits bandwidth and reduces intersymbol interference. The receiver uses a matched filter.</li>
             <li><strong>Timing recovery:</strong> finds the best sampling instant. Gardner, Mueller-Muller, and the generic Symbol Sync block are common.</li>
@@ -2279,6 +2290,394 @@ class blk(gr.sync_block):
       </div>
       <div class="module-foot">
         <button class="complete-btn" data-module="m15">Mark module complete</button>
+        <a class="next-link" href="#m16">Next: RF physics and antennas →</a>
+      </div>
+    </section>
+
+    <section class="view module" id="m16" data-view data-nav="16 / RF physics and antennas" data-module="m16">
+      <div class="module-head">
+        <div class="module-kicker">MODULE 16 <span>/</span> PHASE V · PHYSICAL LAYER</div>
+        <h2>RF physics, propagation, and antennas</h2>
+        <p class="lede">Before software, there is a wave. Wavelength sets antenna size, frequency sets how the wave behaves, and polarization and gain decide how much of it your receiver actually sees.</p>
+        <div class="meta-row"><span class="meta">~60 min</span><span class="meta">rx only</span><span class="meta">3 checkpoints</span></div>
+      </div>
+      <div class="phase-bar">
+        <button class="phase-chip" data-check="m16:study" aria-pressed="false">01 Study</button>
+        <button class="phase-chip" data-check="m16:lab" aria-pressed="false">02 Build</button>
+        <button class="phase-chip" data-check="m16:solo" aria-pressed="false">03 Solo</button>
+      </div>
+      <p class="phase-hint">Tap each chip when you finish that phase.</p>
+
+      <div class="content">
+        <section class="lesson">
+          <h3><span class="step">01</span> Study / Waves, bands, and the antenna</h3>
+          <p>Radio is an electromagnetic wave: an electric field and a magnetic field oscillating perpendicular to each other and travelling at the speed of light. Frequency is how many cycles pass per second; wavelength is the distance between cycles:</p>
+          <pre><code>λ = c / f
+
+λ = wavelength in metres
+c = 299,792,458 m/s (use 3×10⁸ for estimates)
+f = frequency in hertz</code></pre>
+          <p>At 100 MHz, one wavelength is about 3 metres. At 433.92 MHz it is about 69 cm. At 2.4 GHz it is about 12.5 cm. That is why low-frequency antennas are large and microwave antennas are small.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Band</th><th>Range</th><th>Typical examples</th></tr></thead>
+              <tbody>
+                <tr><td><strong>LF / MF</strong></td><td>30 kHz–3 MHz</td><td>Longwave, AM broadcast, some RFID</td></tr>
+                <tr><td><strong>HF</strong></td><td>3–30 MHz</td><td>Shortwave, amateur, marine, RFID</td></tr>
+                <tr><td><strong>VHF</strong></td><td>30–300 MHz</td><td>FM broadcast, airband, pagers, amateur</td></tr>
+                <tr><td><strong>UHF</strong></td><td>300 MHz–3 GHz</td><td>Wi-Fi, Bluetooth, GPS, cellular, keyfobs</td></tr>
+                <tr><td><strong>SHF / EHF</strong></td><td>3–300 GHz</td><td>Satellite, radar, 5G mmWave, point-to-point</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h4>Propagation is not one thing</h4>
+          <ul>
+            <li><strong>Line of sight:</strong> VHF/UHF generally behaves like light; hills and buildings cast shadows. The radio horizon is usually farther than the optical horizon because of atmospheric refraction.</li>
+            <li><strong>Multipath:</strong> reflections arrive with different delays and phases. They can add or cancel; this is fading.</li>
+            <li><strong>Fresnel zone:</strong> the path is not a razor-thin line. Obstructions near the path can still hurt even when the antennas “see” each other.</li>
+            <li><strong>HF skywave:</strong> the ionosphere can refract HF over the horizon. It is time-of-day, season, and solar-weather dependent.</li>
+            <li><strong>Penetration:</strong> lower frequencies generally penetrate walls better; higher frequencies give more bandwidth but less coverage.</li>
+          </ul>
+          <h4>Bandwidth vs channel width</h4>
+          <p>Bandwidth is a property of the signal: how much spectrum it actually occupies. Channel width is a human and legal allocation: the slot the signal is allowed to occupy. A clean transmitter fits inside its channel; a malfunctioning or overdriven one splatters into neighbours.</p>
+          <h4>Antennas are impedance-matched resonators</h4>
+          <ul>
+            <li>A <strong>quarter-wave monopole</strong> is roughly <code>λ/4</code> long; a <strong>half-wave dipole</strong> is roughly <code>λ/2</code> overall.</li>
+            <li><strong>Gain</strong> is measured in dBi, relative to an isotropic radiator. It is not free power; it is directionality.</li>
+            <li><strong>Polarization</strong> matters. A vertically polarized receive antenna is best for a vertically polarized transmitter; mismatch costs signal.</li>
+            <li>Most SDRs and antennas are designed for <strong>50 Ω</strong>. A mismatch causes reflection, loss, and sometimes damage at high transmit power.</li>
+            <li>Feedline loss is real. A long cheap cable can cost more than the antenna gain adds.</li>
+          </ul>
+
+          <div class="tool-card chapter-tool" data-chapter-tool>
+            <div class="tool-head">
+              <div>
+                <div class="tool-kicker">CHAPTER VISUAL / WAVELENGTH</div>
+                <h3>Size follows frequency</h3>
+                <p>Move the frequency and watch the full-wave, quarter-wave, and half-wave dimensions change.</p>
+              </div>
+            </div>
+            <div class="tool-controls">
+              <label class="field"><span>Frequency (MHz)</span><input id="wl-freq" type="number" value="100" min="1" max="6000" step="1"></label>
+            </div>
+            <div class="readouts">
+              <div class="readout"><span>Full wave λ</span><strong id="wl-full">—</strong></div>
+              <div class="readout"><span>Quarter wave λ/4</span><strong id="wl-quarter">—</strong></div>
+              <div class="readout"><span>Half wave λ/2</span><strong id="wl-half">—</strong></div>
+            </div>
+            <canvas class="chart" id="wl-canvas" role="img" height="230" aria-label="Wavelength versus frequency chart">Wavelength chart.</canvas>
+            <div class="chart-legend"><span><i class="swatch cyan"></i>wavelength</span><span><i class="swatch lime"></i>your frequency</span></div>
+            <p class="tool-note">These are free-space dimensions. Real antennas are shortened by velocity factor, loading coils, and matching networks. A quarter-wave whip is a starting point, not a precision cut.</p>
+          </div>
+          <p class="tool-note">Source material: <em>Practical SDR</em> by David Clark and Paul Clark, chapters 8 and 12.</p>
+        </section>
+
+        <section class="lesson">
+          <h3><span class="step">02</span> Build / Measure the antenna effect</h3>
+          <div class="lab-block">
+            <div class="lab-head"><strong>Lab 16</strong><span>calculation + hardware / rx only</span></div>
+            <div class="lab-body">
+              <ol>
+                <li>Calculate λ, λ/4, and λ/2 for 100 MHz, 433.92 MHz, 915 MHz, and 2.4 GHz. Record the values.</li>
+                <li>Hardware: tune an FM station with a telescoping antenna. Record the signal level with the antenna fully retracted, half extended, and fully extended.</li>
+                <li>Rotate the antenna and the radio. Note the level and noise change. Try vertical versus horizontal orientation.</li>
+                <li>Repeat with the antenna connected through a longer cable, if you have one. Compare the loss.</li>
+                <li>Write one sentence explaining why the strongest signal is not always the best antenna position: you are optimising SNR, not just peak level.</li>
+              </ol>
+              <p><strong>Expected:</strong> a measurable level change as length and orientation approach the band’s geometry. Keep a baseline; change one thing at a time.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="lesson">
+          <h3><span class="step">03</span> Solo check / Close the notes</h3>
+          <div class="solo-box">
+            <span class="solo-label">No-help question</span>
+            <p>What are the wavelength, quarter-wave, and half-wave dimensions at <strong>100 MHz</strong>? Why is a 50 Ω match important, and why can two antennas with the same gain behave differently?</p>
+            <details>
+              <summary>Reveal answer</summary>
+              <p>At 100 MHz, <code>λ = 300/100 = 3 m</code>; quarter-wave is about <strong>0.75 m</strong>; half-wave is about <strong>1.5 m</strong>. A 50 Ω match minimises reflection and loss between the antenna, feedline, and radio. Two antennas with the same gain can have different patterns, polarization, bandwidth, and noise pickup, so the one with the best pattern for your direction and polarization may win.</p>
+              <p>Also: gain is directional, not magical. A high-gain antenna pointed the wrong way can be worse than a simple monopole.</p>
+            </details>
+          </div>
+        </section>
+      </div>
+      <div class="module-foot">
+        <button class="complete-btn" data-module="m16">Mark module complete</button>
+        <a class="next-link" href="#m17">Next: SDR hardware under the hood →</a>
+      </div>
+    </section>
+
+    <section class="view module" id="m17" data-view data-nav="17 / SDR hardware" data-module="m17">
+      <div class="module-head">
+        <div class="module-kicker">MODULE 17 <span>/</span> PHASE V · PHYSICAL LAYER</div>
+        <h2>SDR hardware under the hood</h2>
+        <p class="lede">The flowgraph sees complex samples. The radio sees a mixer, filters, amplifiers, ADCs, a clock, and a bus. Understanding that chain explains gain, clipping, DC spikes, overflow, and why “more sample rate” is not always better.</p>
+        <div class="meta-row"><span class="meta">~65 min</span><span class="meta">rx only</span><span class="meta">3 checkpoints</span></div>
+      </div>
+      <div class="phase-bar">
+        <button class="phase-chip" data-check="m17:study" aria-pressed="false">01 Study</button>
+        <button class="phase-chip" data-check="m17:lab" aria-pressed="false">02 Build</button>
+        <button class="phase-chip" data-check="m17:solo" aria-pressed="false">03 Solo</button>
+      </div>
+      <p class="phase-hint">Tap each chip when you finish that phase.</p>
+
+      <div class="content">
+        <section class="lesson">
+          <h3><span class="step">01</span> Study / From antenna to IQ</h3>
+          <div class="chain">
+            <span>Antenna</span><i>→</i><span>RF filter / gain</span><i>→</i><span>mixer + LO</span><i>→</i><span>IF</span><i>→</i><span>I/Q mixers</span><i>→</i><span>anti-alias LPF</span><i>→</i><span>BB gain</span><i>→</i><span>ADC</span><i>→</i><span>USB / host</span>
+          </div>
+          <p>The mixer translates RF down to a lower frequency. The I/Q pair preserves the sign of the offset; the ADCs digitise each component. An analog low-pass filter before the ADC removes energy above Nyquist so it cannot alias into your capture.</p>
+          <ul>
+            <li><strong>Capture window:</strong> the complex bandwidth equals the sample rate and is centred on the LO/tuned frequency.</li>
+            <li><strong>Resolution:</strong> an N-bit ADC has <code>2^N</code> levels. More bits means finer quantisation and more theoretical dynamic range.</li>
+            <li><strong>Full scale and clipping:</strong> gain is useful until the ADC input hits its maximum. Then the waveform is clipped and distortion appears.</li>
+            <li><strong>Overflow:</strong> if the host cannot process samples fast enough, samples are dropped. Audio glitches, gaps, or “O”/“U” messages are clues.</li>
+            <li><strong>DC offset:</strong> a false spike at 0 Hz from analogue imperfections, not a transmitter at the centre frequency.</li>
+            <li><strong>Gain stages:</strong> RF, IF, and baseband gain are not interchangeable. RF gain is broadband and can overload or damage the front end; IF/BB gain can distort if pushed too far.</li>
+          </ul>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>SDR spec</th><th>Why it matters</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Tuning range</strong></td><td>Which bands the hardware can physically receive or transmit.</td></tr>
+                <tr><td><strong>Sample rate</strong></td><td>Capture width and data rate; also a hard limit from ADC and bus speed.</td></tr>
+                <tr><td><strong>ADC/DAC bits</strong></td><td>Quantisation noise, dynamic range, and weak-signal performance.</td></tr>
+                <tr><td><strong>Duplex</strong></td><td>Half-duplex radios cannot transmit and receive at the same time.</td></tr>
+                <tr><td><strong>Channels</strong></td><td>How many independent streams or coherent receive paths exist.</td></tr>
+                <tr><td><strong>Clock / interface</strong></td><td>Frequency accuracy, phase stability, and sustained throughput.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tool-card chapter-tool" data-chapter-tool>
+            <div class="tool-head">
+              <div>
+                <div class="tool-kicker">CHAPTER VISUAL / ADC RESOLUTION</div>
+                <h3>Bits become dynamic range</h3>
+                <p>The ideal signal-to-quantisation-noise ratio is about <code>6.02N + 1.76 dB</code>. Real converters, clocks, and front ends do worse.</p>
+              </div>
+            </div>
+            <div class="tool-controls">
+              <label class="field"><span>ADC bits</span><input id="adc-bits" type="number" value="8" min="4" max="16" step="1"></label>
+            </div>
+            <div class="readouts">
+              <div class="readout"><span>Quantisation levels</span><strong id="adc-levels">—</strong></div>
+              <div class="readout"><span>Ideal SNR</span><strong id="adc-snr">—</strong></div>
+              <div class="readout"><span>Relative step size</span><strong id="adc-step">—</strong></div>
+            </div>
+            <canvas class="chart" id="adc-canvas" role="img" height="230" aria-label="Ideal ADC signal-to-noise ratio versus bit depth">ADC resolution chart.</canvas>
+            <div class="chart-legend"><span><i class="swatch cyan"></i>ideal SNR</span><span><i class="swatch lime"></i>your converter</span></div>
+            <p class="tool-note">The formula assumes a full-scale sine wave and ideal quantisation. Real SDRs lose range to clock jitter, front-end noise, spurs, and imperfect gain staging.</p>
+          </div>
+          <p class="tool-note">Source material: <em>Practical SDR</em>, chapter 11.</p>
+        </section>
+
+        <section class="lesson">
+          <h3><span class="step">02</span> Build / Find the limits</h3>
+          <div class="lab-block">
+            <div class="lab-head"><strong>Lab 17</strong><span>hardware inspection / rx only</span></div>
+            <div class="lab-body">
+              <ol>
+                <li>Open your hardware source block and write down: tuning range, sample-rate range, gain stages, antenna connector, and interface.</li>
+                <li>Tune a strong FM station. Observe the DC spike at the exact centre, then tune a few hundred kHz away. Confirm the spike moves with the centre and is not a real signal.</li>
+                <li>Start with low gain, then increase one stage at a time. Note when the noise floor rises, when the signal stops improving, and when distortion or new spurs appear.</li>
+                <li>Push the sample rate to the hardware maximum and watch for overflow. Lower the rate or simplify the flowgraph until it is stable.</li>
+                <li>Write down the gain values and sample rate that produced the best SNR—not the highest peak.</li>
+              </ol>
+              <p><strong>Expected:</strong> a practical gain ceiling, a visible DC spike, and an overflow lesson. On a HackRF, the RF gain is a broadband 0/14 dB stage—keep it low near strong transmitters.</p>
+            </div>
+          </div>
+          <div class="callout warn">
+            <strong>Hardware safety</strong>
+            <p>RF gain is not just a software slider. A strong nearby transmitter can overload or damage a front end regardless of where you are tuned. Use attenuation, a filter, or a lower gain when in doubt.</p>
+          </div>
+        </section>
+
+        <section class="lesson">
+          <h3><span class="step">03</span> Solo check / Close the notes</h3>
+          <div class="solo-box">
+            <span class="solo-label">No-help question</span>
+            <p>Why does an 8-bit SDR have less theoretical dynamic range than a 12-bit SDR? Why is a DC spike at the centre not a signal? Why can a higher sample rate make things worse?</p>
+            <details>
+              <summary>Reveal answer</summary>
+              <p>An 8-bit ADC has 256 levels; a 12-bit ADC has 4,096. More levels mean finer quantisation and a lower quantisation-noise floor, so the theoretical SNR rises by about 6 dB per bit. The DC spike is an offset in the analogue chain and an FFT artefact at 0 Hz; it moves with the tuned centre and is not RF energy from a transmitter. A higher sample rate widens the capture window but increases USB/host load and can cause overflow, so the flowgraph may drop samples or distort.</p>
+            </details>
+          </div>
+        </section>
+      </div>
+      <div class="module-foot">
+        <button class="complete-btn" data-module="m17">Mark module complete</button>
+        <a class="next-link" href="#m18">Next: peripherals, noise, bench →</a>
+      </div>
+    </section>
+
+    <section class="view module" id="m18" data-view data-nav="18 / Peripherals and noise" data-module="m18">
+      <div class="module-head">
+        <div class="module-kicker">MODULE 18 <span>/</span> PHASE V · PHYSICAL LAYER</div>
+        <h2>Peripherals, noise, and the bench</h2>
+        <p class="lede">The SDR is one part of the radio. The antenna, feedline, connectors, filters, power, and even the laptop charger can decide whether you hear a signal or a wall of noise.</p>
+        <div class="meta-row"><span class="meta">~55 min</span><span class="meta">rx only</span><span class="meta">3 checkpoints</span></div>
+      </div>
+      <div class="phase-bar">
+        <button class="phase-chip" data-check="m18:study" aria-pressed="false">01 Study</button>
+        <button class="phase-chip" data-check="m18:lab" aria-pressed="false">02 Build</button>
+        <button class="phase-chip" data-check="m18:solo" aria-pressed="false">03 Solo</button>
+      </div>
+      <p class="phase-hint">Tap each chip when you finish that phase.</p>
+
+      <div class="content">
+        <section class="lesson">
+          <h3><span class="step">01</span> Study / The rest of the radio</h3>
+          <div class="grid-2">
+            <div class="card"><span class="tag">Antenna</span><h3>Whip, dipole, loop, Yagi</h3><p>A whip is a broadband omnidirectional monopole; a dipole trades bandwidth for pattern; a loop is compact for low frequencies; a Yagi is directional and high-gain. Match the antenna to the band and the direction.</p></div>
+            <div class="card"><span class="tag">Feedline</span><h3>Connectors and adapters</h3><p>SMA, RP-SMA, BNC, N, MCX, and SO-239 are not interchangeable. Every adapter adds loss and a failure point. Keep the chain short and use 50 Ω parts.</p></div>
+            <div class="card"><span class="tag">Front end</span><h3>LNA, filter, attenuator, limiter</h3><p>An LNA helps weak signals if it is before the loss and not overloaded. A filter rejects out-of-band energy. An attenuator protects the receiver. A limiter caps dangerous power.</p></div>
+            <div class="card"><span class="tag">Power</span><h3>Bias tee and upconverter</h3><p>A bias tee puts DC on the coax for an active antenna or LNA. An upconverter shifts low frequencies into the SDR’s tuning range. A downconverter/LNB does the reverse for high frequencies.</p></div>
+            <div class="card"><span class="tag">Noise</span><h3>Computer and charger EMI</h3><p>USB power, switch-mode chargers, displays, and CPUs radiate noise. Battery power, ferrites, shielded cables, short USB runs, and antenna placement often help more than a better SDR.</p></div>
+            <div class="card"><span class="tag">Bench</span><h3>Toolkit discipline</h3><p>Known-good antenna, adapters, 10/20/30 dB attenuators, dummy load, ferrites, labelled cables, and a notebook. Change one variable at a time.</p></div>
+          </div>
+          <h4>Noise mitigation checklist</h4>
+          <ul>
+            <li>Run the laptop on battery and compare the noise floor with the charger connected.</li>
+            <li>Add a ferrite choke to the USB cable and the power cable.</li>
+            <li>Use a shielded feedline; keep it away from displays and power supplies.</li>
+            <li>Move the antenna away from the computer and use a USB extension.</li>
+            <li>Rotate a directional antenna to maximise signal-to-noise, not just signal.</li>
+            <li>Terminate unused ports and avoid adapters that are not needed.</li>
+          </ul>
+          <p class="tool-note">Source material: <em>Practical SDR</em>, chapter 12.</p>
+        </section>
+
+        <section class="lesson">
+          <h3><span class="step">02</span> Build / Noise hunt</h3>
+          <div class="lab-block">
+            <div class="lab-head"><strong>Lab 18</strong><span>baseline / rx only</span></div>
+            <div class="lab-body">
+              <ol>
+                <li>Pick a quiet band or a weak FM station. Record the noise floor and signal level with the antenna connected and the laptop on battery.</li>
+                <li>Plug in the charger. Record the change. Unplug it and repeat. This is one of the most common SDR noise sources.</li>
+                <li>Add a ferrite choke to the USB cable. Record the change. Then move the antenna one metre away from the computer and repeat.</li>
+                <li>Try a shielded cable or a shorter adapter chain. Record the change in dB.</li>
+                <li>Write a one-page baseline: antenna, orientation, cable, power source, sample rate, gain, noise floor, and signal level. This is your reference for future experiments.</li>
+              </ol>
+              <p><strong>Expected:</strong> different noise floors for different physical setups, even with the same SDR and frequency. The radio is part of a system, not a standalone box.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="lesson">
+          <h3><span class="step">03</span> Solo check / Close the notes</h3>
+          <div class="solo-box">
+            <span class="solo-label">No-help question</span>
+            <p>Why can a ferrite choke improve reception? Why should an LNA go near the antenna rather than after a long lossy cable? Why is RP-SMA not the same as SMA?</p>
+            <details>
+              <summary>Reveal answer</summary>
+              <p>A ferrite suppresses common-mode RF current on the cable, reducing noise coupled from the computer and power supply. An LNA early in the chain amplifies the weak signal before the cable’s loss and before the receiver’s noise dominates; putting it after a lossy cable amplifies both signal and noise and may not improve SNR. RP-SMA is reverse-polarity SMA: the centre pin and threaded shell are swapped to prevent antenna swaps on some Wi-Fi gear. It will not mate correctly with standard SMA without an adapter.</p>
+            </details>
+          </div>
+        </section>
+      </div>
+      <div class="module-foot">
+        <button class="complete-btn" data-module="m18">Mark module complete</button>
+        <a class="next-link" href="#m19">Next: transmit chain and boundaries →</a>
+      </div>
+    </section>
+
+    <section class="view module" id="m19" data-view data-nav="19 / Transmit chain" data-module="m19">
+      <div class="module-head">
+        <div class="module-kicker">MODULE 19 <span>/</span> PHASE V · PHYSICAL LAYER</div>
+        <h2>Transmit chain and legal boundaries</h2>
+        <p class="lede">Transmitting is the receive chain backwards, with more ways to break the law and damage hardware. Learn the chain, the filtering, and the safety rules before you key anything.</p>
+        <div class="meta-row"><span class="meta">~65 min</span><span class="meta">software loopback only</span><span class="meta">3 checkpoints</span></div>
+      </div>
+      <div class="phase-bar">
+        <button class="phase-chip" data-check="m19:study" aria-pressed="false">01 Study</button>
+        <button class="phase-chip" data-check="m19:lab" aria-pressed="false">02 Build</button>
+        <button class="phase-chip" data-check="m19:solo" aria-pressed="false">03 Solo</button>
+      </div>
+      <p class="phase-hint">Tap each chip when you finish that phase.</p>
+
+      <div class="content">
+        <section class="lesson">
+          <h3><span class="step">01</span> Study / The reverse chain</h3>
+          <div class="chain">
+            <span>bits / audio</span><i>→</i><span>modulator</span><i>→</i><span>interpolate</span><i>→</i><span>low-pass</span><i>→</i><span>upconvert</span><i>→</i><span>DAC</span><i>→</i><span>IF/RF gain</span><i>→</i><span>PA + filter</span><i>→</i><span>antenna</span>
+          </div>
+          <ul>
+            <li><strong>Interpolation creates images.</strong> Filter after interpolation, before upconversion; a rational resampler can include the low-pass taps.</li>
+            <li><strong>Harmonics and splatter</strong> are the transmitter’s version of aliasing. A nonlinear PA or overdriven DAC puts energy into adjacent channels.</li>
+            <li><strong>Sample scaling matters.</strong> SDR sinks expect roughly −1 to +1 per I/Q component. Too much digital gain clips before the signal reaches the RF stage.</li>
+            <li><strong>TX gain stages</strong> are not a volume knob. Start low, increase only as needed, and verify with a receiver or test equipment.</li>
+            <li><strong>Duty cycle and power</strong> are often linked in unlicensed rules. Lower duty cycle may allow higher peak power; continuous transmission usually does not.</li>
+            <li><strong>Half-duplex</strong> radios cannot receive while transmitting. The receiver is blind during the transmission, and the antenna switch must be controlled.</li>
+          </ul>
+          <div class="callout danger">
+            <strong>Authorization first</strong>
+            <p>Never connect a transmitter to an antenna without a licence or written authorization. Use a dummy load and shielded enclosure for bench tests. Do not jam, spoof, or transmit on a band you do not own or have permission to use. When in doubt, do not transmit.</p>
+          </div>
+
+          <div class="tool-card chapter-tool" data-chapter-tool>
+            <div class="tool-head">
+              <div>
+                <div class="tool-kicker">CHAPTER VISUAL / HARMONICS</div>
+                <h3>Filter the copies before the antenna</h3>
+                <p>A transmitter’s fundamental is supposed to be the only signal. Harmonics are smaller copies at multiples of the frequency; a low-pass filter after the PA keeps them out of adjacent bands.</p>
+              </div>
+            </div>
+            <div class="tool-controls">
+              <label class="field"><span>Fundamental (MHz)</span><input id="tx-f0" type="number" value="100" min="10" max="1000" step="1"></label>
+              <label class="field"><span>Harmonic level (dBc)</span><input id="tx-harm" type="number" value="-25" min="-60" max="-5" step="1"></label>
+              <label class="field"><span>LPF cutoff (MHz)</span><input id="tx-cut" type="number" value="150" min="20" max="2000" step="5"></label>
+            </div>
+            <div class="readouts">
+              <div class="readout"><span>2nd harmonic</span><strong id="tx-2nd">—</strong></div>
+              <div class="readout"><span>3rd harmonic</span><strong id="tx-3rd">—</strong></div>
+              <div class="readout"><span>Filter status</span><strong id="tx-status">—</strong></div>
+            </div>
+            <canvas class="chart" id="tx-canvas" role="img" height="230" aria-label="Fundamental and harmonics with a low-pass filter">Transmit harmonic chart.</canvas>
+            <div class="chart-legend"><span><i class="swatch cyan"></i>before filter</span><span><i class="swatch lime"></i>after filter</span><span><i class="swatch amber"></i>cutoff</span></div>
+            <p class="tool-note">Idealised harmonic model. Real PA nonlinearity, mixer spurs, and filter roll-off determine the actual spectrum; verify with a spectrum analyser or a shielded test setup.</p>
+          </div>
+          <p class="tool-note">Source material: <em>Practical SDR</em>, chapter 13. The book demonstrates a software-only FM transmitter loopback; it does not recommend transmitting without authorization.</p>
+        </section>
+
+        <section class="lesson">
+          <h3><span class="step">02</span> Build / Software FM loopback</h3>
+          <div class="lab-block">
+            <div class="lab-head"><strong>Lab 19</strong><span>software only / no antenna</span></div>
+            <div class="lab-body">
+              <ol>
+                <li>Build a 1 kHz audio tone: <code>Signal Source</code> float, <code>32e3</code> sample rate, amplitude <code>0.5</code>.</li>
+                <li>Add <code>WBFM Transmit</code>: audio rate <code>32e3</code>, quadrature rate <code>320e3</code>, max deviation <code>75e3</code>. This is the transmit modulator.</li>
+                <li>Connect its complex output directly to <code>WBFM Receive</code>: quadrature rate <code>320e3</code>, audio decimation <code>10</code>. Connect the audio output to <code>Audio Sink</code> at <code>32e3</code>.</li>
+                <li>Add a <code>QT GUI Frequency Sink</code> on the transmit output. You should see the FM spectrum centred at 0 Hz, with energy spread by the modulation.</li>
+                <li>Do not connect a hardware sink. This is a software loopback. If you later use hardware, use a dummy load, attenuator, filter, and shielded enclosure with explicit authorization.</li>
+              </ol>
+              <p><strong>Expected:</strong> the 1 kHz tone appears at the receiver output. The transmitter chain is real DSP; the only thing missing is the RF power stage and the law.</p>
+            </div>
+          </div>
+          <div class="callout warn">
+            <strong>What to take to hardware</strong>
+            <p>If you ever move from loopback to a physical transmitter: start at minimum gain, verify the filter and harmonic performance, use a dummy load, check the band plan, and have another person who can cut power. A software loopback cannot teach you antenna matching, PA splatter, or legal responsibility.</p>
+          </div>
+        </section>
+
+        <section class="lesson">
+          <h3><span class="step">03</span> Solo check / Close the notes</h3>
+          <div class="solo-box">
+            <span class="solo-label">No-help question</span>
+            <p>Why should you filter after interpolation? Why do harmonics matter even when the fundamental is clean? Why is a dummy load safer than an antenna for a bench test?</p>
+            <details>
+              <summary>Reveal answer</summary>
+              <p>Interpolation inserts samples and creates spectral images; a low-pass filter removes the images before they reach the upconverter and PA. Harmonics are real transmissions at multiples of the fundamental and can interfere with other services even if the fundamental is inside its channel. A dummy load converts RF energy to heat instead of radiating it, so you can test the chain without polluting the spectrum or exceeding your authorization.</p>
+            </details>
+          </div>
+        </section>
+      </div>
+      <div class="module-foot">
+        <button class="complete-btn" data-module="m19">Mark module complete</button>
         <a class="next-link" href="#reference">Next: field reference →</a>
       </div>
     </section>
@@ -2486,11 +2885,17 @@ class blk(gr.sync_block):
               <tr><td>Samples per symbol</td><td><code>sps = fs / Rs</code></td><td>Needs to be comfortably above 2 for timing recovery.</td></tr>
               <tr><td>Capture duration</td><td><code>T = N / fs</code></td><td>N is number of complex samples.</td></tr>
               <tr><td>Complex float32 size</td><td><code>8 bytes/sample</code></td><td>Interleaved I and Q, 4 bytes each.</td></tr>
+              <tr><td>Wavelength</td><td><code>λ = c / f</code></td><td>c ≈ 3×10⁸ m/s; 100 MHz → 3 m.</td></tr>
+              <tr><td>Quarter-wave antenna</td><td><code>λ/4</code></td><td>Starting estimate; velocity factor and loading shorten real antennas.</td></tr>
+              <tr><td>ADC levels</td><td><code>2^N</code></td><td>8 bits = 256 levels; 12 bits = 4,096.</td></tr>
               <tr><td>Power ratio</td><td><code>dB = 10 log10(P1/P2)</code></td><td>3 dB ≈ 2× power; 10 dB = 10×.</td></tr>
+              <tr><td>SNR in dB</td><td><code>SNR = S(dBm) − N(dBm)</code></td><td>Subtracting logs is dividing linear powers.</td></tr>
               <tr><td>Amplitude ratio</td><td><code>dB = 20 log10(A1/A2)</code></td><td>6 dB ≈ 2× voltage.</td></tr>
               <tr><td>Absolute power</td><td><code>dBm = 10 log10(P / 1 mW)</code></td><td>0 dBm = 1 mW.</td></tr>
               <tr><td>Ideal ADC SNR</td><td><code>6.02N + 1.76 dB</code></td><td>N bits; real receivers are worse.</td></tr>
               <tr><td>Thermal noise</td><td><code>−174 dBm/Hz + NF + 10 log10(B)</code></td><td>At room temperature, approximate.</td></tr>
+              <tr><td>Free-space path loss</td><td><code>20 log10(d) + 20 log10(f) − 147.55</code></td><td>d in metres, f in Hz; free space only.</td></tr>
+              <tr><td>Received power</td><td><code>Ptx + Gtx + Grx − FSPL − losses</code></td><td>All terms in dB/dBm/dBi; a first-order link budget.</td></tr>
               <tr><td>Carson’s rule</td><td><code>B ≈ 2(Δf + f_m)</code></td><td>Approximate FM bandwidth.</td></tr>
               <tr><td>AM bandwidth</td><td><code>B ≈ 2 f_m</code></td><td>Carrier plus two sidebands.</td></tr>
             </tbody>
@@ -2528,7 +2933,7 @@ class blk(gr.sync_block):
               <tr><td><strong>Receive</strong></td><td><code>RTL-SDR Source</code>, <code>SoapySDR Source</code>, <code>UHD USRP Source</code>, <code>File Source</code></td><td>Sample rate must be supported; no throttle on hardware.</td></tr>
               <tr><td><strong>View</strong></td><td><code>QT GUI Frequency Sink</code>, <code>QT GUI Waterfall Sink</code>, <code>QT GUI Time Sink</code>, <code>QT GUI Constellation Sink</code></td><td>Set bandwidth/sample rate to the actual stream rate; GUI is not a logging system.</td></tr>
               <tr><td><strong>Filter</strong></td><td><code>Low Pass Filter</code>, <code>Band Pass Filter</code>, <code>Frequency Xlating FIR Filter</code>, <code>Rational Resampler</code></td><td>Filter before decimation; keep rate variables consistent.</td></tr>
-              <tr><td><strong>Analog demod</strong></td><td><code>AM Demod</code>, <code>WBFM Receive</code>, <code>NBFM Receive</code>, <code>Quadrature Demod</code>, <code>Complex to Mag</code></td><td>Compute audio rate; do not guess the resampler.</td></tr>
+              <tr><td><strong>Analog mod / demod</strong></td><td><code>AM Demod</code>, <code>WBFM Receive</code>, <code>NBFM Receive</code>, <code>Quadrature Demod</code>, <code>Complex to Mag</code>, <code>Frequency Mod</code>, <code>WBFM Transmit</code></td><td>Compute audio rate; do not guess the resampler. Filter after interpolation on transmit.</td></tr>
               <tr><td><strong>Digital</strong></td><td><code>Binary Slicer</code>, <code>Symbol Sync</code>, <code>Costas Loop</code>, <code>Correlate Access Code</code>, <code>Constellation Decoder</code></td><td>Sync first; a constellation sink is a diagnostic, not a decoder.</td></tr>
               <tr><td><strong>Packets</strong></td><td><code>CRC Append</code>, <code>CRC Check</code>, <code>Random PDU Generator</code>, <code>Message Debug</code>, <code>PDU to Tagged Stream</code></td><td>CRC is not authentication. Mind bit order and endianness.</td></tr>
               <tr><td><strong>Record</strong></td><td><code>File Sink</code>, <code>Wav File Sink</code>, <code>Tagged File Sink</code>, <code>File Source</code></td><td>Record metadata separately; hash captures; throttle playback.</td></tr>
@@ -2613,14 +3018,14 @@ class blk(gr.sync_block):
 
       <div class="ref-section">
         <h2>Next frontiers</h2>
-        <p>This manual is the spine, not the ceiling. After the capstone, choose one lane and go deep:</p>
+        <p>This manual is the spine, not the ceiling. Modules 16–19 introduce the physical layer; after that, choose one lane and go deeper:</p>
         <div class="grid-2">
-          <div class="card"><span class="tag">RF engineering</span><h3>Antennas, propagation, link budget</h3><p>Gain, patterns, polarization, Fresnel zones, feedline loss, noise temperature, and the link equation. This is where “my signal is weak” becomes a calculation.</p></div>
+          <div class="card"><span class="tag">RF engineering</span><h3>Antenna modelling and link planning</h3><p>Smith charts, VSWR, matching networks, antenna patterns, Fresnel zones, terrain loss, noise temperature, and calibrated link plans. This is where “my signal is weak” becomes an engineering calculation.</p></div>
           <div class="card"><span class="tag">DSP</span><h3>Filter design and estimation</h3><p>Taps, windows, group delay, polyphase filters, resampling, PLLs, equalizers, and detection theory. Build the intuition behind the blocks.</p></div>
           <div class="card"><span class="tag">Digital receivers</span><h3>OFDM, FEC, equalization</h3><p>Pilots, cyclic prefixes, soft decisions, Viterbi, LDPC, channel estimation, and MIMO. This is the road to Wi-Fi, LTE, and DVB.</p></div>
           <div class="card"><span class="tag">Security</span><h3>Protocol reversing and RF defense</h3><p>Field formats, checksums, rolling codes, authenticated framing, replay windows, RF fingerprinting, and detection engineering.</p></div>
           <div class="card"><span class="tag">Tooling</span><h3>OOT blocks and reproducible labs</h3><p>CMake, gr-modtool, CI, IQ fixtures, versioned Docker images, and signed evidence pipelines.</p></div>
-          <div class="card"><span class="tag">Hardware</span><h3>Clocking, shielding, and measurement</h3><p>TCXO/OCXO, phase noise, attenuators, filters, EMC, dummy loads, and calibrated power measurement.</p></div>
+          <div class="card"><span class="tag">Hardware</span><h3>Front-end design and measurement</h3><p>Mixers, image rejection, IP3, phase noise, TCXO/OCXO, shielding, EMC, and calibrated power measurement.</p></div>
         </div>
       </div>
 
@@ -2642,8 +3047,12 @@ class blk(gr.sync_block):
               <tr><td><strong>Capture, replay, evidence</strong></td><td>Covered</td><td>Module 11</td></tr>
               <tr><td><strong>Automation, headless, monitoring</strong></td><td>Covered</td><td>Module 12</td></tr>
               <tr><td><strong>RF security and threat modelling</strong></td><td>Covered defensively</td><td>Module 14; no attack recipes</td></tr>
-              <tr><td><strong>Antennas, feedlines, VSWR, Smith chart</strong></td><td>Touched only</td><td>Needs a dedicated RF-engineering course</td></tr>
-              <tr><td><strong>Mixers, image reject, phase noise, IP3, spurs</strong></td><td>Mentioned only</td><td>Module 1/7; needs front-end design and measurement practice</td></tr>
+              <tr><td><strong>RF physics, bands, propagation, wavelength</strong></td><td>Covered at introductory level</td><td>Module 16; link budgets and terrain models are still simplified</td></tr>
+              <tr><td><strong>Antennas, polarization, feedlines, VSWR</strong></td><td>Covered at introductory level</td><td>Modules 16 and 18; Smith charts and antenna modelling are not covered</td></tr>
+              <tr><td><strong>SDR hardware, ADC, gain, DC offset, overflow</strong></td><td>Covered at system level</td><td>Module 17; front-end design and phase-noise measurement are not covered</td></tr>
+              <tr><td><strong>Peripherals, connectors, noise mitigation</strong></td><td>Covered practically</td><td>Module 18; specific hardware behaviour varies</td></tr>
+              <tr><td><strong>Transmit chain, filtering, harmonics, law</strong></td><td>Covered conceptually</td><td>Module 19; no unauthorized transmit recipes and no PA design</td></tr>
+              <tr><td><strong>Mixers, image reject, phase noise, IP3, spurs</strong></td><td>System-level only</td><td>Modules 1 and 17; needs front-end design and measurement practice</td></tr>
               <tr><td><strong>OFDM, FEC, equalisation, MIMO, multiple access</strong></td><td>Not covered</td><td>Next frontiers; required for Wi-Fi/LTE/5G depth</td></tr>
               <tr><td><strong>Cellular, satellite, radar, GPS specifics</strong></td><td>Not covered</td><td>Protocol/standards study; legal and safety critical</td></tr>
               <tr><td><strong>RF law and EMC compliance</strong></td><td>Principles only</td><td>Jurisdiction-specific; get local advice</td></tr>
@@ -2658,7 +3067,35 @@ class blk(gr.sync_block):
           <li>The link budget is free-space only. It ignores terrain, Fresnel obstruction, multipath, polarization mismatch, cable loss, and antenna patterns.</li>
           <li>The constellations are ideal AWGN models. They do not include phase noise, carrier offset, timing error, ISI, or nonlinear distortion.</li>
           <li>Hardware ranges are typical, not guarantees. Always confirm your specific radio, antenna, and local regulations.</li>
+          <li>Modules 16–19 are expanded from <em>Practical SDR</em> (Clark &amp; Clark, 2025). HackRF-specific values such as the 0/14 dB RF gain stage are examples, not universal SDR specs.</li>
         </ul>
+      </div>
+
+      <div class="ref-section">
+        <h2>Practical SDR companion</h2>
+        <p>This course was expanded using <em>Practical SDR: Getting Started with Software-Defined Radio</em> by David Clark and Paul Clark (No Starch Press, 2025) as a source for the physical-layer, hardware, peripheral, and transmit material. The explanations, labs, and charts here are original summaries; use the book for its full projects and worked examples.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Practical SDR chapter</th><th>Where it supports this course</th></tr></thead>
+            <tbody>
+              <tr><td>1–2: What is a radio? / Computers and signals</td><td>Modules 1–3: signals, modulation, sampling, IQ</td></tr>
+              <tr><td>3–4: GNU Radio / AM receiver</td><td>Modules 4–5 and 8: GRC, sources, variables, AM</td></tr>
+              <tr><td>5: Signal processing fundamentals</td><td>Modules 6–8: gain, dB, filters, resampling</td></tr>
+              <tr><td>6: How an AM receiver works</td><td>Modules 5, 8, 16: tuning, filtering, demodulation</td></tr>
+              <tr><td>7: Building an FM radio</td><td>Module 8: FM, de-emphasis, audio rate</td></tr>
+              <tr><td>8: The physics of radio signals</td><td>Module 16: bands, wavelength, bandwidth, noise, SNR</td></tr>
+              <tr><td>9: GNU Radio flowgraphs with SDR hardware</td><td>Modules 5, 11, 17: hardware sources and real captures</td></tr>
+              <tr><td>10: Modulation</td><td>Modules 8, 9, 19: AM, FM, PM, digital, filtering</td></tr>
+              <tr><td>11: SDR hardware under the hood</td><td>Module 17: IQ sampling, ADC, gain, DC offset, specs</td></tr>
+              <tr><td>12: Peripheral hardware</td><td>Module 18: antennas, connectors, noise, toolkit</td></tr>
+              <tr><td>13: Transmitting</td><td>Module 19: FM loopback, interpolation, harmonics, law</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout tip">
+          <strong>Source note</strong>
+          <p>No text or figures from the book are reproduced here. The PDF is a reference for concepts and project structure; the website remains a self-contained original course. If you are studying the book, map its chapters to the modules above and use its projects as extra lab time.</p>
+        </div>
       </div>
 
       <div class="ref-section">
@@ -2669,6 +3106,7 @@ class blk(gr.sync_block):
           <a href="https://tutorials.gnuradio.org/" target="_blank" rel="noopener noreferrer">GNU Radio Tutorials<span>guided flowgraphs</span></a>
           <a href="https://www.gnuradio.org/doc/doxygen/" target="_blank" rel="noopener noreferrer">GNU Radio Doxygen<span>API reference</span></a>
           <a href="https://pysdr.org/" target="_blank" rel="noopener noreferrer">PySDR<span>DSP and SDR from first principles</span></a>
+          <a href="https://nostarch.com/practical-sdr" target="_blank" rel="noopener noreferrer">Practical SDR<span>Clark &amp; Clark — source for the physical-layer track</span></a>
           <a href="https://www.sigidwiki.com/" target="_blank" rel="noopener noreferrer">SigID Wiki<span>signal identification catalogue</span></a>
           <a href="https://github.com/jopohl/urh" target="_blank" rel="noopener noreferrer">Universal Radio Hacker<span>protocol reverse engineering</span></a>
           <a href="https://github.com/miek/inspectrum" target="_blank" rel="noopener noreferrer">inspectrum<span>IQ and spectrogram analysis</span></a>
@@ -2702,6 +3140,7 @@ class blk(gr.sync_block):
     { label: 'Phase II / Receive', ids: ['m05', 'm06', 'm07', 'm08'] },
     { label: 'Phase III / Digital', ids: ['m09', 'm10', 'm11'] },
     { label: 'Phase IV / Operations', ids: ['m12', 'm13', 'm14', 'm15'] },
+    { label: 'Phase V / Physical layer', ids: ['m16', 'm17', 'm18', 'm19'] },
     { label: 'Toolbench', ids: ['tools'] },
     { label: 'Reference', ids: ['reference'] }
   ];
@@ -3534,6 +3973,164 @@ class blk(gr.sync_block):
     ctx.setLineDash([]);
   }
 
+  function drawWavelengthChart() {
+    const g = setupChart(toolEl('wl-canvas'));
+    if (!g) return;
+    const { ctx, w, h } = g;
+    const f = Math.max(1, Math.min(6000, numVal('wl-freq', 100)));
+    const lambda = 299.792458 / f;
+    const fmtLength = m => m >= 0.5 ? m.toFixed(2) + ' m' : (m * 100).toFixed(1) + ' cm';
+    toolEl('wl-full').textContent = fmtLength(lambda);
+    toolEl('wl-quarter').textContent = fmtLength(lambda / 4);
+    toolEl('wl-half').textContent = fmtLength(lambda / 2);
+    chartBackground(ctx, w, h);
+    const pad = { l: 42, r: 12, t: 20, b: 24 };
+    const W = w - pad.l - pad.r;
+    const H = h - pad.t - pad.b;
+    const xMin = 1, xMax = 6000;
+    const yMin = 0.02, yMax = 500;
+    const X = v => pad.l + (Math.log10(v) - Math.log10(xMin)) / (Math.log10(xMax) - Math.log10(xMin)) * W;
+    const Y = v => pad.t + (Math.log10(yMax) - Math.log10(v)) / (Math.log10(yMax) - Math.log10(yMin)) * H;
+    ctx.strokeStyle = '#16282b';
+    ctx.lineWidth = 1;
+    for (const v of [0.1, 1, 10, 100]) {
+      ctx.beginPath(); ctx.moveTo(pad.l, Y(v)); ctx.lineTo(pad.l + W, Y(v)); ctx.stroke();
+      ctx.fillStyle = '#7e9690'; ctx.textAlign = 'right';
+      ctx.fillText(v >= 1 ? v + 'm' : (v * 100) + 'cm', pad.l - 5, Y(v));
+    }
+    for (const v of [1, 10, 100, 1000]) {
+      ctx.beginPath(); ctx.moveTo(X(v), pad.t); ctx.lineTo(X(v), pad.t + H); ctx.stroke();
+      ctx.fillStyle = '#7e9690'; ctx.textAlign = 'center';
+      ctx.fillText(v >= 1000 ? (v / 1000) + 'G' : v + 'M', X(v), h - 9);
+    }
+    ctx.textAlign = 'left'; ctx.fillStyle = '#526763';
+    ctx.fillText('free-space wavelength vs frequency', pad.l, 10);
+    ctx.strokeStyle = '#5ee7ff'; ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (let i = 0; i <= 120; i++) {
+      const v = xMin * Math.pow(xMax / xMin, i / 120);
+      const y = Y(299.792458 / v);
+      if (i === 0) ctx.moveTo(X(v), y); else ctx.lineTo(X(v), y);
+    }
+    ctx.stroke();
+    const mx = X(f), my = Y(lambda);
+    ctx.strokeStyle = 'rgba(198,255,74,.7)'; ctx.lineWidth = 1; ctx.setLineDash([3, 3]);
+    ctx.beginPath(); ctx.moveTo(mx, pad.t); ctx.lineTo(mx, pad.t + H); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(pad.l, my); ctx.lineTo(pad.l + W, my); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#c6ff4a';
+    ctx.beginPath(); ctx.arc(mx, my, 4, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#7e9690';
+    ctx.textAlign = mx > w - 110 ? 'right' : 'left';
+    ctx.fillText(f + ' MHz · ' + fmtLength(lambda), mx + (mx > w - 110 ? -7 : 7), my - 9);
+    ctx.textAlign = 'left';
+  }
+
+  function drawADCChart() {
+    const g = setupChart(toolEl('adc-canvas'));
+    if (!g) return;
+    const { ctx, w, h } = g;
+    const bits = Math.max(4, Math.min(16, intVal('adc-bits', 8)));
+    const levels = Math.pow(2, bits);
+    const snr = 6.02 * bits + 1.76;
+    toolEl('adc-levels').textContent = levels.toLocaleString();
+    toolEl('adc-snr').textContent = snr.toFixed(1) + ' dB';
+    toolEl('adc-step').textContent = '1 / ' + levels.toLocaleString();
+    chartBackground(ctx, w, h);
+    const pad = { l: 42, r: 12, t: 20, b: 24 };
+    const W = w - pad.l - pad.r;
+    const H = h - pad.t - pad.b;
+    const xMin = 4, xMax = 16, yMin = 20, yMax = 100;
+    const X = v => pad.l + (v - xMin) / (xMax - xMin) * W;
+    const Y = v => pad.t + (yMax - v) / (yMax - yMin) * H;
+    ctx.strokeStyle = '#16282b'; ctx.lineWidth = 1;
+    for (let v = yMin; v <= yMax; v += 20) {
+      ctx.beginPath(); ctx.moveTo(pad.l, Y(v)); ctx.lineTo(pad.l + W, Y(v)); ctx.stroke();
+      ctx.fillStyle = '#7e9690'; ctx.textAlign = 'right';
+      ctx.fillText(v + 'dB', pad.l - 5, Y(v));
+    }
+    for (let v = 4; v <= 16; v += 2) {
+      ctx.beginPath(); ctx.moveTo(X(v), pad.t); ctx.lineTo(X(v), pad.t + H); ctx.stroke();
+      ctx.fillStyle = '#7e9690'; ctx.textAlign = 'center';
+      ctx.fillText(v + 'b', X(v), h - 9);
+    }
+    ctx.textAlign = 'left'; ctx.fillStyle = '#526763';
+    ctx.fillText('ideal ADC SNR vs bit depth', pad.l, 10);
+    ctx.strokeStyle = '#5ee7ff'; ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (let b = xMin; b <= xMax; b += 0.25) {
+      const y = Y(6.02 * b + 1.76);
+      if (b === xMin) ctx.moveTo(X(b), y); else ctx.lineTo(X(b), y);
+    }
+    ctx.stroke();
+    const mx = X(bits), my = Y(snr);
+    ctx.strokeStyle = 'rgba(198,255,74,.7)'; ctx.lineWidth = 1; ctx.setLineDash([3, 3]);
+    ctx.beginPath(); ctx.moveTo(mx, pad.t); ctx.lineTo(mx, pad.t + H); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(pad.l, my); ctx.lineTo(pad.l + W, my); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#c6ff4a';
+    ctx.beginPath(); ctx.arc(mx, my, 4, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#7e9690'; ctx.textAlign = mx > w - 110 ? 'right' : 'left';
+    ctx.fillText(bits + ' bits · ' + snr.toFixed(1) + ' dB', mx + (mx > w - 110 ? -7 : 7), my - 9);
+    ctx.textAlign = 'left';
+  }
+
+  function drawTXChart() {
+    const g = setupChart(toolEl('tx-canvas'));
+    if (!g) return;
+    const { ctx, w, h } = g;
+    const f0 = Math.max(10, Math.min(1000, numVal('tx-f0', 100)));
+    const harm = Math.max(-60, Math.min(-5, numVal('tx-harm', -25)));
+    const cut = Math.max(20, Math.min(2000, numVal('tx-cut', 150)));
+    const h2 = harm, h3 = harm - 5, h4 = harm - 10;
+    const after = (f, level) => f > cut ? level - 40 : level;
+    const status = cut < f0 ? 'FUNDAMENTAL CUT' : cut < 2 * f0 ? '2nd + filtered' : cut < 3 * f0 ? '3rd + filtered' : 'harmonics pass';
+    toolEl('tx-2nd').textContent = (2 * f0).toFixed(0) + ' MHz / ' + h2.toFixed(0) + ' dBc';
+    toolEl('tx-3rd').textContent = (3 * f0).toFixed(0) + ' MHz / ' + h3.toFixed(0) + ' dBc';
+    toolEl('tx-status').textContent = status;
+    chartBackground(ctx, w, h);
+    const pad = { l: 44, r: 12, t: 20, b: 24 };
+    const W = w - pad.l - pad.r;
+    const H = h - pad.t - pad.b;
+    const xMax = Math.max(4.2 * f0, cut * 1.1);
+    const X = f => pad.l + f / xMax * W;
+    const Y = db => pad.t + (0 - db) / 80 * H;
+    ctx.strokeStyle = '#16282b'; ctx.lineWidth = 1;
+    for (const db of [-80, -60, -40, -20, 0]) {
+      ctx.beginPath(); ctx.moveTo(pad.l, Y(db)); ctx.lineTo(pad.l + W, Y(db)); ctx.stroke();
+      ctx.fillStyle = '#7e9690'; ctx.textAlign = 'right';
+      ctx.fillText(db + 'dBc', pad.l - 5, Y(db));
+    }
+    for (let k = 0; k <= 4; k++) {
+      const v = k * f0;
+      if (v > xMax) continue;
+      ctx.beginPath(); ctx.moveTo(X(v), pad.t); ctx.lineTo(X(v), pad.t + H); ctx.stroke();
+      ctx.fillStyle = '#7e9690'; ctx.textAlign = 'center';
+      ctx.fillText(v.toFixed(0) + 'M', X(v), h - 9);
+    }
+    ctx.textAlign = 'left'; ctx.fillStyle = '#526763';
+    ctx.fillText('fundamental + harmonics / ideal LPF', pad.l, 10);
+    const stem = (f, level, color, dash) => {
+      ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.setLineDash(dash || []);
+      ctx.beginPath(); ctx.moveTo(X(f), Y(-80)); ctx.lineTo(X(f), Y(level)); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = color; ctx.beginPath(); ctx.arc(X(f), Y(level), 3.5, 0, Math.PI * 2); ctx.fill();
+    };
+    stem(2 * f0, h2, '#5ee7ff', [4, 4]);
+    stem(3 * f0, h3, '#5ee7ff', [4, 4]);
+    stem(4 * f0, h4, '#5ee7ff', [4, 4]);
+    stem(f0, cut < f0 ? -40 : 0, '#c6ff4a');
+    stem(2 * f0, after(2 * f0, h2), '#c6ff4a');
+    stem(3 * f0, after(3 * f0, h3), '#c6ff4a');
+    stem(4 * f0, after(4 * f0, h4), '#c6ff4a');
+    ctx.strokeStyle = '#ffc266'; ctx.lineWidth = 1; ctx.setLineDash([5, 4]);
+    ctx.beginPath(); ctx.moveTo(X(cut), pad.t); ctx.lineTo(X(cut), pad.t + H); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#ffc266'; ctx.textAlign = X(cut) > w - 90 ? 'right' : 'left';
+    ctx.fillText('LPF ' + cut.toFixed(0) + ' MHz', X(cut) + (X(cut) > w - 90 ? -6 : 6), pad.t + 10);
+    ctx.textAlign = 'left';
+  }
+
   function drawAMChart() {
     const g = setupChart(toolEl('am-canvas'));
     if (!g) return;
@@ -3590,6 +4187,9 @@ class blk(gr.sync_block):
     if (active.querySelector('#co-canvas')) drawConstMini();
     if (active.querySelector('#am-canvas')) drawAMChart();
     if (active.querySelector('#bu-canvas')) drawBurstChart();
+    if (active.querySelector('#wl-canvas')) drawWavelengthChart();
+    if (active.querySelector('#adc-canvas')) drawADCChart();
+    if (active.querySelector('#tx-canvas')) drawTXChart();
   }
 
   document.addEventListener('input', event => {
