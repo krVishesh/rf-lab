@@ -6,7 +6,8 @@ The Spectrum Field Manual: a self-contained SDR + GNU Radio field manual for cyb
 
 ## What is inside
 
-- 19 modules with Study / Build / Solo checkpoints
+- 20 modules with Study / Build / Solo checkpoints
+- Early real-target lab: capture and decode a cheap 433 MHz remote before digital theory
 - 13 interactive charts, six calculator-style tools, and a 65-block GRC guide
 - Simulated GNU Radio labs that work without a radio, plus receive-only hardware paths
 - RF security, capture, evidence handling, and defensive monitoring material

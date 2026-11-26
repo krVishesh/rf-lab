@@ -1111,7 +1111,7 @@
   <button class="menu-btn" id="menuBtn" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">☰</button>
   <a class="brand" href="#overview"><span class="brand-mark">◈</span><span>SPECTRUM<span class="brand-sub"> // SDR FIELD MANUAL</span></span></a>
   <div class="top-meter" aria-hidden="true">
-    <span id="topLabel">0 / 57</span>
+    <span id="topLabel">0 / 60</span>
     <div class="meter"><i id="topBar"></i></div>
     <span id="topPct">0%</span>
   </div>
@@ -1127,7 +1127,7 @@
     <div class="side-progress">
       <div class="row"><span>COURSE PROGRESS</span><strong id="sidePct">0%</strong></div>
       <div class="meter"><i id="sideBar"></i></div>
-      <div class="row" style="margin-top:8px;margin-bottom:0"><span id="sideDone">0 / 57 checkpoints</span><span>v1.1</span></div>
+      <div class="row" style="margin-top:8px;margin-bottom:0"><span id="sideDone">0 / 60 checkpoints</span><span>v1.1</span></div>
     </div>
     <nav id="nav"></nav>
     <div class="side-actions">
@@ -1151,8 +1151,8 @@
           <a class="btn secondary" href="#reference">Field reference</a>
         </div>
         <div class="hero-meta">
-          <span>19 modules</span>
-          <span>57 checkpoints</span>
+          <span>20 modules</span>
+          <span>60 checkpoints</span>
           <span>13 live charts</span>
           <span>sim + hardware paths</span>
           <span>rx only by default</span>
@@ -1160,8 +1160,8 @@
       </div>
 
       <div class="metrics">
-        <div class="metric"><strong>19</strong><span>modules</span></div>
-        <div class="metric"><strong>57</strong><span>study / lab / solo checks</span></div>
+        <div class="metric"><strong>20</strong><span>modules</span></div>
+        <div class="metric"><strong>60</strong><span>study / lab / solo checks</span></div>
         <div class="metric"><strong>2</strong><span>paths: simulated + radio</span></div>
         <div class="metric"><strong>0</strong><span>transmitters required</span></div>
       </div>
@@ -1203,7 +1203,7 @@
           <div class="card">
             <span class="tag">Receive path</span>
             <h3>RTL-SDR, Airspy, or similar</h3>
-            <p>An RTL-SDR is enough for modules 1–8, 11, 14, and 15. Add a decent antenna, a USB extension, and ferrites. Expect 8-bit dynamic range, not laboratory performance.</p>
+            <p>An RTL-SDR is enough for modules 1–9, 12, 15, and 20. Add a decent antenna, a USB extension, and ferrites. Expect 8-bit dynamic range, not laboratory performance.</p>
           </div>
           <div class="card">
             <span class="tag">Transmit-capable</span>
@@ -1226,8 +1226,8 @@
         <div class="section-head">
           <div class="section-num">02 / ROADMAP</div>
           <div>
-            <h2>Four phases, one stack</h2>
-            <p>Do not jump to digital decoding. The RF chain, sampling, and gain staging are the foundation for every later trick.</p>
+            <h2>Six phases, one stack</h2>
+            <p>You capture a real remote early, then learn why it works. The RF chain, sampling, and gain staging are the foundation; the physical-layer track comes before the capstone.</p>
           </div>
         </div>
         <div class="grid-2">
@@ -1250,29 +1250,40 @@
             </ol>
           </div>
           <div class="card roadmap-phase">
-            <h3>Phase III / Digital</h3>
+            <h3>Phase III / First target</h3>
             <ol start="9">
-              <li><a href="#m09">Digital modulation and sync</a></li>
-              <li><a href="#m10">Framing, checksums, packets</a></li>
-              <li><a href="#m11">Capture and reverse engineering</a></li>
+              <li><a href="#m09">Capture and decode a cheap remote</a></li>
             </ol>
           </div>
           <div class="card roadmap-phase">
-            <h3>Phase IV / Operations</h3>
-            <ol start="12">
-              <li><a href="#m12">Automation and monitoring</a></li>
-              <li><a href="#m13">Advanced GNU Radio</a></li>
-              <li><a href="#m14">RF attack surface and defense</a></li>
-              <li><a href="#m15">Capstone: signal watchdog</a></li>
+            <h3>Phase IV / Digital</h3>
+            <ol start="10">
+              <li><a href="#m10">Digital modulation and sync</a></li>
+              <li><a href="#m11">Framing, checksums, packets</a></li>
+              <li><a href="#m12">Capture and reverse engineering</a></li>
             </ol>
           </div>
           <div class="card roadmap-phase">
-            <h3>Phase V / Physical layer</h3>
+            <h3>Phase V / Operations</h3>
+            <ol start="13">
+              <li><a href="#m13">Automation and monitoring</a></li>
+              <li><a href="#m14">Advanced GNU Radio</a></li>
+              <li><a href="#m15">RF attack surface and defense</a></li>
+            </ol>
+          </div>
+          <div class="card roadmap-phase">
+            <h3>Phase VI / Physical layer</h3>
             <ol start="16">
               <li><a href="#m16">RF physics, propagation, antennas</a></li>
               <li><a href="#m17">SDR hardware under the hood</a></li>
               <li><a href="#m18">Peripherals, noise, bench</a></li>
               <li><a href="#m19">Transmit chain and boundaries</a></li>
+            </ol>
+          </div>
+          <div class="card roadmap-phase">
+            <h3>Graduation</h3>
+            <ol start="20">
+              <li><a href="#m20">Capstone: signal watchdog</a></li>
             </ol>
           </div>
         </div>
@@ -1998,21 +2009,104 @@
       </div>
       <div class="module-foot">
         <button class="complete-btn" data-module="m08">Mark module complete</button>
-        <a class="next-link" href="#m09">Next: digital modulation and sync →</a>
+        <a class="next-link" href="#m09">Next: first real target →</a>
       </div>
     </section>
 
-    <section class="view module" id="m09" data-view data-nav="09 / Digital modulation and sync" data-module="m09">
+    <section class="view module" id="m09" data-view data-nav="09 / First real target" data-module="m09">
       <div class="module-head">
-        <div class="module-kicker">MODULE 09 <span>/</span> PHASE III · DIGITAL</div>
-        <h2>Digital modulation and symbol recovery</h2>
-        <p class="lede">Digital is still analog underneath. Bits become symbols, symbols become waveforms, and the receiver has to recover carrier, timing, and frame boundaries. That is where most real decoders live or die.</p>
-        <div class="meta-row"><span class="meta">~70 min</span><span class="meta">simulation</span><span class="meta">3 checkpoints</span></div>
+        <div class="module-kicker">MODULE 09 <span>/</span> PHASE III · FIRST TARGET</div>
+        <h2>Capture and decode a cheap wireless remote</h2>
+        <p class="lede">This is the first real payoff: press a remote you own, capture the burst, measure its pulses, and turn the envelope into a bit stream. No transmit, no replay, no synthetic bit pattern pretending to be RF.</p>
+        <div class="meta-row"><span class="meta">~70 min</span><span class="meta">rx only / own device</span><span class="meta">3 checkpoints</span></div>
       </div>
       <div class="phase-bar">
         <button class="phase-chip" data-check="m09:study" aria-pressed="false">01 Study</button>
         <button class="phase-chip" data-check="m09:lab" aria-pressed="false">02 Build</button>
         <button class="phase-chip" data-check="m09:solo" aria-pressed="false">03 Solo</button>
+      </div>
+      <p class="phase-hint">Tap each chip when you finish that phase.</p>
+
+      <div class="content">
+        <section class="lesson">
+          <h3><span class="step">01</span> Study / From a button press to bits</h3>
+          <p>Many cheap remotes, doorbells, sensors, and toys use a simple ISM-band transmitter around <strong>315, 433.92, or 868 MHz</strong>. The most common low-cost encoding is <strong>OOK/ASK</strong>: the carrier is switched on and off. Some devices use FSK instead, but the workflow is the same: capture, envelope, timing, bits, frame.</p>
+          <div class="chain">
+            <span>button press</span><i>→</i><span>burst</span><i>→</i><span>envelope</span><i>→</i><span>pulse widths</span><i>→</i><span>bits</span><i>→</i><span>frame / ID / button</span>
+          </div>
+          <ul>
+            <li><strong>Capture:</strong> record raw IQ around the carrier while pressing the remote once. Keep the burst short and the gain moderate.</li>
+            <li><strong>Envelope:</strong> a complex magnitude or diode detector turns the RF burst into a baseband on/off waveform.</li>
+            <li><strong>Timing:</strong> measure short and long pulses. A common scheme encodes 0 and 1 as different pulse-width ratios.</li>
+            <li><strong>Frame:</strong> a repeated burst usually contains a preamble, an ID/address, button bits, and sometimes a checksum or parity bits.</li>
+            <li><strong>Fixed code:</strong> the same frame repeats every press. That is why fixed-code remotes are replayable.</li>
+            <li><strong>Rolling code:</strong> the frame changes every press and the receiver expects a counter/window. Capturing one frame is not enough to replay it.</li>
+          </ul>
+          <div class="callout warn">
+            <strong>Capture only your own device</strong>
+            <p>Use a remote, sensor, or toy that you own, or a device you have explicit permission to test. Do not capture a neighbour’s keyfob, vehicle, access-control token, or medical device. Do not replay the capture. This lab is receive-only evidence collection.</p>
+          </div>
+          <h4>What “decode” means here</h4>
+          <p>You are not expected to identify every proprietary protocol. You are expected to recover the physical layer: burst start, pulse widths, symbol rate, repeated frame, and bit pattern. That is enough to compare two presses and reason about fixed versus rolling code. Tools such as Universal Radio Hacker or inspectrum make the bit slicing easier, but the GRC capture is the foundation.</p>
+          <div class="callout tip">
+            <strong>Typical cheap-remote numbers</strong>
+            <p>433.92 MHz carrier; short pulses on the order of a few hundred microseconds; a frame repeated several times per press; bit rate often in the low kilobits per second. Do not assume those numbers until you measure them.</p>
+          </div>
+        </section>
+
+        <section class="lesson">
+          <h3><span class="step">02</span> Build / Capture, measure, decode</h3>
+          <div class="lab-block">
+            <div class="lab-head"><strong>Lab 09</strong><span>own remote / rx only</span></div>
+            <div class="lab-body">
+              <ol>
+                <li>Connect an antenna and tune <code>RTL-SDR Source</code> to <code>433.92e6</code>, sample rate <code>2e6</code>, moderate RF gain. If your remote uses another band, use that centre instead.</li>
+                <li>Build: source → <code>Complex to Mag</code> → <code>Low Pass Filter</code> (sample rate 2e6, cutoff about 50e3, transition 50e3) → <code>QT GUI Time Sink</code> (sample rate 2e6, enough points to see several milliseconds). Add a <code>File Sink</code> on the complex source output.</li>
+                <li>Record 2–5 seconds of IQ while pressing the remote once. At 2 Msps complex float32, that is about 16 MB per second; keep it short. Name the file and write down centre, rate, gain, and time.</li>
+                <li>Stop the radio. Play the file back with <code>File Source</code> → <code>Throttle</code> (2e6) → the same magnitude/filter/time-sink chain. The burst should be stable and repeatable.</li>
+                <li>Measure the burst: start time, duration, gap between repeats, shortest pulse, longest pulse. Write the numbers down before opening another tool.</li>
+                <li>Optional: open the IQ file in Universal Radio Hacker or inspectrum. Slice the OOK envelope into bits and look for a repeated frame. Record the bit pattern for two separate presses.</li>
+                <li>Compare the two presses. If the frame is identical, it is fixed-code. If it changes, suspect a rolling code or a counter. Do not attempt to replay either one.</li>
+              </ol>
+              <p><strong>Expected:</strong> a visible on/off burst with measurable pulse widths and a repeated frame. The exact bit pattern is device-specific; the workflow is the lesson.</p>
+            </div>
+          </div>
+          <div class="callout">
+            <strong>No remote?</strong>
+            <p>Do the synthetic OOK lab in Module 10 to learn the mechanics, then come back when you have a device you own. A real capture is the point of this module; do not substitute a neighbour’s signal.</p>
+          </div>
+        </section>
+
+        <section class="lesson">
+          <h3><span class="step">03</span> Solo check / Close the notes</h3>
+          <div class="solo-box">
+            <span class="solo-label">No-help question</span>
+            <p>You measure a burst with a 300 µs pulse and a 900 µs pulse. What could those two pulse widths represent, and what should you check before calling it a protocol?</p>
+            <details>
+              <summary>Reveal answer</summary>
+              <p>They are likely two symbols, for example a short pulse for 0 and a long pulse for 1 (or the reverse). Before calling it a protocol, check the repeat interval, preamble, frame length, bit order, address/button fields, parity/checksum, and whether two presses produce the same or different frames. A physical-layer pattern is not yet a complete protocol.</p>
+              <p>If the frame is identical on every press, treat it as fixed-code and replayable in principle. If it changes, suspect a rolling code; do not test replay on anything you do not own.</p>
+            </details>
+          </div>
+        </section>
+      </div>
+      <div class="module-foot">
+        <button class="complete-btn" data-module="m09">Mark module complete</button>
+        <a class="next-link" href="#m10">Next: digital modulation and sync →</a>
+      </div>
+    </section>
+
+    <section class="view module" id="m10" data-view data-nav="10 / Digital modulation and sync" data-module="m10">
+      <div class="module-head">
+        <div class="module-kicker">MODULE 10 <span>/</span> PHASE IV · DIGITAL</div>
+        <h2>Digital modulation and symbol recovery</h2>
+        <p class="lede">Digital is still analog underneath. Bits become symbols, symbols become waveforms, and the receiver has to recover carrier, timing, and frame boundaries. That is where most real decoders live or die.</p>
+        <div class="meta-row"><span class="meta">~70 min</span><span class="meta">simulation</span><span class="meta">3 checkpoints</span></div>
+      </div>
+      <div class="phase-bar">
+        <button class="phase-chip" data-check="m10:study" aria-pressed="false">01 Study</button>
+        <button class="phase-chip" data-check="m10:lab" aria-pressed="false">02 Build</button>
+        <button class="phase-chip" data-check="m10:solo" aria-pressed="false">03 Solo</button>
       </div>
       <p class="phase-hint">Tap each chip when you finish that phase.</p>
 
@@ -2108,22 +2202,22 @@
         </section>
       </div>
       <div class="module-foot">
-        <button class="complete-btn" data-module="m09">Mark module complete</button>
-        <a class="next-link" href="#m10">Next: framing, checksums, packets →</a>
+        <button class="complete-btn" data-module="m10">Mark module complete</button>
+        <a class="next-link" href="#m11">Next: framing, checksums, packets →</a>
       </div>
     </section>
 
-    <section class="view module" id="m10" data-view data-nav="10 / Framing and checksums" data-module="m10">
+    <section class="view module" id="m11" data-view data-nav="11 / Framing and checksums" data-module="m11">
       <div class="module-head">
-        <div class="module-kicker">MODULE 10 <span>/</span> PHASE III · DIGITAL</div>
+        <div class="module-kicker">MODULE 11 <span>/</span> PHASE IV · DIGITAL</div>
         <h2>Framing, checksums, and packets</h2>
         <p class="lede">Bits are not a message. A protocol defines where a message starts, how long it is, what it means, and whether it arrived intact. This is where RF reverse engineering becomes software analysis.</p>
         <div class="meta-row"><span class="meta">~55 min</span><span class="meta">message domain</span><span class="meta">3 checkpoints</span></div>
       </div>
       <div class="phase-bar">
-        <button class="phase-chip" data-check="m10:study" aria-pressed="false">01 Study</button>
-        <button class="phase-chip" data-check="m10:lab" aria-pressed="false">02 Build</button>
-        <button class="phase-chip" data-check="m10:solo" aria-pressed="false">03 Solo</button>
+        <button class="phase-chip" data-check="m11:study" aria-pressed="false">01 Study</button>
+        <button class="phase-chip" data-check="m11:lab" aria-pressed="false">02 Build</button>
+        <button class="phase-chip" data-check="m11:solo" aria-pressed="false">03 Solo</button>
       </div>
       <p class="phase-hint">Tap each chip when you finish that phase.</p>
 
@@ -2182,22 +2276,22 @@
         </section>
       </div>
       <div class="module-foot">
-        <button class="complete-btn" data-module="m10">Mark module complete</button>
-        <a class="next-link" href="#m11">Next: capture and reverse engineering →</a>
+        <button class="complete-btn" data-module="m11">Mark module complete</button>
+        <a class="next-link" href="#m12">Next: capture and reverse engineering →</a>
       </div>
     </section>
 
-    <section class="view module" id="m11" data-view data-nav="11 / Capture and RE" data-module="m11">
+    <section class="view module" id="m12" data-view data-nav="12 / Capture and RE" data-module="m12">
       <div class="module-head">
-        <div class="module-kicker">MODULE 11 <span>/</span> PHASE III · DIGITAL</div>
+        <div class="module-kicker">MODULE 12 <span>/</span> PHASE IV · DIGITAL</div>
         <h2>Capture and reverse engineering</h2>
         <p class="lede">A recording is evidence and a laboratory specimen. Learn to capture IQ without corrupting it, play it back deterministically, and analyse bursts instead of staring at a live waterfall.</p>
         <div class="meta-row"><span class="meta">~60 min</span><span class="meta">rx only</span><span class="meta">3 checkpoints</span></div>
       </div>
       <div class="phase-bar">
-        <button class="phase-chip" data-check="m11:study" aria-pressed="false">01 Study</button>
-        <button class="phase-chip" data-check="m11:lab" aria-pressed="false">02 Build</button>
-        <button class="phase-chip" data-check="m11:solo" aria-pressed="false">03 Solo</button>
+        <button class="phase-chip" data-check="m12:study" aria-pressed="false">01 Study</button>
+        <button class="phase-chip" data-check="m12:lab" aria-pressed="false">02 Build</button>
+        <button class="phase-chip" data-check="m12:solo" aria-pressed="false">03 Solo</button>
       </div>
       <p class="phase-hint">Tap each chip when you finish that phase.</p>
 
@@ -2261,22 +2355,22 @@
         </section>
       </div>
       <div class="module-foot">
-        <button class="complete-btn" data-module="m11">Mark module complete</button>
-        <a class="next-link" href="#m12">Next: automation and monitoring →</a>
+        <button class="complete-btn" data-module="m12">Mark module complete</button>
+        <a class="next-link" href="#m13">Next: automation and monitoring →</a>
       </div>
     </section>
 
-    <section class="view module" id="m12" data-view data-nav="12 / Automation and monitoring" data-module="m12">
+    <section class="view module" id="m13" data-view data-nav="13 / Automation and monitoring" data-module="m13">
       <div class="module-head">
-        <div class="module-kicker">MODULE 12 <span>/</span> PHASE IV · OPERATIONS</div>
+        <div class="module-kicker">MODULE 13 <span>/</span> PHASE V · OPERATIONS</div>
         <h2>Automation and monitoring</h2>
         <p class="lede">Interactive GRC is for learning. Production monitoring is headless, logged, and repeatable. Move from “it runs on my screen” to “it runs at 03:00 and leaves evidence.”</p>
         <div class="meta-row"><span class="meta">~50 min</span><span class="meta">headless</span><span class="meta">3 checkpoints</span></div>
       </div>
       <div class="phase-bar">
-        <button class="phase-chip" data-check="m12:study" aria-pressed="false">01 Study</button>
-        <button class="phase-chip" data-check="m12:lab" aria-pressed="false">02 Build</button>
-        <button class="phase-chip" data-check="m12:solo" aria-pressed="false">03 Solo</button>
+        <button class="phase-chip" data-check="m13:study" aria-pressed="false">01 Study</button>
+        <button class="phase-chip" data-check="m13:lab" aria-pressed="false">02 Build</button>
+        <button class="phase-chip" data-check="m13:solo" aria-pressed="false">03 Solo</button>
       </div>
       <p class="phase-hint">Tap each chip when you finish that phase.</p>
 
@@ -2332,22 +2426,22 @@
         </section>
       </div>
       <div class="module-foot">
-        <button class="complete-btn" data-module="m12">Mark module complete</button>
-        <a class="next-link" href="#m13">Next: advanced GNU Radio →</a>
+        <button class="complete-btn" data-module="m13">Mark module complete</button>
+        <a class="next-link" href="#m14">Next: advanced GNU Radio →</a>
       </div>
     </section>
 
-    <section class="view module" id="m13" data-view data-nav="13 / Advanced GNU Radio" data-module="m13">
+    <section class="view module" id="m14" data-view data-nav="14 / Advanced GNU Radio" data-module="m14">
       <div class="module-head">
-        <div class="module-kicker">MODULE 13 <span>/</span> PHASE IV · OPERATIONS</div>
+        <div class="module-kicker">MODULE 14 <span>/</span> PHASE V · OPERATIONS</div>
         <h2>Advanced GNU Radio</h2>
         <p class="lede">Past the stock blocks: custom Python, out-of-tree modules, tags, messages, hierarchical reuse, and performance. Use these when the graph stops expressing your idea.</p>
         <div class="meta-row"><span class="meta">~65 min</span><span class="meta">simulation</span><span class="meta">3 checkpoints</span></div>
       </div>
       <div class="phase-bar">
-        <button class="phase-chip" data-check="m13:study" aria-pressed="false">01 Study</button>
-        <button class="phase-chip" data-check="m13:lab" aria-pressed="false">02 Build</button>
-        <button class="phase-chip" data-check="m13:solo" aria-pressed="false">03 Solo</button>
+        <button class="phase-chip" data-check="m14:study" aria-pressed="false">01 Study</button>
+        <button class="phase-chip" data-check="m14:lab" aria-pressed="false">02 Build</button>
+        <button class="phase-chip" data-check="m14:solo" aria-pressed="false">03 Solo</button>
       </div>
       <p class="phase-hint">Tap each chip when you finish that phase.</p>
 
@@ -2430,22 +2524,22 @@ class blk(gr.sync_block):
         </section>
       </div>
       <div class="module-foot">
-        <button class="complete-btn" data-module="m13">Mark module complete</button>
-        <a class="next-link" href="#m14">Next: RF attack surface and defense →</a>
+        <button class="complete-btn" data-module="m14">Mark module complete</button>
+        <a class="next-link" href="#m15">Next: RF attack surface and defense →</a>
       </div>
     </section>
 
-    <section class="view module" id="m14" data-view data-nav="14 / RF attack surface" data-module="m14">
+    <section class="view module" id="m15" data-view data-nav="15 / RF attack surface" data-module="m15">
       <div class="module-head">
-        <div class="module-kicker">MODULE 14 <span>/</span> PHASE IV · OPERATIONS</div>
+        <div class="module-kicker">MODULE 15 <span>/</span> PHASE V · OPERATIONS</div>
         <h2>RF attack surface and defense</h2>
         <p class="lede">Radio is an untrusted network with no cable. Learn the attack classes at a systems level, then build the defensive habits: baseline, detect, capture, verify, and document.</p>
         <div class="meta-row"><span class="meta">~50 min</span><span class="meta">defensive / rx</span><span class="meta">3 checkpoints</span></div>
       </div>
       <div class="phase-bar">
-        <button class="phase-chip" data-check="m14:study" aria-pressed="false">01 Study</button>
-        <button class="phase-chip" data-check="m14:lab" aria-pressed="false">02 Build</button>
-        <button class="phase-chip" data-check="m14:solo" aria-pressed="false">03 Solo</button>
+        <button class="phase-chip" data-check="m15:study" aria-pressed="false">01 Study</button>
+        <button class="phase-chip" data-check="m15:lab" aria-pressed="false">02 Build</button>
+        <button class="phase-chip" data-check="m15:solo" aria-pressed="false">03 Solo</button>
       </div>
       <p class="phase-hint">Tap each chip when you finish that phase.</p>
 
@@ -2525,106 +2619,6 @@ class blk(gr.sync_block):
         </section>
       </div>
       <div class="module-foot">
-        <button class="complete-btn" data-module="m14">Mark module complete</button>
-        <a class="next-link" href="#m15">Next: capstone →</a>
-      </div>
-    </section>
-
-    <section class="view module" id="m15" data-view data-nav="15 / Capstone" data-module="m15">
-      <div class="module-head">
-        <div class="module-kicker">MODULE 15 <span>/</span> GRADUATION</div>
-        <h2>Capstone: build a signal watchdog</h2>
-        <p class="lede">Build a legal, receive-only RF sensor that establishes a baseline, detects an event, captures evidence, decodes one known signal end-to-end, and explains its own limitations.</p>
-        <div class="meta-row"><span class="meta">4 sessions</span><span class="meta">rx only</span><span class="meta">3 checkpoints</span></div>
-      </div>
-      <div class="phase-bar">
-        <button class="phase-chip" data-check="m15:study" aria-pressed="false">01 Study</button>
-        <button class="phase-chip" data-check="m15:lab" aria-pressed="false">02 Build</button>
-        <button class="phase-chip" data-check="m15:solo" aria-pressed="false">03 Solo</button>
-      </div>
-      <p class="phase-hint">Tap each chip when you finish that phase.</p>
-
-      <div class="content">
-        <section class="lesson">
-          <h3><span class="step">01</span> Study / What “done” means</h3>
-          <p>You are not done when the flowgraph runs. You are done when you can explain every block, measure the signal, predict a failure, and produce evidence another person can review.</p>
-          <div class="grid-2">
-            <div class="card">
-              <span class="tag">Deliverable 01</span>
-              <h3>Working receiver</h3>
-              <p>A tuned, documented chain from antenna to demodulated output for one legal signal: FM audio, NOAA APT, or another authorized broadcast.</p>
-            </div>
-            <div class="card">
-              <span class="tag">Deliverable 02</span>
-              <h3>Baseline + detector</h3>
-              <p>Noise floor measurement, threshold selection, event log, false-positive analysis, and a short IQ capture per event.</p>
-            </div>
-            <div class="card">
-              <span class="tag">Deliverable 03</span>
-              <h3>Evidence pack</h3>
-              <p>Flowgraph, generated Python, metadata, hashes, timestamps, and a report that separates observation from inference.</p>
-            </div>
-            <div class="card">
-              <span class="tag">Deliverable 04</span>
-              <h3>Security review</h3>
-              <p>Threat model, legal basis, privacy handling, one failure mode, and one way an attacker could evade the detector.</p>
-            </div>
-          </div>
-        </section>
-
-        <section class="lesson">
-          <h3><span class="step">02</span> Build / Four sessions</h3>
-          <div class="lab-block">
-            <div class="lab-head"><strong>Capstone build</strong><span>receive only / legal band</span></div>
-            <div class="lab-body">
-              <ol>
-                <li><strong>Session 1 — receiver.</strong> Pick a legal signal. Build the full chain in GRC. Record the sample rate at every stage and verify the final rate. Produce one clean audio or decoded output.</li>
-                <li><strong>Session 2 — baseline.</strong> Run a headless monitor for 10 minutes. Log centre frequency, gain, noise floor, peak level, and timestamps. Compute a threshold from the data, not from a feeling.</li>
-                <li><strong>Session 3 — event capture.</strong> Detect a burst or a new carrier. Save a short IQ clip, a screenshot or numeric summary, and a metadata record. Hash the capture.</li>
-                <li><strong>Session 4 — report.</strong> Decode or demodulate one known signal. Explain what you proved, what you inferred, and what you could not prove. Include the legal basis and a privacy note.</li>
-              </ol>
-              <p><strong>Constraints:</strong> no transmit, no private communications, no third-party personal data. If you cannot justify the capture legally, choose another signal.</p>
-            </div>
-          </div>
-          <h4>Grading rubric</h4>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Area</th><th>Pass condition</th></tr></thead>
-              <tbody>
-                <tr><td><strong>Chain correctness</strong></td><td>Every block’s input/output rate and type is explained; no accidental rate mismatch.</td></tr>
-                <tr><td><strong>Measurement</strong></td><td>Noise floor, bandwidth, FFT resolution, and threshold are calculated and recorded.</td></tr>
-                <tr><td><strong>Evidence</strong></td><td>Capture is hashed, timestamped, and accompanied by centre/rate/gain metadata.</td></tr>
-                <tr><td><strong>Security analysis</strong></td><td>Threat model, legal basis, privacy handling, false positives, and evasion are discussed.</td></tr>
-                <tr><td><strong>Clarity</strong></td><td>A competent peer can reproduce the result from your notes without asking you.</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <section class="lesson">
-          <h3><span class="step">03</span> Solo check / The final no-help questions</h3>
-          <div class="solo-box">
-            <span class="solo-label">No notes. No flowgraph. Answer out loud.</span>
-            <ol>
-              <li>Walk through your receiver from antenna to output and name the rate at every stage.</li>
-              <li>What is your noise floor in dBm, and how did you calculate it?</li>
-              <li>What is your FFT resolution, and why did you choose it?</li>
-              <li>Where could aliasing occur, and what prevents it?</li>
-              <li>What does your detector actually measure, and what can it not see?</li>
-              <li>How would an attacker evade it without jamming?</li>
-              <li>Why is your capture trustworthy, and what does the hash not prove?</li>
-              <li>What is the legal basis for every signal you captured?</li>
-              <li>What breaks first at 10× the sample rate?</li>
-              <li>What is one limitation of the protocol you decoded?</li>
-            </ol>
-            <details>
-              <summary>Reveal the standard</summary>
-              <p>You are looking for specific numbers, named blocks, explicit assumptions, and a clean separation between “I observed” and “I concluded.” Vague answers like “it worked” or “the CRC makes it secure” mean the module is not finished.</p>
-            </details>
-          </div>
-        </section>
-      </div>
-      <div class="module-foot">
         <button class="complete-btn" data-module="m15">Mark module complete</button>
         <a class="next-link" href="#m16">Next: RF physics and antennas →</a>
       </div>
@@ -2632,7 +2626,7 @@ class blk(gr.sync_block):
 
     <section class="view module" id="m16" data-view data-nav="16 / RF physics and antennas" data-module="m16">
       <div class="module-head">
-        <div class="module-kicker">MODULE 16 <span>/</span> PHASE V · PHYSICAL LAYER</div>
+        <div class="module-kicker">MODULE 16 <span>/</span> PHASE VI · PHYSICAL LAYER</div>
         <h2>RF physics, propagation, and antennas</h2>
         <p class="lede">Before software, there is a wave. Wavelength sets antenna size, frequency sets how the wave behaves, and polarization and gain decide how much of it your receiver actually sees.</p>
         <div class="meta-row"><span class="meta">~60 min</span><span class="meta">rx only</span><span class="meta">3 checkpoints</span></div>
@@ -2761,7 +2755,7 @@ f = frequency in hertz</code></pre>
 
     <section class="view module" id="m17" data-view data-nav="17 / SDR hardware" data-module="m17">
       <div class="module-head">
-        <div class="module-kicker">MODULE 17 <span>/</span> PHASE V · PHYSICAL LAYER</div>
+        <div class="module-kicker">MODULE 17 <span>/</span> PHASE VI · PHYSICAL LAYER</div>
         <h2>SDR hardware under the hood</h2>
         <p class="lede">The flowgraph sees complex samples. The radio sees a mixer, filters, amplifiers, ADCs, a clock, and a bus. Understanding that chain explains gain, clipping, DC spikes, overflow, and why “more sample rate” is not always better.</p>
         <div class="meta-row"><span class="meta">~65 min</span><span class="meta">rx only</span><span class="meta">3 checkpoints</span></div>
@@ -2873,7 +2867,7 @@ f = frequency in hertz</code></pre>
 
     <section class="view module" id="m18" data-view data-nav="18 / Peripherals and noise" data-module="m18">
       <div class="module-head">
-        <div class="module-kicker">MODULE 18 <span>/</span> PHASE V · PHYSICAL LAYER</div>
+        <div class="module-kicker">MODULE 18 <span>/</span> PHASE VI · PHYSICAL LAYER</div>
         <h2>Peripherals, noise, and the bench</h2>
         <p class="lede">The SDR is one part of the radio. The antenna, feedline, connectors, filters, power, and even the laptop charger can decide whether you hear a signal or a wall of noise.</p>
         <div class="meta-row"><span class="meta">~55 min</span><span class="meta">rx only</span><span class="meta">3 checkpoints</span></div>
@@ -2961,7 +2955,7 @@ f = frequency in hertz</code></pre>
 
     <section class="view module" id="m19" data-view data-nav="19 / Transmit chain" data-module="m19">
       <div class="module-head">
-        <div class="module-kicker">MODULE 19 <span>/</span> PHASE V · PHYSICAL LAYER</div>
+        <div class="module-kicker">MODULE 19 <span>/</span> PHASE VI · PHYSICAL LAYER</div>
         <h2>Transmit chain and legal boundaries</h2>
         <p class="lede">Transmitting is the receive chain backwards, with more ways to break the law and damage hardware. Learn the chain, the filtering, and the safety rules before you key anything.</p>
         <div class="meta-row"><span class="meta">~65 min</span><span class="meta">software loopback only</span><span class="meta">3 checkpoints</span></div>
@@ -3058,6 +3052,106 @@ f = frequency in hertz</code></pre>
       </div>
       <div class="module-foot">
         <button class="complete-btn" data-module="m19">Mark module complete</button>
+        <a class="next-link" href="#m20">Next: capstone →</a>
+      </div>
+    </section>
+
+    <section class="view module" id="m20" data-view data-nav="20 / Capstone" data-module="m20">
+      <div class="module-head">
+        <div class="module-kicker">MODULE 20 <span>/</span> GRADUATION</div>
+        <h2>Capstone: build a signal watchdog</h2>
+        <p class="lede">Build a legal, receive-only RF sensor that establishes a baseline, detects an event, captures evidence, decodes one known signal end-to-end, and explains its own limitations.</p>
+        <div class="meta-row"><span class="meta">4 sessions</span><span class="meta">rx only</span><span class="meta">3 checkpoints</span></div>
+      </div>
+      <div class="phase-bar">
+        <button class="phase-chip" data-check="m20:study" aria-pressed="false">01 Study</button>
+        <button class="phase-chip" data-check="m20:lab" aria-pressed="false">02 Build</button>
+        <button class="phase-chip" data-check="m20:solo" aria-pressed="false">03 Solo</button>
+      </div>
+      <p class="phase-hint">Tap each chip when you finish that phase.</p>
+
+      <div class="content">
+        <section class="lesson">
+          <h3><span class="step">01</span> Study / What “done” means</h3>
+          <p>You are not done when the flowgraph runs. You are done when you can explain every block, measure the signal, predict a failure, and produce evidence another person can review.</p>
+          <div class="grid-2">
+            <div class="card">
+              <span class="tag">Deliverable 01</span>
+              <h3>Working receiver</h3>
+              <p>A tuned, documented chain from antenna to demodulated output for one legal signal: FM audio, NOAA APT, or another authorized broadcast.</p>
+            </div>
+            <div class="card">
+              <span class="tag">Deliverable 02</span>
+              <h3>Baseline + detector</h3>
+              <p>Noise floor measurement, threshold selection, event log, false-positive analysis, and a short IQ capture per event.</p>
+            </div>
+            <div class="card">
+              <span class="tag">Deliverable 03</span>
+              <h3>Evidence pack</h3>
+              <p>Flowgraph, generated Python, metadata, hashes, timestamps, and a report that separates observation from inference.</p>
+            </div>
+            <div class="card">
+              <span class="tag">Deliverable 04</span>
+              <h3>Security review</h3>
+              <p>Threat model, legal basis, privacy handling, one failure mode, and one way an attacker could evade the detector.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="lesson">
+          <h3><span class="step">02</span> Build / Four sessions</h3>
+          <div class="lab-block">
+            <div class="lab-head"><strong>Capstone build</strong><span>receive only / legal band</span></div>
+            <div class="lab-body">
+              <ol>
+                <li><strong>Session 1 — receiver.</strong> Pick a legal signal. Build the full chain in GRC. Record the sample rate at every stage and verify the final rate. Produce one clean audio or decoded output.</li>
+                <li><strong>Session 2 — baseline.</strong> Run a headless monitor for 10 minutes. Log centre frequency, gain, noise floor, peak level, and timestamps. Compute a threshold from the data, not from a feeling.</li>
+                <li><strong>Session 3 — event capture.</strong> Detect a burst or a new carrier. Save a short IQ clip, a screenshot or numeric summary, and a metadata record. Hash the capture.</li>
+                <li><strong>Session 4 — report.</strong> Decode or demodulate one known signal. Explain what you proved, what you inferred, and what you could not prove. Include the legal basis and a privacy note.</li>
+              </ol>
+              <p><strong>Constraints:</strong> no transmit, no private communications, no third-party personal data. If you cannot justify the capture legally, choose another signal.</p>
+            </div>
+          </div>
+          <h4>Grading rubric</h4>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Area</th><th>Pass condition</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Chain correctness</strong></td><td>Every block’s input/output rate and type is explained; no accidental rate mismatch.</td></tr>
+                <tr><td><strong>Measurement</strong></td><td>Noise floor, bandwidth, FFT resolution, and threshold are calculated and recorded.</td></tr>
+                <tr><td><strong>Evidence</strong></td><td>Capture is hashed, timestamped, and accompanied by centre/rate/gain metadata.</td></tr>
+                <tr><td><strong>Security analysis</strong></td><td>Threat model, legal basis, privacy handling, false positives, and evasion are discussed.</td></tr>
+                <tr><td><strong>Clarity</strong></td><td>A competent peer can reproduce the result from your notes without asking you.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="lesson">
+          <h3><span class="step">03</span> Solo check / The final no-help questions</h3>
+          <div class="solo-box">
+            <span class="solo-label">No notes. No flowgraph. Answer out loud.</span>
+            <ol>
+              <li>Walk through your receiver from antenna to output and name the rate at every stage.</li>
+              <li>What is your noise floor in dBm, and how did you calculate it?</li>
+              <li>What is your FFT resolution, and why did you choose it?</li>
+              <li>Where could aliasing occur, and what prevents it?</li>
+              <li>What does your detector actually measure, and what can it not see?</li>
+              <li>How would an attacker evade it without jamming?</li>
+              <li>Why is your capture trustworthy, and what does the hash not prove?</li>
+              <li>What is the legal basis for every signal you captured?</li>
+              <li>What breaks first at 10× the sample rate?</li>
+              <li>What is one limitation of the protocol you decoded?</li>
+            </ol>
+            <details>
+              <summary>Reveal the standard</summary>
+              <p>You are looking for specific numbers, named blocks, explicit assumptions, and a clean separation between “I observed” and “I concluded.” Vague answers like “it worked” or “the CRC makes it secure” mean the module is not finished.</p>
+            </details>
+          </div>
+        </section>
+      </div>
+      <div class="module-foot">
+        <button class="complete-btn" data-module="m20">Mark module complete</button>
         <a class="next-link" href="#reference">Next: field reference →</a>
       </div>
     </section>
@@ -3420,7 +3514,7 @@ f = frequency in hertz</code></pre>
 
       <div class="ref-section">
         <h2>Next frontiers</h2>
-        <p>This manual is the spine, not the ceiling. Modules 16–19 introduce the physical layer; after that, choose one lane and go deeper:</p>
+        <p>This manual is the spine, not the ceiling. Modules 16–19 are the physical layer, and Module 20 ties them together. After that, choose one lane and go deeper:</p>
         <div class="grid-2">
           <div class="card"><span class="tag">RF engineering</span><h3>Antenna modelling and link planning</h3><p>Smith charts, VSWR, matching networks, antenna patterns, Fresnel zones, terrain loss, noise temperature, and calibrated link plans. This is where “my signal is weak” becomes an engineering calculation.</p></div>
           <div class="card"><span class="tag">DSP</span><h3>Filter design and estimation</h3><p>Taps, windows, group delay, polyphase filters, resampling, PLLs, equalizers, and detection theory. Build the intuition behind the blocks.</p></div>
@@ -3442,13 +3536,14 @@ f = frequency in hertz</code></pre>
             <thead><tr><th>Area</th><th>Depth here</th><th>Where / caveat</th></tr></thead>
             <tbody>
               <tr><td><strong>RF chain, IQ, sampling, FFT, dB</strong></td><td>Covered</td><td>Modules 1–3 and toolbench</td></tr>
-              <tr><td><strong>GNU Radio flowgraphs, filters, rates</strong></td><td>Covered</td><td>Modules 4–6, 13</td></tr>
+              <tr><td><strong>GNU Radio flowgraphs, filters, rates</strong></td><td>Covered</td><td>Modules 4–6, 14</td></tr>
               <tr><td><strong>Noise, gain, dynamic range</strong></td><td>Covered at system level</td><td>Module 7; front-end IP3 and phase noise are only mentioned</td></tr>
-              <tr><td><strong>Analog and digital demod</strong></td><td>Covered at introductory level</td><td>Modules 8–9; OFDM, FEC, equalisation and MIMO are next steps</td></tr>
-              <tr><td><strong>Framing, CRC, packets</strong></td><td>Covered conceptually</td><td>Module 10; protocol-specific decoders vary widely</td></tr>
-              <tr><td><strong>Capture, replay, evidence</strong></td><td>Covered</td><td>Module 11</td></tr>
-              <tr><td><strong>Automation, headless, monitoring</strong></td><td>Covered</td><td>Module 12</td></tr>
-              <tr><td><strong>RF security and threat modelling</strong></td><td>Covered defensively</td><td>Module 14; no attack recipes</td></tr>
+              <tr><td><strong>Analog and digital demod</strong></td><td>Covered at introductory level</td><td>Modules 8 and 10; OFDM, FEC, equalisation and MIMO are next steps</td></tr>
+              <tr><td><strong>Cheap-remote capture and bit slicing</strong></td><td>Covered practically</td><td>Module 9; exact protocols and rolling-code families vary</td></tr>
+              <tr><td><strong>Framing, CRC, packets</strong></td><td>Covered conceptually</td><td>Module 11; protocol-specific decoders vary widely</td></tr>
+              <tr><td><strong>Capture, replay, evidence</strong></td><td>Covered</td><td>Module 12</td></tr>
+              <tr><td><strong>Automation, headless, monitoring</strong></td><td>Covered</td><td>Module 13</td></tr>
+              <tr><td><strong>RF security and threat modelling</strong></td><td>Covered defensively</td><td>Module 15; no attack recipes</td></tr>
               <tr><td><strong>RF physics, bands, propagation, wavelength</strong></td><td>Covered at introductory level</td><td>Module 16; link budgets and terrain models are still simplified</td></tr>
               <tr><td><strong>Antennas, polarization, feedlines, VSWR</strong></td><td>Covered at introductory level</td><td>Modules 16 and 18; Smith charts and antenna modelling are not covered</td></tr>
               <tr><td><strong>SDR hardware, ADC, gain, DC offset, overflow</strong></td><td>Covered at system level</td><td>Module 17; front-end design and phase-noise measurement are not covered</td></tr>
@@ -3527,87 +3622,110 @@ f = frequency in hertz</code></pre>
 <script src="grc-block-data.js"></script>
 <script>
   const STORE = 'spectrum-field-manual:v1';
+  const SCHEMA_KEY = STORE + ':schema';
+  const SCHEMA = '2';
+  const LEGACY_MODULE_MAP = {
+    m09: 'm10', m10: 'm11', m11: 'm12', m12: 'm13',
+    m13: 'm14', m14: 'm15', m15: 'm20'
+  };
   const state = (() => {
-    try { return JSON.parse(localStorage.getItem(STORE) || '{}') || {}; }
-    catch (_) { return {}; }
+    let parsed = {};
+    try { parsed = JSON.parse(localStorage.getItem(STORE) || '{}') || {}; }
+    catch (_) { parsed = {}; }
+    if (localStorage.getItem(SCHEMA_KEY) !== SCHEMA) {
+      const migrated = {};
+      Object.keys(parsed).forEach(key => {
+        const [id, phase] = key.split(':');
+        if (!phase) return;
+        migrated[(LEGACY_MODULE_MAP[id] || id) + ':' + phase] = parsed[key];
+      });
+      parsed = migrated;
+      try {
+        localStorage.setItem(STORE, JSON.stringify(parsed));
+        localStorage.setItem(SCHEMA_KEY, SCHEMA);
+      } catch (_) {}
+    }
+    return parsed;
   })();
 
   /* Core GNU Radio blocks used in the course, plus common neighbours. */
   const BLOCKS = [
-    { name: 'Options', cat: 'Flowgraph', what: 'Defines flowgraph metadata and the generation mode.', why: 'Sets the graph ID, title, author, and whether the generated Python uses a GUI.', params: 'ID, title, author, generate options.', watch: 'Use No GUI for headless production; keep an interactive copy.', chapters: ['m04', 'm12'] },
+    { name: 'Options', cat: 'Flowgraph', what: 'Defines flowgraph metadata and the generation mode.', why: 'Sets the graph ID, title, author, and whether the generated Python uses a GUI.', params: 'ID, title, author, generate options.', watch: 'Use No GUI for headless production; keep an interactive copy.', chapters: ['m04', 'm13'] },
     { name: 'Variable', cat: 'Flowgraph', what: 'Defines a named value or expression used by other blocks.', why: 'Keeps sample rates and frequencies consistent across the graph.', params: 'ID and value/expression.', watch: 'A variable is not a runtime slider; use QT GUI Range for that.', chapters: ['m04', 'm05', 'm06'] },
-    { name: 'QT GUI Range', cat: 'Control', what: 'Creates a runtime slider or numeric control.', why: 'Changes gain, volume, frequency, or another parameter while the graph runs.', params: 'ID, type, default, start, stop, step.', watch: 'Only works for parameters with callbacks; not every setting is live.', chapters: ['m07', 'm13', 'm16'] },
+    { name: 'QT GUI Range', cat: 'Control', what: 'Creates a runtime slider or numeric control.', why: 'Changes gain, volume, frequency, or another parameter while the graph runs.', params: 'ID, type, default, start, stop, step.', watch: 'Only works for parameters with callbacks; not every setting is live.', chapters: ['m07', 'm14', 'm16'] },
     { name: 'Signal Source', cat: 'Source', what: 'Generates a sine, cosine, square, triangle, or constant waveform.', why: 'Provides a known-good signal for testing without hardware.', params: 'Sample rate, waveform, frequency, amplitude, offset.', watch: 'The frequency is a baseband offset; add a Throttle.', chapters: ['m01', 'm02', 'm04', 'm06', 'm08', 'm16', 'm19'] },
-    { name: 'Noise Source', cat: 'Source', what: 'Produces random samples from a selected distribution.', why: 'Adds a realistic noise floor and tests detector thresholds.', params: 'Noise type, amplitude, seed.', watch: 'Amplitude is not dBm; uniform and Gaussian noise behave differently.', chapters: ['m03', 'm04', 'm07', 'm14'] },
-    { name: 'Random Source', cat: 'Source', what: 'Generates random bytes, integers, or shorts.', why: 'Creates bit patterns and synthetic packet payloads.', params: 'Output type, minimum, maximum, repeat.', watch: 'It is unpaced; use Throttle or Repeat before rate-sensitive blocks.', chapters: ['m09', 'm10'] },
-    { name: 'Vector Source', cat: 'Source', what: 'Repeats a fixed vector of samples or bytes.', why: 'Makes a deterministic bit pattern for modulation and framing labs.', params: 'Output type, vector, repeat.', watch: 'The vector is not a sample-rate clock; add Throttle.', chapters: ['m09', 'm14'] },
-    { name: 'File Source', cat: 'Source', what: 'Reads a raw IQ, float, or byte file from disk.', why: 'Replays a capture deterministically without hardware.', params: 'File, output type, repeat, offset, length.', watch: 'Raw files carry no metadata; set the sample rate yourself and Throttle playback.', chapters: ['m11'] },
-    { name: 'RTL-SDR Source', cat: 'Hardware source', what: 'Receives IQ samples from an RTL-SDR dongle.', why: 'Cheap wideband receive for FM, ADS-B, weather, and spectrum surveys.', params: 'Centre frequency, sample rate, RF gain, ppm correction, antenna.', watch: 'Receive-only, 8-bit, and easily overloaded; hardware sources do not need a Throttle.', chapters: ['m01', 'm05', 'm07', 'm11', 'm14', 'm15', 'm17', 'm18'] },
+    { name: 'Noise Source', cat: 'Source', what: 'Produces random samples from a selected distribution.', why: 'Adds a realistic noise floor and tests detector thresholds.', params: 'Noise type, amplitude, seed.', watch: 'Amplitude is not dBm; uniform and Gaussian noise behave differently.', chapters: ['m03', 'm04', 'm07', 'm15'] },
+    { name: 'Random Source', cat: 'Source', what: 'Generates random bytes, integers, or shorts.', why: 'Creates bit patterns and synthetic packet payloads.', params: 'Output type, minimum, maximum, repeat.', watch: 'It is unpaced; use Throttle or Repeat before rate-sensitive blocks.', chapters: ['m10', 'm11'] },
+    { name: 'Vector Source', cat: 'Source', what: 'Repeats a fixed vector of samples or bytes.', why: 'Makes a deterministic bit pattern for modulation and framing labs.', params: 'Output type, vector, repeat.', watch: 'The vector is not a sample-rate clock; add Throttle.', chapters: ['m10', 'm15'] },
+    { name: 'File Source', cat: 'Source', what: 'Reads a raw IQ, float, or byte file from disk.', why: 'Replays a capture deterministically without hardware.', params: 'File, output type, repeat, offset, length.', watch: 'Raw files carry no metadata; set the sample rate yourself and Throttle playback.', chapters: ['m09', 'm12'] },
+    { name: 'RTL-SDR Source', cat: 'Hardware source', what: 'Receives IQ samples from an RTL-SDR dongle.', why: 'Cheap wideband receive for FM, ADS-B, weather, and spectrum surveys.', params: 'Centre frequency, sample rate, RF gain, ppm correction, antenna.', watch: 'Receive-only, 8-bit, and easily overloaded; hardware sources do not need a Throttle.', chapters: ['m09', 'm01', 'm05', 'm07', 'm12', 'm15', 'm20', 'm17', 'm18'] },
     { name: 'Soapy Source', cat: 'Hardware source', what: 'Receives IQ through the SoapySDR hardware abstraction.', why: 'One block family supports HackRF, Pluto, Lime, USRP, RTL-SDR, and more.', params: 'Driver, centre frequency, sample rate, gain, bandwidth.', watch: 'Set bandwidth to match the sample rate; supported rates and gain steps are device-specific.', chapters: ['m01', 'm17'] },
-    { name: 'QT GUI Frequency Sink', cat: 'Sink', what: 'Displays spectrum as an FFT plot.', why: 'Shows signal position, bandwidth, noise floor, and spurs.', params: 'FFT size, bandwidth, centre frequency, averaging, window.', watch: 'Set bandwidth to the actual stream rate; averaging can hide bursts.', chapters: ['m01', 'm02', 'm03', 'm04', 'm06', 'm07', 'm16', 'm17', 'm18', 'm19'] },
+    { name: 'QT GUI Frequency Sink', cat: 'Sink', what: 'Displays spectrum as an FFT plot.', why: 'Shows signal position, bandwidth, noise floor, and spurs.', params: 'FFT size, bandwidth, centre frequency, averaging, window.', watch: 'Set bandwidth to the actual stream rate; averaging can hide bursts.', chapters: ['m09', 'm01', 'm02', 'm03', 'm04', 'm06', 'm07', 'm16', 'm17', 'm18', 'm19'] },
     { name: 'QT GUI Waterfall Sink', cat: 'Sink', what: 'Displays spectrum over time as a scrolling waterfall.', why: 'Makes intermittent bursts, frequency hopping, and drift visible.', params: 'FFT size, bandwidth, centre, update rate, colour map.', watch: 'Not a logging tool; capture IQ if you need evidence.', chapters: ['m01', 'm03', 'm05'] },
-    { name: 'QT GUI Time Sink', cat: 'Sink', what: 'Plots samples in the time domain.', why: 'Shows envelopes, bit transitions, audio waveforms, and clipping.', params: 'Input type, sample rate, number of points, autoscale.', watch: 'Autoscale can hide amplitude changes; set fixed axes for measurements.', chapters: ['m04', 'm05', 'm09', 'm14', 'm18'] },
-    { name: 'QT GUI Constellation Sink', cat: 'Sink', what: 'Plots complex samples in the I/Q plane.', why: 'Diagnoses modulation, carrier offset, phase noise, and timing errors.', params: 'Number of points, autoscale, axes.', watch: 'A pretty constellation is not proof of a correct decoder; sync matters.', chapters: ['m02', 'm09'] },
+    { name: 'QT GUI Time Sink', cat: 'Sink', what: 'Plots samples in the time domain.', why: 'Shows envelopes, bit transitions, audio waveforms, and clipping.', params: 'Input type, sample rate, number of points, autoscale.', watch: 'Autoscale can hide amplitude changes; set fixed axes for measurements.', chapters: ['m09', 'm04', 'm05', 'm10', 'm15', 'm18'] },
+    { name: 'QT GUI Constellation Sink', cat: 'Sink', what: 'Plots complex samples in the I/Q plane.', why: 'Diagnoses modulation, carrier offset, phase noise, and timing errors.', params: 'Number of points, autoscale, axes.', watch: 'A pretty constellation is not proof of a correct decoder; sync matters.', chapters: ['m02', 'm10'] },
     { name: 'Audio Sink', cat: 'Sink', what: 'Sends float samples to the sound card.', why: 'Turns demodulated audio into something you can hear.', params: 'Sample rate, device, OK to block.', watch: 'The rate must match; wrong rates cause chipmunk or slow audio.', chapters: ['m05', 'm08', 'm19'] },
-    { name: 'File Sink', cat: 'Sink', what: 'Writes raw stream samples to a file.', why: 'Captures IQ or demodulated data for offline analysis and evidence.', params: 'File, input type, vector length, append/unbuffered.', watch: 'Complex float32 is 8 bytes per sample; record metadata and hash the file.', chapters: ['m01', 'm04', 'm11', 'm15', 'm18'] },
-    { name: 'Wav File Sink', cat: 'Sink', what: 'Writes audio to a WAV, FLAC, or Ogg file.', why: 'Produces a playable audio recording without a GUI.', params: 'File, sample rate, format, bit depth.', watch: 'Input is float; do not feed complex IQ into it.', chapters: ['m12', 'm15'] },
-    { name: 'Null Sink', cat: 'Sink', what: 'Discards samples while still consuming them.', why: 'Benchmarks a flowgraph or terminates an unused branch.', params: 'Item size.', watch: 'It does not pace a source; you still need a Throttle or hardware rate.', chapters: ['m12', 'm17'] },
-    { name: 'Message Debug', cat: 'Message', what: 'Prints messages and PDUs to the console.', why: 'Shows packet contents, metadata, and CRC pass/fail results.', params: 'Input message port.', watch: 'It prints; it does not validate the protocol for you.', chapters: ['m10'] },
-    { name: 'Tag Debug', cat: 'Message', what: 'Prints stream tags and their sample offsets.', why: 'Shows burst boundaries, sync markers, and tagged-stream lengths.', params: 'Input type, key filter, display.', watch: 'Tags are metadata, not payload; check the offset and key.', chapters: ['m13'] },
-    { name: 'Throttle', cat: 'Rate', what: 'Paces samples from a source that has no real-time clock.', why: 'Keeps simulated flowgraphs from consuming 100 percent CPU.', params: 'Sample rate, vector length, ignore tags.', watch: 'Do not add it after a hardware source; the radio already paces.', chapters: ['m01', 'm02', 'm03', 'm04', 'm06', 'm08', 'm09'] },
+    { name: 'File Sink', cat: 'Sink', what: 'Writes raw stream samples to a file.', why: 'Captures IQ or demodulated data for offline analysis and evidence.', params: 'File, input type, vector length, append/unbuffered.', watch: 'Complex float32 is 8 bytes per sample; record metadata and hash the file.', chapters: ['m09', 'm01', 'm04', 'm12', 'm20', 'm18'] },
+    { name: 'Wav File Sink', cat: 'Sink', what: 'Writes audio to a WAV, FLAC, or Ogg file.', why: 'Produces a playable audio recording without a GUI.', params: 'File, sample rate, format, bit depth.', watch: 'Input is float; do not feed complex IQ into it.', chapters: ['m13', 'm20'] },
+    { name: 'Null Sink', cat: 'Sink', what: 'Discards samples while still consuming them.', why: 'Benchmarks a flowgraph or terminates an unused branch.', params: 'Item size.', watch: 'It does not pace a source; you still need a Throttle or hardware rate.', chapters: ['m13', 'm17'] },
+    { name: 'Message Debug', cat: 'Message', what: 'Prints messages and PDUs to the console.', why: 'Shows packet contents, metadata, and CRC pass/fail results.', params: 'Input message port.', watch: 'It prints; it does not validate the protocol for you.', chapters: ['m11'] },
+    { name: 'Tag Debug', cat: 'Message', what: 'Prints stream tags and their sample offsets.', why: 'Shows burst boundaries, sync markers, and tagged-stream lengths.', params: 'Input type, key filter, display.', watch: 'Tags are metadata, not payload; check the offset and key.', chapters: ['m14'] },
+    { name: 'Throttle', cat: 'Rate', what: 'Paces samples from a source that has no real-time clock.', why: 'Keeps simulated flowgraphs from consuming 100 percent CPU.', params: 'Sample rate, vector length, ignore tags.', watch: 'Do not add it after a hardware source; the radio already paces.', chapters: ['m09', 'm01', 'm02', 'm03', 'm04', 'm06', 'm08', 'm10'] },
     { name: 'Add', cat: 'Math', what: 'Adds two or more sample streams element by element.', why: 'Combines signal and noise, or sums tones and channels.', params: 'Input type and number of inputs.', watch: 'Inputs must have the same type and rate.', chapters: ['m02', 'm03', 'm04', 'm06', 'm08'] },
-    { name: 'Multiply', cat: 'Math', what: 'Multiplies sample streams element by element.', why: 'Implements mixing, modulation, and complex multiplication.', params: 'Input type and number of inputs.', watch: 'Complex multiplication is not the same as multiplying magnitudes.', chapters: ['m08', 'm09', 'm19'] },
+    { name: 'Multiply', cat: 'Math', what: 'Multiplies sample streams element by element.', why: 'Implements mixing, modulation, and complex multiplication.', params: 'Input type and number of inputs.', watch: 'Complex multiplication is not the same as multiplying magnitudes.', chapters: ['m08', 'm10', 'm19'] },
     { name: 'Add Const', cat: 'Math', what: 'Adds a constant to every sample.', why: 'Creates a DC term or converts a bipolar message to a unipolar envelope.', params: 'Constant and input type.', watch: 'A DC offset can create a centre spike; know why you are adding it.', chapters: ['m08'] },
-    { name: 'Multiply Const', cat: 'Math', what: 'Scales every sample by a constant.', why: 'Applies software gain, attenuation, or volume control.', params: 'Constant and input type.', watch: 'Too much gain clips; the SDR sink expects roughly -1 to +1.', chapters: ['m07', 'm13', 'm19'] },
+    { name: 'Multiply Const', cat: 'Math', what: 'Scales every sample by a constant.', why: 'Applies software gain, attenuation, or volume control.', params: 'Constant and input type.', watch: 'Too much gain clips; the SDR sink expects roughly -1 to +1.', chapters: ['m07', 'm14', 'm19'] },
     { name: 'Keep 1 in N', cat: 'Rate', what: 'Keeps one sample out of every N and discards the rest.', why: 'Simple decimation for teaching and rate reduction.', params: 'N and vector length.', watch: 'It does not filter; put a low-pass filter before it to prevent aliasing.', chapters: ['m06'] },
-    { name: 'Repeat', cat: 'Rate', what: 'Repeats each input sample N times.', why: 'Creates samples per symbol in simple OOK and FSK labs.', params: 'Interpolation and vector length.', watch: 'Creates images; filter after it in a real transmitter.', chapters: ['m09'] },
+    { name: 'Repeat', cat: 'Rate', what: 'Repeats each input sample N times.', why: 'Creates samples per symbol in simple OOK and FSK labs.', params: 'Interpolation and vector length.', watch: 'Creates images; filter after it in a real transmitter.', chapters: ['m10'] },
     { name: 'Rational Resampler', cat: 'Rate', what: 'Changes rate by interpolation/decimation with an optional FIR filter.', why: 'Converts between audio, channel, and hardware rates.', params: 'Type, interpolation, decimation, taps, fractional bandwidth.', watch: 'Compute the ratio; filter when interpolating to suppress images.', chapters: ['m05', 'm08', 'm19'] },
-    { name: 'Low Pass Filter', cat: 'Filter', what: 'Passes low frequencies and attenuates high frequencies.', why: 'Selects a channel, limits bandwidth, and prevents aliasing.', params: 'Type, cutoff, transition width, sample rate, taps, decimation.', watch: 'A narrow transition needs many taps and more CPU; account for group delay.', chapters: ['m05', 'm06', 'm07', 'm09', 'm14', 'm15'] },
+    { name: 'Low Pass Filter', cat: 'Filter', what: 'Passes low frequencies and attenuates high frequencies.', why: 'Selects a channel, limits bandwidth, and prevents aliasing.', params: 'Type, cutoff, transition width, sample rate, taps, decimation.', watch: 'A narrow transition needs many taps and more CPU; account for group delay.', chapters: ['m09', 'm05', 'm06', 'm07', 'm10', 'm15', 'm20'] },
     { name: 'Band Pass Filter', cat: 'Filter', what: 'Passes a band and rejects energy above and below it.', why: 'Selects a signal in a crowded spectrum before demodulation.', params: 'Low/high cutoff, transition width, sample rate, taps.', watch: 'For complex signals, an asymmetric filter may be better than a symmetric real filter.', chapters: ['m06'] },
-    { name: 'Frequency Xlating FIR Filter', cat: 'Filter', what: 'Shifts a selected frequency to zero and filters/decimates it.', why: 'Extracts one channel from a wideband capture efficiently.', params: 'Decimation, centre frequency, taps, sample rate.', watch: 'The centre offset is relative to the stream; get the sign right.', chapters: ['m05', 'm15'] },
-    { name: 'Root Raised Cosine Filter', cat: 'Filter', what: 'Pulse-shapes symbols and acts as a matched filter.', why: 'Limits digital bandwidth while controlling intersymbol interference.', params: 'Gain, symbol rate, excess bandwidth, taps per symbol.', watch: 'The transmitter and receiver must use compatible pulse shaping.', chapters: ['m09'] },
-    { name: 'Complex to Mag', cat: 'Math', what: 'Computes the magnitude of a complex sample.', why: 'Implements an envelope detector, burst detector, or AM demod front end.', params: 'Vector length.', watch: 'It discards phase; do not use it for PSK or coherent detection.', chapters: ['m02', 'm08', 'm09', 'm14'] },
-    { name: 'Float To Complex', cat: 'Type', what: 'Combines a real stream with an optional imaginary stream.', why: 'Feeds a real message into complex multiplication or modulation.', params: 'Vector length; optional imaginary input.', watch: 'With no imaginary input, Q is zero; this is not an IQ modulator by itself.', chapters: ['m02', 'm08', 'm09'] },
-    { name: 'Char To Float', cat: 'Type', what: 'Converts byte samples to float samples.', why: 'Connects byte-oriented bit sources to float DSP blocks.', params: 'Vector length, scale.', watch: 'Check the scale and whether the byte is signed or unsigned.', chapters: ['m08', 'm09'] },
-    { name: 'Binary Slicer', cat: 'Digital', what: 'Makes a one-bit decision from a float sample.', why: 'Recovers OOK, FSK discriminator output, or other binary decisions.', params: 'None beyond input type.', watch: 'Timing and threshold matter; a slicer is not a clock recovery block.', chapters: ['m09'] },
-    { name: 'Threshold', cat: 'Math', what: 'Outputs 1 when the input is above a threshold and 0 otherwise.', why: 'Builds simple burst or envelope detectors.', params: 'Threshold and input type.', watch: 'No hysteresis or minimum duration; noise will chatter.', chapters: ['m14', 'm15'] },
-    { name: 'Pack K Bits', cat: 'Digital', what: 'Packs K one-bit samples into each output byte.', why: 'Compacts unpacked bits for byte-oriented processing.', params: 'K and vector length.', watch: 'Bit order is a protocol fact; document it.', chapters: ['m09', 'm10'] },
-    { name: 'Unpack K Bits', cat: 'Digital', what: 'Expands each byte into K one-bit samples.', why: 'Turns packed data into a bit stream for modulation or inspection.', params: 'K and vector length.', watch: 'MSB-first vs LSB-first will make valid data look wrong.', chapters: ['m09', 'm10'] },
-    { name: 'Repack Bits', cat: 'Digital', what: 'Changes the bit packing/order of a stream.', why: 'Bridges protocols with different byte and bit conventions.', params: 'Input/output sizes, bit order, endianness.', watch: 'Test with a known byte pattern before trusting a decoder.', chapters: ['m10'] },
+    { name: 'Frequency Xlating FIR Filter', cat: 'Filter', what: 'Shifts a selected frequency to zero and filters/decimates it.', why: 'Extracts one channel from a wideband capture efficiently.', params: 'Decimation, centre frequency, taps, sample rate.', watch: 'The centre offset is relative to the stream; get the sign right.', chapters: ['m05', 'm20'] },
+    { name: 'Root Raised Cosine Filter', cat: 'Filter', what: 'Pulse-shapes symbols and acts as a matched filter.', why: 'Limits digital bandwidth while controlling intersymbol interference.', params: 'Gain, symbol rate, excess bandwidth, taps per symbol.', watch: 'The transmitter and receiver must use compatible pulse shaping.', chapters: ['m10'] },
+    { name: 'Complex to Mag', cat: 'Math', what: 'Computes the magnitude of a complex sample.', why: 'Implements an envelope detector, burst detector, or AM demod front end.', params: 'Vector length.', watch: 'It discards phase; do not use it for PSK or coherent detection.', chapters: ['m09', 'm02', 'm08', 'm10', 'm15'] },
+    { name: 'Float To Complex', cat: 'Type', what: 'Combines a real stream with an optional imaginary stream.', why: 'Feeds a real message into complex multiplication or modulation.', params: 'Vector length; optional imaginary input.', watch: 'With no imaginary input, Q is zero; this is not an IQ modulator by itself.', chapters: ['m02', 'm08', 'm10'] },
+    { name: 'Char To Float', cat: 'Type', what: 'Converts byte samples to float samples.', why: 'Connects byte-oriented bit sources to float DSP blocks.', params: 'Vector length, scale.', watch: 'Check the scale and whether the byte is signed or unsigned.', chapters: ['m08', 'm10'] },
+    { name: 'Binary Slicer', cat: 'Digital', what: 'Makes a one-bit decision from a float sample.', why: 'Recovers OOK, FSK discriminator output, or other binary decisions.', params: 'None beyond input type.', watch: 'Timing and threshold matter; a slicer is not a clock recovery block.', chapters: ['m10'] },
+    { name: 'Threshold', cat: 'Math', what: 'Outputs 1 when the input is above a threshold and 0 otherwise.', why: 'Builds simple burst or envelope detectors.', params: 'Threshold and input type.', watch: 'No hysteresis or minimum duration; noise will chatter.', chapters: ['m09', 'm15', 'm20'] },
+    { name: 'Pack K Bits', cat: 'Digital', what: 'Packs K one-bit samples into each output byte.', why: 'Compacts unpacked bits for byte-oriented processing.', params: 'K and vector length.', watch: 'Bit order is a protocol fact; document it.', chapters: ['m10', 'm11'] },
+    { name: 'Unpack K Bits', cat: 'Digital', what: 'Expands each byte into K one-bit samples.', why: 'Turns packed data into a bit stream for modulation or inspection.', params: 'K and vector length.', watch: 'MSB-first vs LSB-first will make valid data look wrong.', chapters: ['m10', 'm11'] },
+    { name: 'Repack Bits', cat: 'Digital', what: 'Changes the bit packing/order of a stream.', why: 'Bridges protocols with different byte and bit conventions.', params: 'Input/output sizes, bit order, endianness.', watch: 'Test with a known byte pattern before trusting a decoder.', chapters: ['m11'] },
     { name: 'AM Demod', cat: 'Analog', what: 'Envelope-demodulates a complex AM signal and filters/decimates audio.', why: 'Recovers AM audio without building a detector by hand.', params: 'Channel rate, audio decimation, pass/stop frequencies.', watch: 'The internal filter can be expensive; keep the audio transition practical.', chapters: ['m08'] },
     { name: 'WBFM Receive', cat: 'Analog', what: 'Demodulates wideband FM with decimation, audio filtering, and de-emphasis.', why: 'The normal FM broadcast receiver block.', params: 'Quadrature rate, audio decimation.', watch: 'Output rate is quad rate divided by audio decimation.', chapters: ['m05', 'm08', 'm19'] },
     { name: 'NBFM Receive', cat: 'Analog', what: 'Demodulates narrowband FM.', why: 'Receives narrow FM voice and telemetry signals.', params: 'Audio rate, quadrature rate, tau, max deviation.', watch: 'Set deviation and rates to the signal, not to the broadcast FM defaults.', chapters: ['m08'] },
-    { name: 'Quadrature Demod', cat: 'Analog', what: 'Converts phase change into an amplitude proportional to frequency offset.', why: 'Builds FM/FSK discriminators and measures frequency deviation.', params: 'Gain, usually sample rate divided by 2π times deviation.', watch: 'The gain must match the modulator deviation or the output clips or disappears.', chapters: ['m09'] },
-    { name: 'Frequency Mod', cat: 'Analog', what: 'Modulates a float message onto a complex carrier as frequency deviation.', why: 'Builds FM and FSK transmitters or test signals.', params: 'Sensitivity in radians per sample.', watch: 'Sensitivity is not deviation in Hz; compute 2πΔf/fs.', chapters: ['m05', 'm09', 'm19'] },
+    { name: 'Quadrature Demod', cat: 'Analog', what: 'Converts phase change into an amplitude proportional to frequency offset.', why: 'Builds FM/FSK discriminators and measures frequency deviation.', params: 'Gain, usually sample rate divided by 2π times deviation.', watch: 'The gain must match the modulator deviation or the output clips or disappears.', chapters: ['m10'] },
+    { name: 'Frequency Mod', cat: 'Analog', what: 'Modulates a float message onto a complex carrier as frequency deviation.', why: 'Builds FM and FSK transmitters or test signals.', params: 'Sensitivity in radians per sample.', watch: 'Sensitivity is not deviation in Hz; compute 2πΔf/fs.', chapters: ['m05', 'm10', 'm19'] },
     { name: 'WBFM Transmit', cat: 'Analog', what: 'Modulates audio into a complex wideband FM waveform.', why: 'Builds a broadcast-FM transmitter or software loopback.', params: 'Audio rate, quadrature rate, tau, max deviation, pre-emphasis.', watch: 'Audio rate must divide quadrature rate; filter after interpolation and never transmit without authorization.', chapters: ['m19'] },
-    { name: 'Constellation Object', cat: 'Digital', what: 'Defines a digital constellation and its symbol mapping.', why: 'Shared configuration for modulators and decoders.', params: 'Constellation type, points, mapping.', watch: 'The transmitter and receiver must agree on points, order, and normalization.', chapters: ['m09'] },
-    { name: 'Constellation Modulator', cat: 'Digital', what: 'Maps bits/bytes to symbols and pulse-shapes them.', why: 'Generates PSK/QAM waveforms for simulation or transmission.', params: 'Constellation, samples per symbol, excess bandwidth.', watch: 'Pulse shaping and rate change belong in the chain; do not forget the filter.', chapters: ['m09'] },
-    { name: 'Constellation Decoder', cat: 'Digital', what: 'Maps received symbols back to bits or bytes.', why: 'Recovers the digital payload after timing and carrier recovery.', params: 'Constellation and output type.', watch: 'It assumes the input is already synchronized and scaled.', chapters: ['m09'] },
-    { name: 'Symbol Sync', cat: 'Digital', what: 'Recovers symbol timing from an oversampled stream.', why: 'Finds the best sampling instant instead of trusting the transmitter clock.', params: 'Input/output type, TED, samples per symbol, loop bandwidth, damping.', watch: 'Check samples per symbol and loop bandwidth; a bad TED will not lock.', chapters: ['m09'] },
-    { name: 'Costas Loop', cat: 'Digital', what: 'Tracks carrier phase for BPSK/QPSK.', why: 'Removes carrier offset and phase rotation before decisions.', params: 'Loop bandwidth, order, use SNR.', watch: 'A Costas loop does not fix timing; use it with symbol sync.', chapters: ['m09'] },
-    { name: 'FLL Band-Edge', cat: 'Digital', what: 'Estimates and corrects carrier frequency offset.', why: 'Pulls a large frequency error into the Costas loop range.', params: 'Loop bandwidth, order, samples per symbol.', watch: 'FLL pulls frequency; it does not resolve phase or timing by itself.', chapters: ['m09'] },
-    { name: 'Correlate Access Code - Tag', cat: 'Digital', what: 'Finds a known access code and attaches a tag at the match.', why: 'Marks frame starts for packet processing.', params: 'Access code, threshold, tag name, type.', watch: 'A sync word is not authentication; anyone can transmit it.', chapters: ['m10'] },
-    { name: 'Message Strobe', cat: 'Message', what: 'Emits a message periodically.', why: 'Triggers PDU generators and message-driven tests.', params: 'Period and message value.', watch: 'Message rate is wall-clock, not sample rate.', chapters: ['m10', 'm12'] },
-    { name: 'Random PDU Generator', cat: 'Message', what: 'Generates random protocol data units.', why: 'Tests packet plumbing and CRC handling.', params: 'Min/max size, mask, length modulo.', watch: 'Payload bytes are random, so do not treat them as a valid protocol.', chapters: ['m10'] },
-    { name: 'CRC Append', cat: 'Packet', what: 'Appends a CRC to a PDU.', why: 'Adds error detection to a packet stream.', params: 'CRC width, polynomial, init, XOR, reflection, skip bytes.', watch: 'CRC detects errors; it does not authenticate the sender.', chapters: ['m10'] },
-    { name: 'CRC Check', cat: 'Packet', what: 'Checks a PDU CRC and emits pass/fail messages.', why: 'Separates valid frames from corrupted frames.', params: 'Same CRC settings as the transmitter, discard CRC.', watch: 'Mismatched settings look identical to a bad link.', chapters: ['m10'] },
-    { name: 'PDU to Tagged Stream', cat: 'Packet', what: 'Converts PDUs into a tagged sample stream.', why: 'Bridges packet processing into the sample-domain modulator.', params: 'Type, length tag.', watch: 'Tags carry the packet boundary; downstream blocks must preserve them.', chapters: ['m10'] },
-    { name: 'Tagged Stream to PDU', cat: 'Packet', what: 'Converts a tagged stream into PDUs.', why: 'Hands received packets to message-based decoders.', params: 'Type, length tag.', watch: 'A missing or wrong length tag produces broken packets.', chapters: ['m10'] },
-    { name: 'Stream to Tagged Stream', cat: 'Packet', what: 'Adds a length tag to fixed-size chunks of a stream.', why: 'Creates packet boundaries for framed processing.', params: 'Type, packet length, length tag key.', watch: 'The length must match the real frame; it is not a sync detector.', chapters: ['m10', 'm13'] },
-    { name: 'Tags Strobe', cat: 'Tag', what: 'Adds a tag every N samples.', why: 'Demonstrates tag propagation and timing.', params: 'Value, key, sample interval.', watch: 'A tag is metadata; it does not change the samples.', chapters: ['m13'] },
-    { name: 'Burst Tagger', cat: 'Tag', what: 'Tags the start and end of bursts from a trigger stream.', why: 'Marks activity for burst capture and packet processing.', params: 'True/false keys and values.', watch: 'Needs a detector in front; the tagger does not decide what a burst is.', chapters: ['m13', 'm14'] },
-    { name: 'Probe Avg Mag^2', cat: 'Probe', what: 'Tracks average signal power and exposes it to probes.', why: 'Builds power meters, squelch logic, and simple monitors.', params: 'Threshold, alpha, input type.', watch: 'Alpha controls averaging; a slow probe hides short bursts.', chapters: ['m07', 'm12', 'm15', 'm17'] },
-    { name: 'Function Probe', cat: 'Probe', what: 'Polls a method on another block at a fixed rate.', why: 'Turns a probe value into a variable for logging or control.', params: 'Block ID, function, arguments, poll rate.', watch: 'It is asynchronous; do not use it as a sample-accurate detector.', chapters: ['m12'] },
-    { name: 'Embedded Python Block', cat: 'Custom', what: 'Runs a Python work function inside the flowgraph.', why: 'Prototypes a detector, formatter, or custom DSP operation quickly.', params: 'Input/output signatures and Python code.', watch: 'Per-sample Python is slow; decimate first or move hot paths to C++.', chapters: ['m13'] }
+    { name: 'Constellation Object', cat: 'Digital', what: 'Defines a digital constellation and its symbol mapping.', why: 'Shared configuration for modulators and decoders.', params: 'Constellation type, points, mapping.', watch: 'The transmitter and receiver must agree on points, order, and normalization.', chapters: ['m10'] },
+    { name: 'Constellation Modulator', cat: 'Digital', what: 'Maps bits/bytes to symbols and pulse-shapes them.', why: 'Generates PSK/QAM waveforms for simulation or transmission.', params: 'Constellation, samples per symbol, excess bandwidth.', watch: 'Pulse shaping and rate change belong in the chain; do not forget the filter.', chapters: ['m10'] },
+    { name: 'Constellation Decoder', cat: 'Digital', what: 'Maps received symbols back to bits or bytes.', why: 'Recovers the digital payload after timing and carrier recovery.', params: 'Constellation and output type.', watch: 'It assumes the input is already synchronized and scaled.', chapters: ['m10'] },
+    { name: 'Symbol Sync', cat: 'Digital', what: 'Recovers symbol timing from an oversampled stream.', why: 'Finds the best sampling instant instead of trusting the transmitter clock.', params: 'Input/output type, TED, samples per symbol, loop bandwidth, damping.', watch: 'Check samples per symbol and loop bandwidth; a bad TED will not lock.', chapters: ['m10'] },
+    { name: 'Costas Loop', cat: 'Digital', what: 'Tracks carrier phase for BPSK/QPSK.', why: 'Removes carrier offset and phase rotation before decisions.', params: 'Loop bandwidth, order, use SNR.', watch: 'A Costas loop does not fix timing; use it with symbol sync.', chapters: ['m10'] },
+    { name: 'FLL Band-Edge', cat: 'Digital', what: 'Estimates and corrects carrier frequency offset.', why: 'Pulls a large frequency error into the Costas loop range.', params: 'Loop bandwidth, order, samples per symbol.', watch: 'FLL pulls frequency; it does not resolve phase or timing by itself.', chapters: ['m10'] },
+    { name: 'Correlate Access Code - Tag', cat: 'Digital', what: 'Finds a known access code and attaches a tag at the match.', why: 'Marks frame starts for packet processing.', params: 'Access code, threshold, tag name, type.', watch: 'A sync word is not authentication; anyone can transmit it.', chapters: ['m11'] },
+    { name: 'Message Strobe', cat: 'Message', what: 'Emits a message periodically.', why: 'Triggers PDU generators and message-driven tests.', params: 'Period and message value.', watch: 'Message rate is wall-clock, not sample rate.', chapters: ['m11', 'm13'] },
+    { name: 'Random PDU Generator', cat: 'Message', what: 'Generates random protocol data units.', why: 'Tests packet plumbing and CRC handling.', params: 'Min/max size, mask, length modulo.', watch: 'Payload bytes are random, so do not treat them as a valid protocol.', chapters: ['m11'] },
+    { name: 'CRC Append', cat: 'Packet', what: 'Appends a CRC to a PDU.', why: 'Adds error detection to a packet stream.', params: 'CRC width, polynomial, init, XOR, reflection, skip bytes.', watch: 'CRC detects errors; it does not authenticate the sender.', chapters: ['m11'] },
+    { name: 'CRC Check', cat: 'Packet', what: 'Checks a PDU CRC and emits pass/fail messages.', why: 'Separates valid frames from corrupted frames.', params: 'Same CRC settings as the transmitter, discard CRC.', watch: 'Mismatched settings look identical to a bad link.', chapters: ['m11'] },
+    { name: 'PDU to Tagged Stream', cat: 'Packet', what: 'Converts PDUs into a tagged sample stream.', why: 'Bridges packet processing into the sample-domain modulator.', params: 'Type, length tag.', watch: 'Tags carry the packet boundary; downstream blocks must preserve them.', chapters: ['m11'] },
+    { name: 'Tagged Stream to PDU', cat: 'Packet', what: 'Converts a tagged stream into PDUs.', why: 'Hands received packets to message-based decoders.', params: 'Type, length tag.', watch: 'A missing or wrong length tag produces broken packets.', chapters: ['m11'] },
+    { name: 'Stream to Tagged Stream', cat: 'Packet', what: 'Adds a length tag to fixed-size chunks of a stream.', why: 'Creates packet boundaries for framed processing.', params: 'Type, packet length, length tag key.', watch: 'The length must match the real frame; it is not a sync detector.', chapters: ['m11', 'm14'] },
+    { name: 'Tags Strobe', cat: 'Tag', what: 'Adds a tag every N samples.', why: 'Demonstrates tag propagation and timing.', params: 'Value, key, sample interval.', watch: 'A tag is metadata; it does not change the samples.', chapters: ['m14'] },
+    { name: 'Burst Tagger', cat: 'Tag', what: 'Tags the start and end of bursts from a trigger stream.', why: 'Marks activity for burst capture and packet processing.', params: 'True/false keys and values.', watch: 'Needs a detector in front; the tagger does not decide what a burst is.', chapters: ['m14', 'm15'] },
+    { name: 'Probe Avg Mag^2', cat: 'Probe', what: 'Tracks average signal power and exposes it to probes.', why: 'Builds power meters, squelch logic, and simple monitors.', params: 'Threshold, alpha, input type.', watch: 'Alpha controls averaging; a slow probe hides short bursts.', chapters: ['m07', 'm13', 'm20', 'm17'] },
+    { name: 'Function Probe', cat: 'Probe', what: 'Polls a method on another block at a fixed rate.', why: 'Turns a probe value into a variable for logging or control.', params: 'Block ID, function, arguments, poll rate.', watch: 'It is asynchronous; do not use it as a sample-accurate detector.', chapters: ['m13'] },
+    { name: 'Embedded Python Block', cat: 'Custom', what: 'Runs a Python work function inside the flowgraph.', why: 'Prototypes a detector, formatter, or custom DSP operation quickly.', params: 'Input/output signatures and Python code.', watch: 'Per-sample Python is slow; decimate first or move hot paths to C++.', chapters: ['m14'] }
   ];
 
   const navGroups = [
     { label: 'Brief', ids: ['overview'] },
     { label: 'Phase I / Foundations', ids: ['m01', 'm02', 'm03', 'm04'] },
     { label: 'Phase II / Receive', ids: ['m05', 'm06', 'm07', 'm08'] },
-    { label: 'Phase III / Digital', ids: ['m09', 'm10', 'm11'] },
-    { label: 'Phase IV / Operations', ids: ['m12', 'm13', 'm14', 'm15'] },
-    { label: 'Phase V / Physical layer', ids: ['m16', 'm17', 'm18', 'm19'] },
+    { label: 'Phase III / First target', ids: ['m09'] },
+    { label: 'Phase IV / Digital', ids: ['m10', 'm11', 'm12'] },
+    { label: 'Phase V / Operations', ids: ['m13', 'm14', 'm15'] },
+    { label: 'Phase VI / Physical layer', ids: ['m16', 'm17', 'm18', 'm19'] },
+    { label: 'Capstone', ids: ['m20'] },
     { label: 'Block guide', ids: ['blocks'] },
     { label: 'Toolbench', ids: ['tools'] },
     { label: 'Reference', ids: ['reference'] }
